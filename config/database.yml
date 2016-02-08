@@ -1,0 +1,11 @@
+# For development environment
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: pro_attorney
+  host: localhost
+  pool: 5
+  username: postgres
+  password: postgres
+  port: 5432
+  reconnect: true
