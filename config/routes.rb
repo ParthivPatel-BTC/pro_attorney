@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  root 'user_profiles#index'
+  resources :user_profiles
+  
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
