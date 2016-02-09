@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # get 'case/index'=>'case#index'
+
+
+  #  get 'case/show/:case1' => 'case#show',as: :case_show
+
+  # get 'case/edit/:case1' =>'case#edit', as: :case_edit
+
+   #get 'case/new' 
+
+  # get 'case/delete'
+
+  resources :cases
+
+
+  root 'cases#index'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
