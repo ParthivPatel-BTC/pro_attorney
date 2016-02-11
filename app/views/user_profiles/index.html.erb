@@ -1,22 +1,22 @@
 <h1>User Profiles</h1>
-	<%= link_to "New User",   new_user_profile_path    %>
-
-<table>
-<tr>
-<th>Id</th> <th>First name</th> <th>Last Name</th> <th>Actions</th>
-</tr>
+<%= link_to "New User",   new_user_profile_path    %>
+ <table>
+  <tr>
+   <th>Id</th> 
+   <th>First name</th>
+   <th>Last Name</th>
+   <th>Actions</th>
+  </tr>
 <% @user_profile.each do |up|  %>
-<tr>
-<td><%= up.id %></td>
-<td><%= up.first_name %></td>
-<td><%= up.last_name %></td>
-<td>
-	<%= link_to "Show",  user_profile_path(up) %>
-	<%= link_to "Edit", edit_user_profile_path(up) %>
-	<%= link_to "Delete", up ,method: :delete ,data: {confirm: 'are you sure? '} %>
-
-
-</td>
-</tr>
+  <tr>
+   <td><%= up.id %></td>
+   <td><%= up.first_name %></td>
+   <td><%= up.last_name %></td>
+   <td>
+    <%= link_to "Show",  user_profile_path(up) %>
+    <%= link_to "Edit", edit_user_profile_path(up) %>
+    <%= link_to "Delete", up ,method: :delete ,data: {confirm: 'are you sure? '} %>
+   </td>
+  </tr>
 <%end %>
 </table>
