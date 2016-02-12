@@ -1,6 +1,10 @@
 <h2>user profile</h2>
-
+<%= rating_for @feedback,"ratings",:disable_after_rate => true, :enable_half => true,
+    :half_show => true %>
 <table>
+<tr><td>Ratings:</td>
+<td>  <%= imdb_style_rating_for @feedback, current_user, "ratings" %></td>
+</tr>
 <tr><td>Profile Pic: </td><td><%= image_tag(@avatarsrc) %></td></tr>	
 <tr><td>Id: </td><td><%= @user_profile.id %></td></tr>
 <tr><td>First Name: </td><td><%= @user_profile.first_name %></td></tr>
@@ -15,3 +19,4 @@
 </table>
 
 <%= link_to "Edit",edit_user_profile_path(@user_profile) %>
+

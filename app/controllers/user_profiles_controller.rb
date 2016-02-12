@@ -7,6 +7,7 @@ class UserProfilesController < ApplicationController
   end
 
   def show
+    @feedback=Feedback.new
     @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
   end
   

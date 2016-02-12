@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+#rating to user
+gem 'ratyrate'
 #paperclip for upload files
 gem "paperclip", "~> 4.2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
