@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  
+
+  get 'users/signin'
+
+  #get 'users/index'
+
+  
+ # root to: 'welcome#index'
+root to: 'users#index'
+devise_for :users, :controllers => { :registrations => "users/registrations" }
+ # devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
