@@ -1,16 +1,9 @@
 Rails.application.routes.draw do
-  # get 'case/index'=>'case#index'
+  root 'user_profiles#index'
+  resources :user_profiles
+  get 'home/index'
 
-
-  #  get 'case/show/:case1' => 'case#show',as: :case_show
-
-  # get 'case/edit/:case1' =>'case#edit', as: :case_edit
-
-   #get 'case/new' 
-
-  # get 'case/delete'
-
-  resources :cases do 
+	resources :cases do 
     collection do
       get 'doc_upload'
       delete 'doc_delete/:document' =>  'cases#delete_document',as: :document
@@ -20,9 +13,9 @@ Rails.application.routes.draw do
 
 
 
-  root 'cases#index'
+  #root 'cases#index'
 
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
