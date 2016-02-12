@@ -1,6 +1,18 @@
-<%= form_for(@case)  do |f| %>
+<%= form_for @case,:html => { :multipart => true }  do |f| %>
 <table>
-	<tr>
+<tr>
+
+
+	<% if @case.errors.any? %>
+    <div id="error_explanation">
+      <h2> <%= pluralize(@case.errors.count, "Error") %> Summary:</h2>
+
+      <ul>
+        <% @case.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+      <%end%>
 
 <td><%=f.label :Client_id %></td>
 <td><%=f.text_field :client_id %></td>
@@ -8,58 +20,55 @@
 </tr>
 
 <tr>
-
-<td><%=f.label :Advocate_id %></td>
-
-<td><%=f.text_field :advocate_id %></td>
-
-
+   <td><%=f.label :Advocate_id %></td>
+   <td><%=f.text_field :advocate_id %></td>
 </tr>
 <tr>
 	<td><%=f.label :Case_Type %></td>
 	<td><%= f.select :case_type_id, options_from_collection_for_select(CaseType.all, :id, :case_type) %></td>
-
 </tr>
 
-
-
-
 <tr>
-
-<td><%=f.label :Case_Title %></td>
-<td><%=f.text_field :case_title %></td>
-
-
+   <td><%=f.label :Case_Title %></td>
+   <td><%=f.text_field :case_title %></td>
 </tr>
 
-
-
 <tr>
-<td><%=f.label :Case_detail %> </td>
-<td><%=f.text_area :case_detail %></td>
+   <td><%=f.label :Case_detail %> </td>
+   <td><%=f.text_area :case_detail %></td>
 </tr>
 
-
-
 <tr>
-<td><%=f.label :Location %></td>
-<td><%=f.text_field :location %></td>
+   <td><%=f.label :Location %></td>
+   <td><%=f.text_field :location %></td>
+</tr>
+
+<tr>	
+  <td><%=f.label :Status %></td>
+  <td><%=f.text_field :status %></td>
 </tr>
 
 
 <tr>
-	<td>
-<%=f.label :Status %></td>
-<td><%=f.text_field :status %></td>
-</tr>
-
-<tr>
-
-<td><%=f.submit %></td>
-
-
-
-
-
-
+   <td><b>Documents Atteched</b>
+  </td><td>
+<% @documents.each do |document| %>
+<%=document.doc_file_name%><%=link_to "Delete", document_cases_path(document) ,method: :delete, data: { confirm: 'Are you sure?' }  %><br>
 <%end%>
+   </td>
+</tr>
+<tr>
+   <td><%=f.label :Document %></td>
+   <td><%= file_field_tag "document[]", type: :file, multiple: true%>
+</tr>
+
+
+<tr>
+    <td><%=f.submit %></td>
+</tr>
+<%end%>
+
+
+
+
+

@@ -15,37 +15,58 @@ class CasesController < ApplicationController
         format.html { render :edit }
       end
     end
-end
+  end
 
-
+ def delete_document
+   case_id=Document.find(params[:document]).case_id
+   Document.destroy(params[:document])
+  redirect_to edit_case_path(Case.find(case_id)) 
+ end
 
 
   def edit
  #@case=Case.find(params[:id])
+ @documents = @case.documents
   end
 
   def new
     @case=Case.new
+    @documents = @case.documents
+
   end
 
   def create
-       @case = Case.new(case_params)
-    respond_to do |format|
-      if @case.save
-        format.html { redirect_to @case, notice: 'Case created.' }  
-      else
-        format.html { render :new }
-       
-      end
+
+@case=Case.new(case_params)
+ if @case.save
+   if params[:document]
+        #===== The magic is here ;)
+        params[:document].each { |image|
+          @case.documents.create(doc: image)
+        }
+           redirect_to  cases_path 
+
     end
+  else
+        @documents = @case.documents
+            render :new
+
+   end
+ end
   
-  end
+  
 
   def destroy
     if @case.destroy
+       @case.documents.destroy
+
       redirect_to cases_path
      end
-end
+ 
+ end
+
+ def doc_upload
+ end
 
 
  private
@@ -56,8 +77,13 @@ end
 
 
 
- def case_params
+   def case_params
       params.require(:case).permit(:client_id,:advocate_id,:case_type_id,:case_title,:case_detail,:location,:status)
     end
+
+  def doc_params
+    params.require(:document).permit(:doc_file_name,:doc_content_type,:doc_file_size,:doc_updated_at)
+  end
+
 
 end

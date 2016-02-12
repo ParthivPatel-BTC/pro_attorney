@@ -10,7 +10,14 @@ Rails.application.routes.draw do
 
   # get 'case/delete'
 
-  resources :cases
+  resources :cases do 
+    collection do
+      get 'doc_upload'
+      delete 'doc_delete/:document' =>  'cases#delete_document',as: :document
+    end
+  end
+  
+
 
 
   root 'cases#index'

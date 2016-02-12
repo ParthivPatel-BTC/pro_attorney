@@ -1,28 +1,33 @@
-<p id="notice"><%= notice %></p>
+<%=link_to 'Back', cases_path %>
 <table>
-
-	<tr>
-	<td>Advocate  id</td> <td><%=@case.advocate_id%>
+    <tr>
+	    <td>Advocate  id</td> <td><%=@case.advocate_id%>
 	</tr>
-  <tr>
-	<td>Client_id</td> <td><%=@case.client_id%>
-</tr>
+    <tr>
+	   <td>Client_id</td> <td><%=@case.client_id%>
+    </tr>
 
-<tr>
-	<td>Case Title</td> <td><%=@case.case_title%>
+    <tr>
+	   <td>Case Title</td> <td><%=@case.case_title%>
+    </tr>
+
+    <tr>
+	  <td>Detail</td> <td><%=@case.case_detail%>
 	</tr>
-
-<tr>
-	<td>Detail</td> <td><%=@case.case_detail%>
+    <tr>
+	   <td>Location</td> <td><%=@case.location%>
 	</tr>
-<tr>
-	<td>Location</td> <td><%=@case.location%>
-	</tr>
-<tr>
-	<td>staus</td> <td><%=@case.status%>
-	</tr>
+   <tr>
+	   <td>staus</td> <td><%=@case.status%>
+   </tr>
 
-
-
-
+ <tr>
+ 	<td>Documents</td>
+ 	<% docs=""
+       @case.documents.each do |doc|
+        docs+="  #{doc.doc_file_name}"
+       end %>
+    <td><%=docs%>
+   </td>
+ </tr>
 </table>

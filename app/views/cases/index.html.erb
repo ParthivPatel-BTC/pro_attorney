@@ -1,37 +1,29 @@
 <h1>Cases</h1>
-
 <table>
   <thead>
     <tr>
-
       <th>Client_id</th>
       <th>Advocate_id</th>
       <th>Case Title</th>
       <th>location</th>
       <th>status</th>
-      <th>
       <th colspan="3"></th>
   </thead>
 
   <tbody>
     <% @cases.each do |case1| %>
       <tr>
-        <td><%=case1.client_id %></td>
-        <td><%= case1.advocate_id %></td>
-         <td><%= case1.case_title %></td>
-         <td><%= case1.location%></td>
+          <td><%=case1.client_id %></td>
+          <td><%= case1.advocate_id %></td>
+          <td><%= case1.case_title %></td>
+          <td><%= case1.location%></td>
           <td><%=case1.status%></td>
-         <td><%= link_to 'Show', case_path(case1)%></td>
-         <td><%= link_to 'Edit', edit_case_path(case1)%></td>
-         <td><td><%= link_to 'Destroy', case1, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', case_path(case1)%></td>
+          <td><%= link_to 'Edit', edit_case_path(case1)%></td>
+          <td><%= link_to 'Destroy', case1, method: :delete, data: { confirm: 'Are you sure?' }%></td>
         
-      
-            
-
-
       </tr>
-    <% end %>
+     <% end %>
   </tbody>
 </table>
-
 <%= link_to 'New Case', new_case_path %>
