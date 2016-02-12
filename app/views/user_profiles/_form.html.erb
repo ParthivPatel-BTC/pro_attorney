@@ -1,46 +1,46 @@
 <div class="row">
   <div class="col-md-6">
-<div class="box box-primary"><!--start box 2 -->
-  <div class="box-header with-border">
+  <div class="box box-primary"><!--start box 2 -->
+    <div class="box-header with-border">
     <h3 class="box-title">Basic Info</h3><br>
-  </div>
-<%= form_for @user_profile, role: "form", :html => { :multipart => true } do |f| %>
+    </div>
+    <%= form_for @user_profile, role: "form", :html => { :multipart => true } do |f| %>
 
-<div class = "box-body">
-  <div class = "col-md-12">
-    <% if @user_profile.errors.any? %>
-      <div id="error_explanation">
-        <div style="color:red"> 
-          Please enter valid data<br>
-        <% @user_profile.errors.full_messages.each do |message| %>
+    <div class = "box-body">
+      <div class = "col-md-12">
+        <% if @user_profile.errors.any? %>
+          <div id="error_explanation">
+            <div style="color:red"> 
+            Please enter valid data<br>
+            <% @user_profile.errors.full_messages.each do |message| %>
             <ul>*<%= message %></ul>
+            <% end %>
+            </div>
+          </div>
         <% end %>
+
+        <div class = "form-group">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name" %>
         </div>
-      </div>
-    <% end %>
 
-    <div class = "form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter first name" %>
-    </div>
+        <div class = "form-group">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter last name" %>
+        </div>
 
-    <div class = "form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter last name" %>
-    </div>
+        <div class = "form-group">
+          <%= f.label :gender %>
+          <%= f.radio_button :gender, "Male", checked: (@user_profile.gender == "Male" || @user_profile.gender == nil) %>Male 
+          <%= f.radio_button :gender,"Female", checked: (@user_profile.gender == "Female")%>Female<br>
+        </div>
 
-    <div class = "form-group">
-      <%= f.label :gender %>
-      <%= f.radio_button :gender, "Male", checked: (@user_profile.gender == "Male" || @user_profile.gender == nil) %>Male 
-      <%= f.radio_button :gender,"Female", checked: (@user_profile.gender == "Female")%>Female<br>
-    </div>
+        <div class = "form-group">
+          <%= f.label :mobile_no %>
+          <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter mobile number" %>
+        </div>
 
-    <div class = "form-group">
-      <%= f.label :mobile_no %>
-      <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter mobile number" %>
-    </div>
-
-    <div class = "form-group" >
+      <div class = "form-group" >
           <%= f.label "Profile Picture" %>
           <div class = "form-group" >
             <%= image_tag(@avatarsrc) %>    
@@ -90,31 +90,4 @@
 </div>
 </div>
 
-
 <% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
