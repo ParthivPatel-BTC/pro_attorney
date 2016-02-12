@@ -12,12 +12,12 @@ class UserProfile < ActiveRecord::Base
 	validates :address , presence: true
 	validates :city , presence: true
 	validates :pincode , presence: true,length: { is: 6 }
-	validates :qualification , presence: true
+	
     validates_format_of :first_name,:last_name,:city, :with => /[-a-z]+/
 
 #has_attached_file :avatar, :path => ":rails_root/public/images/:basename.:extension"
-has_attached_file :avatar, :path => ":rails_root/app/assets/images/avatar/:basename.:extension"
-validates :avatar,presence: true
+has_attached_file :avatar, :path => ":rails_root/public/images/avatar/:basename.:extension", :styles => { :small => "30x15>", :medium => "155x85>" }
+validates :avatar, presence: true
 validates_attachment_size :avatar, :less_than => 5.megabytes
 validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
