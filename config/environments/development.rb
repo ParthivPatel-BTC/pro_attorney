@@ -21,8 +21,8 @@ config.action_mailer.default_url_options = { :host => 'localhost:3000' }
       :address => "smtp.gmail.com",
       :port => 587,
       :domain => "gmail.com",
-      :user_name => "bamniyakaran71@gmail.com",
-      :password => "87mymanishak",
+      :user_name => "YOUR EMAIL ADD."
+      :password => "MY password",
       :authentication => "plain",
       :enable_starttls_auto => true
   }
