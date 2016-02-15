@@ -3,8 +3,15 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
  #root 'user_profiles#index'
  resources :user_profiles
- 
  get 'home/index'
+
+	resources :cases do 
+    collection do
+      get 'doc_upload'
+      delete 'doc_delete/:document' =>  'cases#delete_document',as: :document
+    end
+ 
+ 
  get 'users/signin'
 
   #get 'users/index'

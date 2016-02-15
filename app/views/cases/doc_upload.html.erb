@@ -1,0 +1,26 @@
+<h1>Upload Case docments</h1>
+<%=form_tag  multipart:  true  do %>
+<table>
+<tr>
+
+<td><%=label_tag :document %></td>
+<td><%= file_field_tag "images[]", type: :file, multiple: true %><td>
+
+
+</tr>
+<tr>
+	<td><%=submit_tag%></td>
+
+
+
+
+
+
+</tr>
+
+
+</table>
+<% end %>
+
+
+
