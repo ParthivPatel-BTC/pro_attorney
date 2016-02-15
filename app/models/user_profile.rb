@@ -1,7 +1,7 @@
 class UserProfile < ActiveRecord::Base
- belongs_to :user
- after_initialize :default_values
-	
+ratyrate_rateable "ratings"
+belongs_to :user
+after_initialize :default_values
  validates :first_name,      
            :last_name,
            :gender,
@@ -10,12 +10,12 @@ class UserProfile < ActiveRecord::Base
            :city,
            :pincode,
            :qualification , presence: true
-	
- validates_format_of :first_name,:last_name,:city, :with => /[-a-z]+/
- has_attached_file :avatar, :path => ":rails_root/app/assets/images/avatar/:basename.:extension"
- validates :avatar,presence: true
- validates_attachment_size :avatar, :less_than => 5.megabytes
- validates_attachment_content_type :avatar, 
+  
+validates_format_of :first_name,:last_name,:city, :with => /[-a-z]+/
+has_attached_file :avatar, :path => ":rails_root/public/images/avatar/:basename.:extension"
+validates :avatar,presence: true
+validates_attachment_size :avatar, :less_than => 5.megabytes
+validates_attachment_content_type :avatar, 
                                    :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 private

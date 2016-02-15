@@ -7,7 +7,6 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-    @feedback=Feedback.new
     @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
   end
   
@@ -41,12 +40,12 @@ class UserProfilesController < ApplicationController
     end
   end
 
-  private
-    def set_user
-      @user_profile = UserProfile.find(params[:id])
-    end
+private
+  def set_user
+   @user_profile = UserProfile.find(params[:id])
+  end
 
-    def profile_params
-      params.require(:user_profile).permit(:first_name, :last_name,:gender,:mobile_no,:address,:city,:pincode,:qualification,:experience,:avatar)
-    end
+  def profile_params
+   params.require(:user_profile).permit(:first_name, :last_name,:gender,:mobile_no,:address,:city,:pincode,:qualification,:experience,:avatar)
+  end
 end
