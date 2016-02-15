@@ -1,93 +1,85 @@
-<div class="row">
-  <div class="col-md-6">
-  <div class="box box-primary"><!--start box 2 -->
-    <div class="box-header with-border">
-    <h3 class="box-title">Basic Info</h3><br>
-    </div>
-    <%= form_for @user_profile, role: "form", :html => { :multipart => true } do |f| %>
-
-    <div class = "box-body">
-      <div class = "col-md-12">
-        <% if @user_profile.errors.any? %>
-          <div id="error_explanation">
-            <div style="color:red"> 
-            Please enter valid data<br>
-            <% @user_profile.errors.full_messages.each do |message| %>
-            <ul>*<%= message %></ul>
+<%= form_for @user_profile, role: "form", html: { :multipart => true } do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box box-primary"><!--start box 2 -->
+        <div class="box-header with-border">
+          <h3 class="box-title">Basic Info</h3><br>
+        </div>
+        <div class = "box-body">
+          <div class = "col-md-12">
+            <% if @user_profile.errors.any? %>
+              <div id="error_explanation">
+                <div style="color:red"> 
+                  Please enter valid data<br>
+                  <% @user_profile.errors.full_messages.each do |message| %>
+                  <ul>*<%= message %></ul>
+                  <% end %>
+                </div>
+              </div>
             <% end %>
+
+            <div class = "form-group">
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name" %>
+            </div>
+
+            <div class = "form-group">
+              <%= f.label :last_name %>
+              <%= f.text_field :last_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter last name" %>
+            </div>
+
+            <div class = "form-group">
+              <%= f.label :gender %>
+              <%= f.radio_button :gender, "Male", checked: (@user_profile.gender == "Male" || @user_profile.gender == nil) %>Male 
+              <%= f.radio_button :gender,"Female", checked: (@user_profile.gender == "Female")%>Female<br>
+            </div>
+
+            <div class = "form-group">
+              <%= f.label :mobile_no %>
+              <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter mobile number" %>
+            </div>
+
+            <div class = "form-group" >
+              <%= f.label "Profile Picture" %>
+              <div class = "form-group" >
+                <%= image_tag(@avatarsrc) %>    
+                <%= f.file_field :avatar %><p class="help-block">File should be less than 5Mb.</p>
+              </div>
             </div>
           </div>
-        <% end %>
-
-        <div class = "form-group">
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name" %>
         </div>
-
-        <div class = "form-group">
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter last name" %>
+      </div> <!--end box 1 -->
+    </div>
+    <div class="col-md-6">
+      <div class="box box-primary"><!--start box 2 -->
+        <div class="box-header with-border">
+          <h3 class="box-title">Address</h3><br>
         </div>
+        <div class="box-body">
+          <div class="col-md-12">
+            <div class = "form-group">
+              <%= f.label :address %>
+              <%= f.text_area :address, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter address" %>
+            </div>
 
-        <div class = "form-group">
-          <%= f.label :gender %>
-          <%= f.radio_button :gender, "Male", checked: (@user_profile.gender == "Male" || @user_profile.gender == nil) %>Male 
-          <%= f.radio_button :gender,"Female", checked: (@user_profile.gender == "Female")%>Female<br>
-        </div>
+            <div class = "form-group">
+              <%= f.label :city %>
+              <%= f.text_field :city, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter city" %>
+            </div>
 
-        <div class = "form-group">
-          <%= f.label :mobile_no %>
-          <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter mobile number" %>
-        </div>
+            <div class = "form-group">
+              <%= f.label :pincode %>
+              <%= f.number_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter pincode" %>
+            </div>
 
-      <div class = "form-group" >
-          <%= f.label "Profile Picture" %>
-          <div class = "form-group" >
-            <%= image_tag(@avatarsrc) %>    
-            <%= f.file_field :avatar %><p class="help-block">File should be less than 5Mb.</p>
+            <div class = "form-group">
+              <%= f.label :experience %>
+              <%= f.text_area :experience, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter experience" %>
+            </div>
           </div>
         </div>
-
-  </div>
-</div>
-</div> <!--end box 1 -->
-</div>
-<div class="col-md-6">
-<div class="box box-primary"><!--start box 2 -->
-  <div class="box-header with-border">
-    <h3 class="box-title">Address</h3><br>
-  </div>
-    <div class="box-body">
-      <div class="col-md-12">
-        <div class = "form-group">
-          <%= f.label :address %>
-          <%= f.text_area :address, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter address" %>
-        </div>
-
-        <div class = "form-group">
-          <%= f.label :city %>
-          <%= f.text_field :city, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter city" %>
-        </div>
-
-        <div class = "form-group">
-          <%= f.label :pincode %>
-          <%= f.number_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter pincode" %>
-        </div>
-
-  
-        <div class = "form-group">
-          <%= f.label :experience %>
-          <%= f.text_area :experience, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter experience" %>
-        </div>
-
-        
-      </div>
+      </div><!--end box 2 -->
+      <%=f.submit class: "btn btn-primary" %>
     </div>
-  
-</div><!--end box 2 -->
-<%=f.submit class: "btn btn-primary" %>
-
+  <% end %>
 </div>
-</div>
-
-<% end %>
