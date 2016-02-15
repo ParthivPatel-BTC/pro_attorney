@@ -8,8 +8,7 @@ after_initialize :default_values
            :mobile_no,
            :address,
            :city,
-           :pincode,
-           :qualification , presence: true
+           :pincode, presence: true
   
 validates_format_of :first_name,:last_name,:city, :with => /[-a-z]+/
 has_attached_file :avatar, 
