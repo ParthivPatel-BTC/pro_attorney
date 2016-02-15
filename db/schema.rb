@@ -25,6 +25,40 @@ ActiveRecord::Schema.define(version: 20160212110756) do
     t.datetime "updated_at"
   end
 
+  create_table "case_types", force: :cascade do |t|
+    t.string   "case_type"
+    t.integer  "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cases", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "advocate_id"
+    t.string   "case_title"
+    t.string   "location"
+    t.string   "case_detail"
+    t.string   "case_document"
+    t.string   "status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "case_type_id"
+  end
+
+  add_index "cases", ["case_type_id"], name: "index_cases_on_case_type_id", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "case_id"
+    t.string   "doc_file_name"
+    t.string   "doc_content_type"
+    t.integer  "doc_file_size"
+    t.datetime "doc_updated_at"
+  end
+
+  add_index "documents", ["case_id"], name: "index_documents_on_case_id", using: :btree
+
   create_table "feedbacks", force: :cascade do |t|
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -121,20 +155,7 @@ ActiveRecord::Schema.define(version: 20160212110756) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
-  add_foreign_key "user_profiles", "users"
-  
-  create_table "documents", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "case_id"
-    t.string   "doc_file_name"
-    t.string   "doc_content_type"
-    t.integer  "doc_file_size"
-    t.datetime "doc_updated_at"
-  end
-
-  add_index "documents", ["case_id"], name: "index_documents_on_case_id", using: :btree
-
   add_foreign_key "cases", "case_types"
   add_foreign_key "documents", "cases"
+  add_foreign_key "user_profiles", "users"
 end
