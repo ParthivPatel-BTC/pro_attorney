@@ -11,8 +11,8 @@ ratyrate_rater
 	def is_client?
   	self.role.title == Role::CLIENT ? true :false
 	end
-
-def is_advocate?
+	
+	def is_advocate?
 	self.role.title == Role::ADVOCATE ? true :false
-end
+	end
 end
