@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
+layout 'registration_layout'
   def sign_up_params
     devise_parameter_sanitizer.sanitize(:sign_up)
   end

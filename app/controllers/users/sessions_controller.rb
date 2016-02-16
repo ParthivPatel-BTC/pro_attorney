@@ -1,71 +1,8 @@
 class Users::SessionsController < Devise::SessionsController
+
+layout 'registration_layout'
+
 # before_filter :configure_sign_in_params, only: [:create]
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  end
-
-
   # GET /resource/sign_in
   # def new
   #   super
