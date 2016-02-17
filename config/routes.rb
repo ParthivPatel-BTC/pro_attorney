@@ -17,8 +17,15 @@ Rails.application.routes.draw do
   #get 'users/index'
   # root to: 'welcome#index'
  
- root to: 'users#index'
- devise_for :users, :controllers => { :registrations => "users/registrations",:sessions=> "users/sessions" }
+ 
+ devise_for :users, :controllers => { registrations: "users/registrations",
+                                      sessions: "users/sessions",
+                                      confirmations: "users/confirmations",
+                                      passwords: "users/passwords",
+                                      unlocks: "users/unlocks"}
+devise_scope :user do
+  root  "users/registrations#new"
+end
  # devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
