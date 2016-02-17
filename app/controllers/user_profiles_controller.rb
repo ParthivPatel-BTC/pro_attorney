@@ -1,5 +1,4 @@
 class UserProfilesController < ApplicationController
-    
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_path, only: [:show,:edit]
   
@@ -8,11 +7,9 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-  #  @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
   end
   
   def edit
- #   @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
   end
 
   def new
