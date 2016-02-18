@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
- 
   	<meta charset="UTF-8">
   	<title>ProAttorney</title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -25,24 +24,12 @@
 	<body class="skin-blue sidebar-mini">
 		<%= render 'layouts/header' %>
 		<div class="wrapper">
-			
-				
-<div class="content-wrapper">
-	<section class="content-header">
- <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>">
-      <%= value %>
-    </div>
-  <% end %>
+			<div class="content-wrapper">
+        <section class="content-header">
 				<%= yield %>
-
-	</section>
-</div>
-				<%= render 'layouts/sidebar' %>
-        
-				<%= render 'layouts/footer' %>
-			
-		</div>
+        </section>
+        </div>
+        <%= render 'layouts/sidebar' %>
+    </div>		
 	</body>
-  
 </html>

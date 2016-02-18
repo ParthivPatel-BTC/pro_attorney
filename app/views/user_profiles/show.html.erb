@@ -1,5 +1,24 @@
-<h2>user profile</h2>
-<table>
+<div class="row">
+	<div class="col-md-8"><!--start box 1 -->
+		<div class = "box box-primary">
+			<div class = "box-header with-border">Profile</div>
+				<p>
+				<div class="row">
+					<div class= "col-md-4"><!--start inner box 1 -->
+
+						<% if @user_profile.avatar.exists? %>
+							<%= image_tag(@user_profile.avatar.url, class: "img-circle", height: "236", width: "236") %>
+						<% else %> 
+							<%= image_tag(@avatarsrc, class: "img-circle", height: "236", width: "236") %>
+						<% end %>
+					</div><!--end inner box 1 -->
+					<div class= "col-md-7 pull-right"><!--start inner box 2 -->
+						<h2 class="user-card-name"><%= @user_profile.first_name + " " + @user_profile.last_name %></h2>
+						<div class="current-position"><i class="fa fa-fw fa-mortar-board"></i>Advocate</div>
+						<br>
+						<p><br><br>
+						<b><u>Experience: </u></b><br><br><p><%= @user_profile.experience %></p></p>
+						<table>
 <tr><td>Give your Ratings:</td><td>
 <%= rating_for @user_profile,"ratings",:disable_after_rate => true, :enable_half => true,
     :half_show => true %>
@@ -7,17 +26,31 @@
 <tr><td>Average Ratings:</td>
 <td><%= rating_for @user_profile, "ratings", disabled: true, imdb_avg: true %> </td>
 </tr>
-<tr><td>Profile Pic: </td><td><%= image_tag(@avatarsrc) %></td></tr>	
-<tr><td>Id: </td><td><%= @user_profile.id %></td></tr>
-<tr><td>First Name: </td><td><%= @user_profile.first_name %></td></tr>
-<tr><td>Last Name: </td><td><%= @user_profile.last_name %></td>	</tr>
-<tr><td>Gender: </td><td><%= @user_profile.gender %></td>	</tr>
-<tr><td>Mobile No: </td><td><%= @user_profile.mobile_no %></td>	</tr>
-<tr><td>Address: </td><td><%= @user_profile.address %></td>	</tr>
-<tr><td>City: </td><td><%= @user_profile.city %></td>	</tr>
-<tr><td>pincode: </td><td><%= @user_profile.pincode %></td>	</tr>
-<tr><td>Qualification: </td><td><%= @user_profile.qualification %></td></tr>	
-<tr><td>Experience: </td><td><%= @user_profile.experience %></td>	</tr>
 </table>
+					</div><!--end inner box 2 -->
+				</div>
+		</div>
+	</div><!--end box 1 -->
 
-<%= link_to "Edit",edit_user_profile_path(@user_profile) %>
+	<div class="col-md-4"><!--start box 2 -->
+		<div class = "box box-primary">
+			<div class = "box-header with-border">Address</div>
+			<br>
+			&nbsp;&nbsp;&nbsp;<i class="fa fa-fw fa-male"></i>
+			<b>Gender:</b>&nbsp;&nbsp;<%= @user_profile.gender %><br><br>
+			&nbsp;&nbsp;&nbsp;<i class="fa fa-fw fa-mobile-phone"></i>
+			<b>Contact:</b>&nbsp;&nbsp;<%= @user_profile.mobile_no %><br><br>
+			&nbsp;&nbsp;<i class="fa fa-fw fa-map-marker"></i>
+			<b>Address:</b><br><br>&nbsp;&nbsp;&nbsp;<%= @user_profile.address %><br>
+			&nbsp;&nbsp;&nbsp;<%= @user_profile.city %> -	
+			<%= @user_profile.pincode %>
+			</p>
+			<br>
+			&nbsp;&nbsp;
+			<%= link_to edit_user_profile_path(@user_profile), class: "btn btn-primary" do %>
+			<i class="fa fa-fw fa-edit"></i>
+			<%end%>
+			<br>
+		</div>
+	</div><!--end box 2 -->
+</div>
