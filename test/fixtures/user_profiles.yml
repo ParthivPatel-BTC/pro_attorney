@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: Manoj 
+  last_name: Parmar
+  gender: Male
+  mobile_no: +91-9099112233
+  address: 4/any street 
+  city: nadiad
+  pincode: 102345
+  qualification: LLB
+  experience: 5+ years
+
+two:
+  first_name: kavya
+  last_name: patel
+  gender: Female
+  mobile_no: 9099785634
+  address: 10/greenland society
+  city: ahmedabad
+  pincode: 123456
+  qualification: llm phd
+  experience: 2+ years in criminal cases

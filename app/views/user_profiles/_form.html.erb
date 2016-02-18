@@ -1,0 +1,50 @@
+
+<%= form_for @user_profile,:html => { :multipart => true } do |f| %>
+
+ <% if @user_profile.errors.any? %>
+    <div style="color:red" >
+    <hr>Validation Errors<br>
+    <% @user_profile.errors.full_messages.each do |message| %>
+      <li>*<%= message %></li>
+    <% end %>
+    </div>
+ <% end %>
+
+ <%= f.label :first_name %>
+ <%= f.text_field :first_name %> <br>
+
+ <%= f.label :last_name %>
+ <%= f.text_field :last_name %> <br>
+
+ <%= f.label :gender %>
+
+ <%= f.radio_button :gender,"Male" ,checked: male_or_new? %>Male
+ <%= f.radio_button :gender,"Female" ,checked: female? %>Female<br>
+
+
+ <%= f.label :mobile_no %>
+ <%= f.text_field :mobile_no %><br>
+
+
+ <%= f.label :address %>
+ <%= f.text_area :address%><br><br>
+
+ <%= f.label :city %>
+ <%= f.text_field :city %><br>
+
+ <%= f.label :pincode %>
+ <%= f.number_field :pincode %><br>
+
+ <%= f.label :qualification %>
+ <%= f.text_field :qualification %><br>
+
+ <%= f.label :experience %>
+ <%= f.text_field :experience %><br>
+
+ <%= image_tag(@avatarsrc) %>
+
+ <%= f.label "Profile Picture" %>
+ <%= f.file_field :avatar %>
+
+ <%=f.submit %>
+ <% end %>
