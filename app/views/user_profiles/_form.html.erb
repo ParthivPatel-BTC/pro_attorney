@@ -42,7 +42,7 @@
             <div class = "form-group" >
               <%= f.label "Profile Picture" %>
               <div class = "form-group" >
-                <%= image_tag(@avatarsrc) %>    
+                <%= image_tag(@user_profile.avatar.url(:medium)) %>    
                 <%= f.file_field :avatar %><p class="help-block">File should be less than 5Mb.</p>
               </div>
             </div>

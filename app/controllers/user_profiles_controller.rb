@@ -1,5 +1,4 @@
 class UserProfilesController < ApplicationController
-    
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_path, only: [:show,:edit]
   
@@ -8,11 +7,9 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-  #  @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
   end
   
   def edit
- #   @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
   end
 
   def new
@@ -27,7 +24,7 @@ class UserProfilesController < ApplicationController
   def create
     @user_profile=UserProfile.new(profile_params) 
     if @user_profile.save 
-      redirect_to   user_profiles_path  
+      redirect_to user_profile_path(@user_profile)  
     else
       render :new
     end
@@ -35,7 +32,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to   user_profiles_path  
+      redirect_to user_profile_path(@user_profile) 
     else
       redirect_to :back 
     end

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end 
  
  get 'users/signin'
+ get 'users/after_signin' => 'users#after_signin'
+ 
 
   #get 'users/index'
   # root to: 'welcome#index'

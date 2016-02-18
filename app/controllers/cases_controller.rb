@@ -1,5 +1,6 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
+
   def index
     @cases=Case.all
   end
@@ -17,15 +18,15 @@ class CasesController < ApplicationController
     end
   end
 
- def delete_document
-   case_id=Document.find(params[:document]).case_id
-   Document.destroy(params[:document])
-  redirect_to edit_case_path(Case.find(case_id)) 
- end
+  def delete_document
+    case_id=Document.find(params[:document]).case_id
+    Document.destroy(params[:document])
+    redirect_to edit_case_path(Case.find(case_id)) 
+  end
 
 
   def edit
- #@case=Case.find(params[:id])
+    #@case=Case.find(params[:id])
  @documents = @case.documents
   end
 
@@ -44,7 +45,7 @@ class CasesController < ApplicationController
         params[:document].each { |image|
           @case.documents.create(doc: image)
         }
-           redirect_to  cases_path 
+           redirect_to case_path(@case)
 
     end
   else
@@ -69,21 +70,21 @@ class CasesController < ApplicationController
  end
 
 
- private
+  private
 
-    def set_case
-      @case = Case.find(params[:id])
-    end
-
-
-
-   def case_params
-      params.require(:case).permit(:client_id,:advocate_id,:case_type_id,:case_title,:case_detail,:location,:status)
-    end
-
-  def doc_params
-    params.require(:document).permit(:doc_file_name,:doc_content_type,:doc_file_size,:doc_updated_at)
+  def set_case
+    @case = Case.find(params[:id])
   end
+
+
+
+ def case_params
+    params.require(:case).permit(:client_id,:advocate_id,:case_type_id,:case_title,:case_detail,:location,:status)
+  end
+
+def doc_params
+  params.require(:document).permit(:doc_file_name,:doc_content_type,:doc_file_size,:doc_updated_at)
+end
 
 
 end
