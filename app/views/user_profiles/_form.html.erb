@@ -41,10 +41,14 @@
 
             <div class = "form-group" >
               <%= f.label "Profile Picture" %>
-              <div class = "form-group" >
-                <%= image_tag(@avatarsrc) %>    
+                <div class = "form-group" >
+                <% if @user_profile.avatar.exists? %>
+                <%= image_tag(@user_profile.avatar.url, height: "85px", width: "85px") %>
+                <% else %> 
+                <%= image_tag('default.jpg', height: "85px", width: "85px") %>
+                <% end %>  
                 <%= f.file_field :avatar %><p class="help-block">File should be less than 5Mb.</p>
-              </div>
+                </div>
             </div>
           </div>
         </div>

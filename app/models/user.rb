@@ -7,14 +7,14 @@ class User < ActiveRecord::Base
 	ratyrate_rater
 
 	def is_system_admin?
- 		self.role.title == Role::SYSTEM_ADMIN ? true : false
+ 		self.role.title == Role::SYSTEM_ADMIN
 	end
 
 	def is_client?
-  	self.role.title == Role::CLIENT ? true :false
+  	self.role.title == Role::CLIENT
   end
 
 	def is_advocate?
-  	self.role.title == Role::ADVOCATE ? true :false
+  	self.role.title == Role::ADVOCATE
   end
 end

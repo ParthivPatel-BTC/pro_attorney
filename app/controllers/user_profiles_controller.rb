@@ -1,6 +1,5 @@
 class UserProfilesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_path, only: [:show,:edit]
   
   def index
     @user_profile = UserProfile.all.order(id: :asc)
@@ -14,7 +13,6 @@ class UserProfilesController < ApplicationController
 
   def new
     @user_profile = UserProfile.new
-    @avatarsrc = "avatar/#{@user_profile.avatar_file_name}"
   end
 
   def destroy
@@ -45,10 +43,6 @@ class UserProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user_profile).permit(:first_name, :last_name,:gender,:mobile_no,:address,:city,:pincode,:qualification,:experience,:avatar)
-  end
-
-  def set_path
-    @avatarsrc = "avatar/#{@user_profile.avatar_file_name}"
+    params.require(:user_profile).permit(:first_name, :last_name, :gender, :mobile_no, :address, :city, :pincode, :qualification, :experience, :avatar)
   end
 end
