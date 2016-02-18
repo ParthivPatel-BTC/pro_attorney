@@ -3,7 +3,7 @@ class UserProfilesController < ApplicationController
   before_action :set_path, only: [:show,:edit]
   
   def index
-    @user_profile= UserProfile.all.order(id: :asc)
+    @user_profile = UserProfile.all.order(id: :asc)
   end
 
   def show
@@ -13,8 +13,8 @@ class UserProfilesController < ApplicationController
   end
 
   def new
-    @user_profile=UserProfile.new
-    @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
+    @user_profile = UserProfile.new
+    @avatarsrc = "avatar/#{@user_profile.avatar_file_name}"
   end
 
   def destroy
@@ -22,9 +22,9 @@ class UserProfilesController < ApplicationController
   end
 
   def create
-    @user_profile=UserProfile.new(profile_params) 
+    @user_profile = UserProfile.new(profile_params) 
     if @user_profile.save 
-      redirect_to   user_profiles_path  
+      redirect_to user_profiles_path  
     else
       render :new
     end
@@ -32,7 +32,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to   user_profiles_path  
+      redirect_to user_profiles_path  
     else
       redirect_to :back 
     end

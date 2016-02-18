@@ -1,40 +1,30 @@
-<div class= "col-md-8">
+<div class = "col-md-8">
   <h1>Case Detail</h1>
-<table class="table table-bordered table-hover">
+  <table class = "table table-bordered table-hover"> 
     <tr>
-      <td>Advocate id</td>
-      <td><%=@case.advocate_id%></td>
+      <td>Case Title</td>
+      <td><%= @case.case_title %></td>
     </tr>
     <tr>
-       <td>Client d</td>
-       <td><%=@case.client_id%></td>
-    </tr>
-    <tr>
-       <td>Case Title</td>
-       <td><%=@case.case_title%></td>
-    </tr>
-    <tr>
-	     <td>Detail</td> 
-       <td><%=@case.case_detail%></td>
+	    <td>Detail</td> 
+      <td><%= @case.case_detail %></td>
 	  </tr>
     <tr>
-	     <td>Location</td> 
-       <td><%=@case.location%></td>
-	 </tr>
-   <tr>
-	     <td>staus</td> <td><%=@case.status%></td>
-   </tr>
-
-   <tr>
- 	    <td>Documents</td>
- 	    <% docs=""
-       @case.documents.each do |doc|
-        docs+="  #{doc.doc_file_name}"
-       end %>
-      <td><%=docs%></td>
+	    <td>Location</td> 
+      <td><%= @case.location %></td>
+	  </tr>
+    <tr>
+	    <td>status</td> <td><%= @case.status %></td>
     </tr>
-</table>
+    <tr>
+ 	    <td>Documents</td>
+ 	    <% docs = ""
+       @case.documents.each do |doc|
+        docs += "  #{doc.doc_file_name}"
+       end %>
+      <td><%= docs %></td>
+    </tr>
+  </table>
 
-<%=link_to 'Back', cases_path,class: "btn btn-primary" %>
+  <%= link_to 'Back', cases_path,class: "btn btn-primary" %>
 </div>
-

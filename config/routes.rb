@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
- #root 'user_profiles#index'
- resources :user_profiles
- get 'home/index'
+  #root 'user_profiles#index'
+  resources :user_profiles
+  get 'home/index'
 
 	resources :cases do 
     collection do
@@ -12,21 +12,20 @@ Rails.application.routes.draw do
     end
   end 
  
- get 'users/signin'
-
+  get 'users/signin'
+  get 'users/after_signin' => 'users#after_signin'
   #get 'users/index'
   # root to: 'welcome#index'
- 
- 
- devise_for :users, :controllers => { registrations: "users/registrations",
+  
+  devise_for :users, :controllers => { registrations: "users/registrations",
                                       sessions: "users/sessions",
                                       confirmations: "users/confirmations",
                                       passwords: "users/passwords",
                                       unlocks: "users/unlocks"}
-devise_scope :user do
+  devise_scope :user do
   root  "users/registrations#new"
 end
- # devise_for :users
+ # devise_for :useseers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

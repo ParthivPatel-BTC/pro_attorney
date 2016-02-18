@@ -1,100 +1,77 @@
-<div class="row">
-  <div class="col-md-6">
-      <div class="box box-primary"><!--start box 2 -->
-          <div class="box-header with-border">
-          <h3 class="box-title">Case Info</h3><br>
+<%= form_for @case,:html => { :multipart => true }  do |f| %>
+<div class = "row">
+  <div class = "col-md-6">
+    <div class = "box box-primary"><!--start box 1 -->
+      <div class = "box-header with-border">
+      <h3 class = "box-title">Case Info</h3><br>
+      </div>
+      <div class = "box-body">
+        <div class = "col-md-12">
+	        <% if @case.errors.any? %>
+          <div id="error_explanation">
+          <div>   
+            <h2> <%= pluralize(@case.errors.count, "Error") %> Summary:</h2>
+            <ul>
+            <% @case.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+          <% end %>
           </div>
 
-<%= form_for @case,:html => { :multipart => true }  do |f| %>
-  <div class = "box-body">
-  <div class = "col-md-12">
-	 <% if @case.errors.any? %>
-          <div id="error_explanation">
-            <div>   
-      <h2> <%= pluralize(@case.errors.count, "Error") %> Summary:</h2>
-      <ul>
-        <%@case.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-   <%end%>
-  </div>
+          <div class = "form-group">
+	          <%= f.label :Case_Type %>
+	          <%= f.select :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type),class: "form-control",id:"sel1" %>
+          </div>
 
+          <div class = "form-group">
+            <%= f.label :Case_Title %>
+            <%= f.text_field :case_title,class: "form-control",placeholder: "Enter Case title" %>
+          </div>
 
-
-  <div class = "form-group">
-  <%=f.label :Client_id %>
-  <%=f.text_field :client_id,class: "form-control",placeholder: "Enter Client id"%>
-  </div>
-
-  <div class = "form-group">
-  <%=f.label :Advocate_id %>
-  <%=f.text_field :advocate_id,class: "form-control",placeholder: "Enter Advocate id"%>
-  </div>
-
-  <div class ="form-group">
-	<%=f.label :Case_Type %>
-	<%= f.select :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type),class: "form-control",id:"sel1"%>
-  </div>
-
-   <div class="form-group">
-   <%=f.label :Case_Title %>
-   <%=f.text_field :case_title,class: "form-control",placeholder: "Enter Case title" %>
-   </div>
-
-   <div class="form-group">
-   <%=f.label :Case_detail %>
-   <%=f.text_area :case_detail,class: "form-control",placeholder: "Enter Case detail"%>
-   </div>
-
-
-</div>
-</div>
-</div><!--end box 1 -->
-
-<div class="col-md-6">
-<div class="box box-primary"><!--start box 2 -->
-
-<div class="box-header with-border">
-          <h3 class="box-title">Case Info</h3><br>
-</div>
-
-<div class="box-body">
-<div class="col-md-12">
-   <div class="form-group">
-    <%=f.label :Location %>
-    <%=f.text_field :location,class: "form-control",placeholder: "Enter Case Location"%>
-   </div> 
-  
-    <div class="form-group">
-    <%=f.label :Status %>
-    <%=f.text_field :status ,class: "form-control",placeholder: "Enter status"%></td>
-   </div>
+          <div class = "form-group">
+            <%= f.label :Case_detail %>
+            <%= f.text_area :case_detail,class: "form-control",placeholder: "Enter Case detail" %>
+          </div>
+        </div>
+      </div>
+    </div><!--end box 1 -->
     
-    <div class="form-group">
-    <%=f.label :Documents_Atteched %>    
-    <% @documents.each do |document| %>
-    <%=document.doc_file_name%><%=link_to "Delete", document_cases_path(document) ,method: :delete, data: { confirm: 'Are you sure?' }  %><br>
-    <%end%>
+    <div class = "col-md-6">
+      <div class = "box box-primary"><!--start box 2 -->
+      <div class = "box-header with-border">
+        <h3 class = "box-title">Case Info</h3><br>
+      </div>
+      <div class = "box-body">
+        
+        <div class = "col-md-12">
+          <div class = "form-group">
+            <%= f.label :Location %>
+            <%= f.text_field :location,class: "form-control",placeholder: "Enter Case Location" %>
+          </div> 
+  
+          <div class = "form-group">
+            <%= f.label :Status %>
+            <%= f.text_field :status ,class: "form-control",placeholder: "Enter status" %></td>
+          </div>
+    
+          <div class = "form-group">
+            <%= f.label :Documents_Atteched %>    
+            <% @documents.each do |document| %>
+              <%= document.doc_file_name %>
+              <%= link_to "Delete", document_cases_path(document) ,method: :delete, data: { confirm: 'Are you sure?' }  %><br>
+            <% end %>
+          </div>
+
+          <div class = "form-group">
+            <%= f.label :Document %>
+            <%= file_field_tag "document[]", type: :file, multiple: true %>
+          </div>
+        </div>
+      </div>
+      </div>
+      <%= f.submit class: "btn btn-primary" %>    
     </div>
-
-   <div class="form-group">
-   <%=f.label :Document %>
-   <%= file_field_tag "document[]", type: :file, multiple: true%>
   </div>
-
-</div>
-</div>
-   
-
-</div>
-<%=f.submit class: "btn btn-primary" %>    
-
-</div>
-</div>
-<%end%>
-
-
-
-
+<% end %>
