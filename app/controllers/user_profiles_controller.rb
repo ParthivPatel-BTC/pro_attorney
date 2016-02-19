@@ -2,7 +2,7 @@ class UserProfilesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
   def index
-    @user_profile = UserProfile.all.order(first_name: :asc)
+    @user_profile = UserProfile.order(first_name: :asc)
   end
 
   def show

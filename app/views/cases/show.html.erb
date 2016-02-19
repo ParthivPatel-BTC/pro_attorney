@@ -18,13 +18,9 @@
     </tr>
     <tr>
  	    <td>Documents</td>
- 	    <% docs = ""
-       @case.documents.each do |doc|
-        docs += "  #{doc.doc_file_name}"
-       end %>
-      <td><%= docs %></td>
+ 	    <%= render partial: "case_documents.html.erb" %>
     </tr>
   </table>
 
-  <%= link_to 'Back', cases_path,class: "btn btn-primary" %>
+  <%= link_to 'Back', cases_path, class: "btn btn-primary" %>
 </div>
