@@ -5,7 +5,7 @@ Rails.application.routes.draw do
  resources :user_profiles
  get 'home/index'
 
-	resources :cases do 
+  resources :cases do 
     collection do
       get 'doc_upload'
       delete 'doc_delete/:document' =>  'cases#delete_document',as: :document
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
                                       passwords: "users/passwords",
                                       unlocks: "users/unlocks"}
 devise_scope :user do
-  root  "users/registrations#new"
+  root  "users/sessions#new"
 end
  # devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

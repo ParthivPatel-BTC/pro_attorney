@@ -40,13 +40,9 @@ ActiveRecord::Schema.define(version: 20160212110756) do
     t.string   "case_detail"
     t.string   "case_document"
     t.string   "status"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "case_type_id"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
   end
 
   add_index "cases", ["case_type_id"], name: "index_cases_on_case_type_id", using: :btree
@@ -62,6 +58,14 @@ ActiveRecord::Schema.define(version: 20160212110756) do
   end
 
   add_index "documents", ["case_id"], name: "index_documents_on_case_id", using: :btree
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_profile_id"
+  end
+
+  add_index "feedbacks", ["user_profile_id"], name: "index_feedbacks_on_user_profile_id", using: :btree
 
   create_table "overall_averages", force: :cascade do |t|
     t.integer  "rateable_id"

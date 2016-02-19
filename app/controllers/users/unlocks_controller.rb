@@ -1,3 +1,3 @@
 class Users::UnlocksController < Devise::UnlocksController
-  	layout 'registration_layout'
+    layout 'registration_layout'
 end
