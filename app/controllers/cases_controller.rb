@@ -5,6 +5,10 @@ class CasesController < ApplicationController
     @cases=Case.all.order(id: :asc)
   end
 
+  def search_case
+    Case.search_by_all(search_params)
+  end
+
   def show
   end
 
@@ -67,5 +71,9 @@ class CasesController < ApplicationController
 
   def doc_params
     params.require(:document).permit(:doc_file_name,:doc_content_type,:doc_file_size,:doc_updated_at)
+  end
+
+  def search_params
+    params.require()
   end
 end
