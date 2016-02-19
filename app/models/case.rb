@@ -1,5 +1,5 @@
 class Case < ActiveRecord::Base
-
+	
 	include PgSearch
 	 
 	belongs_to :case_type
@@ -8,4 +8,6 @@ class Case < ActiveRecord::Base
 
 	pg_search_scope :search_by_all,
 	 :against => [:case_title, :case_detail, :location]
+
+	 #will_paginate @cases
 end

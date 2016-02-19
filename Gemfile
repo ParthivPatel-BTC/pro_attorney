@@ -10,7 +10,7 @@ gem 'rails', '4.2.5'
 gem 'pg'
 gem 'pg_search'
 # Use SCSS for stylesheets
-
+gem 'will_paginate-bootstrap'
 gem 'devise','3.4.1'
 
 gem 'sass-rails', '~> 5.0'

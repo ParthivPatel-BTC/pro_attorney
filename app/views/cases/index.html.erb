@@ -1,5 +1,6 @@
 <h1>Cases</h1>
 <%= render partial: "search_form" %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -25,4 +26,5 @@
      <% end %>
   </tbody>
 </table>
+<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
 <%= link_to 'New Case', new_case_path %>

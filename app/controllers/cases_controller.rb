@@ -2,7 +2,8 @@ class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
 
   def index
-    @cases=Case.all.order(id: :asc)
+    @cases = Case.order(id: :asc)
+    @cases = Case.paginate(page: params[:page], per_page: 1, :order => 'created_at DESC') 
   end
 
   def search_case
