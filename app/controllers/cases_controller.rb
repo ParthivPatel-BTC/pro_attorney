@@ -2,7 +2,7 @@ class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
 
   def index
-    @cases=Case.all
+    @cases=Case.all.order(id: :asc)
   end
 
   def show

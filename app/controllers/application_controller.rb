@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
     if current_user.is_system_admin?
       users_signin_path(resource)
     elsif current_user.is_client?
-      user_session_path(resource)
+      new_case_path(resource)
     elsif current_user.is_advocate?
-      user_profiles_path
+      cases_path
     end
   end
 end
