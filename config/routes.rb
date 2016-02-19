@@ -4,7 +4,7 @@ Rails.application.routes.draw do
  #root 'user_profiles#index'
  resources :user_profiles
  get 'home/index'
-
+#get 'cases/search'
   resources :cases do 
     collection do
       get 'doc_upload'

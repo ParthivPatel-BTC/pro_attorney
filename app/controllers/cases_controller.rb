@@ -1,13 +1,15 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
+ 
+@cases=Case.new
 
   def index
-    @cases=Case.all
-  end
-
+    @cases=Case.search(params[:case_type_id])
+ end
+  
   def show
   end
-
+  
   def update
     if @case.update(case_params)
      redirect_to @case

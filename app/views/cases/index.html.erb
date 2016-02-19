@@ -1,4 +1,21 @@
 <h1>Cases</h1>
+    
+<table>
+  <tr>
+    <%= form_tag("cases", method: "get") do %>
+      <td> 
+          <%= "Case Type" %> 
+      </td>
+          <td><%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all,    :id, :case_type,selected_case_type),class: "form-control",style: "width:100px"%>
+          </td>
+      <td>
+          <%= submit_tag("Search") %>
+      </td>
+  </tr>
+
+    <% end %>
+</table>
+
 <table class="table table-striped">
   <thead>
     <tr>
