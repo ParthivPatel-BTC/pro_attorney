@@ -6,7 +6,12 @@ class CasesController < ApplicationController
   end
 
   def search_case
-    Case.search_by_all(search_params)
+    if params[:search] == ""
+      @cases = Case.all
+    else
+      @cases = Case.search_by_all(params[:search])
+    end
+    render 'index'
   end
 
   def show
@@ -73,7 +78,5 @@ class CasesController < ApplicationController
     params.require(:document).permit(:doc_file_name,:doc_content_type,:doc_file_size,:doc_updated_at)
   end
 
-  def search_params
-    params.require()
-  end
+  
 end
