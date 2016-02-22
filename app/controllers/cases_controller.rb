@@ -2,17 +2,13 @@ class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
 
   def index
-    @cases = Case.order(id: :asc)
-    @cases = Case.paginate(page: params[:page], per_page: 1, :order => 'created_at DESC') 
-  end
-
-  def search_case
-    if params[:search] == ""
-      @cases = Case.all
+    if params[:search].blank?
+      @cases = Case.paginate(page: params[:page], per_page: 1)
+    elsif Case.search_by_all(params[:search]).blank?
+      flash[:notice] = "Case not found"
     else
-      @cases = Case.search_by_all(params[:search])
-    end
-    render 'index'
+      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: 1)
+    end 
   end
 
   def show
