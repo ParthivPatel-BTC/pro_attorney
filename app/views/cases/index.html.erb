@@ -10,27 +10,10 @@
       <th>Location</th>
       <th>Status</th>
       <th colspan="1"></th>
+    </tr>
   </thead>
-   </tr>
   <tbody>
-      
-    <% @cases.each do |case1| %>
-      <tr>
-          <td><%= case1.case_title %></td>
-          <td><%= case1.location%></td>
-          <td><%=case1.status%></td>
-          <td><%= link_to case_path(case1) do%><%= image_tag "detail.png", size: "20x40" ,class: "some class here",alt: "show" %><% end %></td>
-          <td><%= link_to edit_case_path(case1) do%><%= image_tag "edit.png", size: "20x40" ,class: "some class here",alt: "Edit" %><%end%></td>
-
-          <td><%= link_to case1, method: :delete, data: { confirm: 'Are you sure?' } do %><%= image_tag "del.png", size: "20x40" ,class: "some class here",alt: "Edit" %><%end%></td>
-        
-      </tr>
-     <% end %>
-     
+    <%= render partial: "cases" %>
   </tbody>
 </table>
-<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
-
 <%= link_to 'New Case', new_case_path %>
-
-<% end %>

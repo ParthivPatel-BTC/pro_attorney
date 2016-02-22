@@ -38,7 +38,7 @@ class CasesController < ApplicationController
   end
 
   def create
-    @case=Case.new(case_params)
+    @case = Case.new(case_params.merge({user_id: current_user.id}))
     if @case.save
       if params[:document]
         params[:document].each { |image|
@@ -63,17 +63,16 @@ class CasesController < ApplicationController
   end
 
   private
+  
   def set_case
     @case = Case.find(params[:id])
   end
 
   def case_params
-    params.require(:case).permit(:client_id,:advocate_id,:case_type_id,:case_title,:case_detail,:location,:status)
+    params.require(:case).permit(:user_id, :case_type_id, :case_title, :case_detail, :location,:status)
   end
 
   def doc_params
-    params.require(:document).permit(:doc_file_name,:doc_content_type,:doc_file_size,:doc_updated_at)
+    params.require(:document).permit(:doc_file_name, :doc_content_type, :doc_file_size, :doc_updated_at)
   end
-
-  
 end
