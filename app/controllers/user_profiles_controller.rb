@@ -1,9 +1,8 @@
 class UserProfilesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_path, only: [:show,:edit]
   
   def index
-    @user_profile= UserProfile.all.order(id: :asc)
+    @user_profile = UserProfile.order(first_name: :asc)
   end
 
   def show
@@ -13,8 +12,7 @@ class UserProfilesController < ApplicationController
   end
 
   def new
-    @user_profile=UserProfile.new
-    @avatarsrc= "avatar/#{@user_profile.avatar_file_name}"
+    @user_profile = UserProfile.new
   end
 
   def destroy
@@ -22,9 +20,9 @@ class UserProfilesController < ApplicationController
   end
 
   def create
-    @user_profile=UserProfile.new(profile_params) 
+    @user_profile = UserProfile.new(profile_params) 
     if @user_profile.save 
-      redirect_to   user_profiles_path  
+      redirect_to user_profiles_path  
     else
       render :new
     end
@@ -32,7 +30,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to   user_profiles_path  
+      redirect_to user_profiles_path  
     else
       redirect_to :back 
     end
@@ -45,10 +43,6 @@ class UserProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user_profile).permit(:first_name, :last_name,:gender,:mobile_no,:address,:city,:pincode,:qualification,:experience,:avatar)
-  end
-
-  def set_path
-    @avatarsrc = "avatar/#{@user_profile.avatar_file_name}"
+    params.require(:user_profile).permit(:first_name, :last_name, :gender, :mobile_no, :address, :city, :pincode, :qualification, :experience, :avatar)
   end
 end

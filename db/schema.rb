@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212110756) do
+ActiveRecord::Schema.define(version: 20160218061640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,23 +33,19 @@ ActiveRecord::Schema.define(version: 20160212110756) do
   end
 
   create_table "cases", force: :cascade do |t|
-    t.integer  "client_id"
-    t.integer  "advocate_id"
     t.string   "case_title"
     t.string   "location"
     t.string   "case_detail"
     t.string   "case_document"
     t.string   "status"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "case_type_id"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
+    t.integer  "user_id"
   end
 
   add_index "cases", ["case_type_id"], name: "index_cases_on_case_type_id", using: :btree
+  add_index "cases", ["user_id"], name: "index_cases_on_user_id", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.datetime "created_at",       null: false
@@ -62,6 +58,14 @@ ActiveRecord::Schema.define(version: 20160212110756) do
   end
 
   add_index "documents", ["case_id"], name: "index_documents_on_case_id", using: :btree
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_profile_id"
+  end
+
+  add_index "feedbacks", ["user_profile_id"], name: "index_feedbacks_on_user_profile_id", using: :btree
 
   create_table "overall_averages", force: :cascade do |t|
     t.integer  "rateable_id"
@@ -152,6 +156,7 @@ ActiveRecord::Schema.define(version: 20160212110756) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "cases", "case_types"
+  add_foreign_key "cases", "users"
   add_foreign_key "documents", "cases"
   add_foreign_key "user_profiles", "users"
 end
