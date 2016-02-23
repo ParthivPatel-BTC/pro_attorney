@@ -1,21 +1,20 @@
 class AdminsController < ApplicationController
 	def view_advocates
-		@users=User.where(role_id: 3)
+		@users=User.joins(:user_profile).order("user_profiles.first_name").where(role_id: 3).paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def view_clients
-		@users=User.where(role_id: 2)
+		@users=User.joins(:user_profile).order("user_profiles.first_name").where(role_id: 2).paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def view_cases
-		@cases=Case.all
+		@cases=Case.all.paginate(:page => params[:page], :per_page => 5)
 	end
 
 	def view_case
-
 	end
 
-  def update_user
+  	def update_user
 		user=User.find(params[:id])
 		user.update!(is_active: !user.is_active)
 		if user.role.title == "advocate"
