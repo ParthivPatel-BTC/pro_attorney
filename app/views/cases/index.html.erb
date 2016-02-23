@@ -15,6 +15,7 @@
   </tbody>
 </table>
 <%= link_to 'New Case', new_case_path %>
+<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
   <% else %>
   <p>No matching result found</p>
 <% end %>
