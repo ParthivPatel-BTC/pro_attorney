@@ -13,23 +13,26 @@
 						<% end %>
 					</div><!--end inner box 1 -->
 					<div class= "col-md-7 pull-right"><!--start inner box 2 -->
-						<h2 class="user-card-name"><%= @user_profile.first_name + " " + @user_profile.last_name %></h2>
-						<div class="current-position"><i class="fa fa-fw fa-mortar-board"></i>Advocate</div>
-						<br>
-						<p><br><br>
-						<b><u>Experience: </u></b><br><br><p><%= @user_profile.experience %></p></p>
+						<h2 class="user-card-name"><%= @user_profile.first_name.titleize + " " + @user_profile.last_name.titleize %></h2>
+						<div class="current-position"><i class="fa fa-fw fa-mortar-board"></i>Advocate</div><br>
+						<p><%= @user_profile.experience %></p><br>
 						<table>
-							<tr><td>Give your Ratings:</td><td>
+							<tr><td>My Ratings:</td><td>
 							<%= rating_for @user_profile,"ratings",:disable_after_rate => true, :enable_half => true,
     																								  :half_show => true %>
 							</td></tr>
-							<tr><td>Average Ratings:</td>
+							<!-- <tr><td>Average Ratings:</td>
 							<td><%= rating_for @user_profile, "ratings", disabled: true, imdb_avg: true %> </td>
-							</tr>
+							</tr> -->
 						</table>
 					</div><!--end inner box 2 -->
 				</div>
 		</div>
+		<br>
+			&nbsp;&nbsp;
+			<%= link_to "Edit", edit_user_profile_path(@user_profile), class: "fa fa-fw fa-edit" %>
+			
+			<br>
 	</div><!--end box 1 -->
 
 	<div class="col-md-4"><!--start box 2 -->
@@ -45,12 +48,7 @@
 			&nbsp;&nbsp;&nbsp;<%= @user_profile.city %> -	
 			<%= @user_profile.pincode %>
 			</p>
-			<br>
-			&nbsp;&nbsp;
-			<%= link_to edit_user_profile_path(@user_profile), class: "btn btn-primary" do %>
-			<i class="fa fa-fw fa-edit"></i>
-			<%end%>
-			<br>
+			
 		</div>
 	</div><!--end box 2 -->
 </div>

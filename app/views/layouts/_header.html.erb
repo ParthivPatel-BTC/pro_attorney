@@ -4,7 +4,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Admin</b>LTE</span>
+          <span class="logo-lg"><b>Pro</b>ATTORNEY</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -204,8 +204,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />
-                  <span class="hidden-xs">Alexander Pierce</span>
+                <% if current_user.user_profile.avatar.exists? %>
+              <%= image_tag(current_user.user_profile.avatar.url(:small), class: "img-circle") %>
+            <% else %> 
+              <%= image_tag("default.jpg", class: "img-circle", height: "15px", width: "15px") %>
+            <% end %>
+            &nbsp;&nbsp;
+                  <span class="hidden-xs"><%= current_user.user_profile.first_name + " " + current_user.user_profile.last_name %></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->

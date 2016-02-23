@@ -30,7 +30,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to user_profiles_path  
+      redirect_to user_profile_path(@user_profile)  
     else
       redirect_to :back 
     end
