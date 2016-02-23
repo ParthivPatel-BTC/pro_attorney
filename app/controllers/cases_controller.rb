@@ -4,8 +4,6 @@ class CasesController < ApplicationController
   def index
     if params[:search].blank?
       @cases = Case.paginate(page: params[:page], per_page: 1)
-    elsif Case.search_by_all(params[:search]).blank?
-      flash[:notice] = "Case not found"
     else
       @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: 1)
     end 
