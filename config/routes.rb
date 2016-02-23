@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  # get 'admins/view_users'
+
+  # get 'admins/view_cases'
+
+  # get 'admins/view_case'
+
   post '/rate' => 'rater#create', :as => 'rate'
  
   resources :user_profiles
@@ -22,7 +28,18 @@ Rails.application.routes.draw do
                                       unlocks: "users/unlocks"}
   devise_scope :user do
   root  "users/sessions#new"
-end
+  end
+
+  namespace :admins do
+    get 'view_advocates'
+    get 'view_clients'
+    get 'view_cases'
+    get 'view_case'
+  end
+
+  patch 'admins/update_user/:id' => "admins#update_user", as: :update_user
+  patch 'admins/update_case/:id' => "admins#update_case", as: :update_case
+
  # devise_for :useseers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

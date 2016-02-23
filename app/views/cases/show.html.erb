@@ -1,5 +1,5 @@
 <div class = "col-md-8">
-  <h1>Case Detail</h1>
+  <h3>Case Detail</h3>
   <table class = "table table-bordered table-hover"> 
     <tr>
       <td>Case Title</td>
@@ -22,5 +22,32 @@
     </tr>
   </table>
 
-  <%= link_to 'Back', cases_path, class: "btn btn-primary" %>
+<h3>Client Detail</h3>
+  <table class = "table table-bordered table-hover"> 
+    <tr>
+      <td>Name</td>
+      <td><%= @case.user.user_profile.first_name %> <%= @case.user.user_profile.last_name %></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td><%= @case.user.user_profile.last_name %></td>
+    </tr>
+    <tr>
+      <td>Contact</td>
+      <td><%= @case.user.user_profile.mobile_no %></td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td><%= @case.user.user_profile.address %></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><%= @case.user.user_profile.city %></td>
+    </tr>
+    <tr>
+      <td>Pincode</td>
+      <td><%= @case.user.user_profile.pincode %></td>
+    </tr>
+  </table>  
+  <%= link_to 'Back',:back, class: "btn btn-primary" %>
 </div>

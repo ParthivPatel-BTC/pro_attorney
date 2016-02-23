@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218061640) do
+ActiveRecord::Schema.define(version: 20160223043836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +38,11 @@ ActiveRecord::Schema.define(version: 20160218061640) do
     t.string   "case_detail"
     t.string   "case_document"
     t.string   "status"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "case_type_id"
     t.integer  "user_id"
+    t.boolean  "is_active",     default: true
   end
 
   add_index "cases", ["case_type_id"], name: "index_cases_on_case_type_id", using: :btree
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 20160218061640) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "role_id"
+    t.boolean  "is_active"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

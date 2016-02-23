@@ -1,0 +1,24 @@
+<table class="table table-hover">
+	<thead>
+		<tr>
+		 	<th>Id</th>
+		 	<th>Email</th>
+		 	<th>Name</th>
+		 	<th>Actions</th>
+	 	</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user|%>
+		  <tr>
+				<td><%= user.id %></td>
+				<td><%= user.email %></td>
+				<td>
+				<%=link_to user_profile_path(user.user_profile) do%>
+				<%= user.user_profile.first_name+" "+user.user_profile.last_name %>
+				<%end %>
+				</td>
+				<td><%= link_to active?(user), update_user_path(user),method: :patch,title: "Activate/Deactivate this User" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -28,13 +28,28 @@ e<aside class="main-sidebar">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
+            <% if current_user.is_system_admin? %>
+            
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Layout Options</span>
-                <span class="label label-primary pull-right">4</span>
-              </a>
+              <%=link_to  admins_view_advocates_path  do %>
+              <i class="fa fa-users"></i> <span>Advocates</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
             </li>
+
+          <li class="treeview">
+              <%=link_to  admins_view_clients_path  do %>
+              <i class="fa fa-users"></i> <span>clients</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
+
+            <li class="treeview">
+              <%=link_to  admins_view_cases_path  do %>
+                <i class="fa fa-book"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
+
+            <% end %>
+
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>
