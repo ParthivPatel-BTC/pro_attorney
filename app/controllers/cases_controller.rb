@@ -42,9 +42,11 @@ class CasesController < ApplicationController
         params[:document].each { |image|
         @case.documents.create(doc: image)
         }
-        redirect_to cases_path 
+        flash[:success] = "Case created succefully"
+        redirect_to cases_path
       end
     else
+      flash[:danger] = @case.errors.full_messages
       @documents = @case.documents
       render :new
     end
