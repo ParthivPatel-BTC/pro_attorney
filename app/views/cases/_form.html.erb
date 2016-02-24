@@ -1,4 +1,4 @@
-<%= form_for @case,:html => { :multipart => true }  do |f| %>
+<%= form_for @case, html: { :multipart => true }  do |f| %>
 <div class = "row">
   <div class = "col-md-6">
     <div class = "box box-primary"><!--start box 1 -->
@@ -27,14 +27,14 @@
     </div>
   </div><!--end box 1 -->
     
-    <div class = "col-md-6">
-      <div class = "box box-primary"><!--start box 2 -->
+  <div class = "col-md-6">
+    <div class = "box box-primary"><!--start box 2 -->
       <div class = "box-header with-border">
         <h3 class = "box-title">Case Info</h3><br>
       </div>
       <div class = "box-body">
-        
         <div class = "col-md-12">
+
           <div class = "form-group">
             <%= f.label :location %>
             <%= f.text_field :location,class: "form-control",placeholder: "Enter Case Location" %>
@@ -49,7 +49,7 @@
             <%= f.label :documents_atteched %>    
             <% @documents.each do |document| %>
               <%= document.doc_file_name %>
-              <%= link_to "Delete", document_cases_path(document) ,method: :delete, data: { confirm: 'Are you sure?' }  %><br>
+              <%= link_to "Delete", document_cases_path(document), method: :delete, data: { confirm: 'Are you sure?' }  %><br>
             <% end %>
           </div>
 
