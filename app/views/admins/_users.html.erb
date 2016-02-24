@@ -1,7 +1,8 @@
+<div id="users">
 <table class="table table-bordered table-hover dataTable">
 	<thead>
 		<tr>
-		 	<th>Id</th>
+		 	<th>No</th>
 		 	<th>Name</th>
 		 	<th class="sorting_asc">Email</th>
 		 	<th>Actions</th>
@@ -17,9 +18,10 @@
 				<%end %>
 				</td>
 				<td><%= user.email %></td>
-				<td><%= link_to active?(user), update_user_path(user),method: :patch,title: "Activate/Deactivate this User" %></td>
+				<td><%= link_to active?(user), update_user_path(user),remote: true,method: :patch,title: "Activate/Deactivate this User" %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
-<%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right"%>
+<%= will_paginate @users %>
+</div>

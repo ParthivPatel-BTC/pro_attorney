@@ -53,7 +53,7 @@ e<aside class="main-sidebar">
            <% if current_user.is_advocate? %>
             
             <li class="treeview">
-              <%=link_to  admins_view_advocates_path  do %>
+              <%=link_to   cases_path   do %>
               <i class="fa fa-book"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
                <% end %>
             </li>
@@ -61,7 +61,7 @@ e<aside class="main-sidebar">
 
             <li class="treeview">
               <%=link_to  admins_view_advocates_path  do %>
-        <i class="fa fa-book"></i> <span>Purchased Cases</span> <i class="fa fa-angle-left pull-right"></i>
+        <i class="fa fa-book"></i> <span>My Cases</span> <i class="fa fa-angle-left pull-right"></i>
                <% end %>
             </li>
           <% end %>

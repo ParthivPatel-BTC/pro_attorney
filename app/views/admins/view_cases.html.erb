@@ -1,24 +1,2 @@
 <h1>Cases</h1>
-<table class="table table-hover">
-<thead>
-	<tr>
-		<th>Id</th>
-		<th>Title</th>
-		<th>Client Name</th>
-		<th>Type</th>
-		<th>Actions</th>
-	</tr>
-</thead>
-<tbody>
-<% @cases.each_with_index do |c,index|%>
-<tr>
-	<td><%= index+1 %></td>
-	<td><%= link_to case_path(c) do%><%= c.case_title %><%end%></td>
-	<td><%= c.user.user_profile.first_name.capitalize %> <%= c.user.user_profile.last_name.capitalize %></td>
-	<td><%= c.case_type.case_type %></td>
-	<td><%= link_to  active?(c),update_case_path(c),method: :patch %></td>
-</tr>
-<% end %>
-</tbody>
-</table>
-<%= will_paginate @cases, renderer: BootstrapPagination::Rails,class: "pull-right"%>
+<%= render 'case1' %>
