@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
 	resources :cases do 
     collection do
+      get 'case_purchase_paypal/:id' =>'cases#case_purchase_paypal',as: :id
       get 'doc_upload'
       delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
     end

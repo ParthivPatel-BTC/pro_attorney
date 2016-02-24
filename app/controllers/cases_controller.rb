@@ -1,5 +1,5 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: [:show,:edit,:update,:destroy]
+  before_action :set_case, only: [:show,:edit,:update,:destroy, :case_purchase_paypal]
 
   def index
     if params[:search].blank?
@@ -20,6 +20,10 @@ class CasesController < ApplicationController
     else
       render :edit 
     end
+  end
+
+  def case_purchase_paypal
+     redirect_to @case.paypal_url(cases_path)
   end
 
   def delete_document

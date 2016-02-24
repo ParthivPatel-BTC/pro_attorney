@@ -7,7 +7,7 @@
     <td><%= case1.case_type.amount %></td>
     <td><%= case1.status%></td>
     <% if current_user.is_advocate? %>
-      <td><%=  link_to "Purchase", '#' %></td>
+      <td><%= link_to "Purchase", id_cases_path(case1) %></td>
     <% elsif current_user.is_client? %>
       <td>
         <%= link_to case_path(case1) do %>
