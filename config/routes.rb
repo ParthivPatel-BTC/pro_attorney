@@ -7,11 +7,15 @@ Rails.application.routes.draw do
 
 	resources :cases do 
     collection do
+      get 'case_purchase'
+      get 'case_purchase_paypal/:id' =>'cases#case_purchase_paypal',as: :id
       get 'doc_upload'
+
+      post "/hook" => "cases#hook"
       delete 'doc_delete/:document' =>  'cases#delete_document',as: :document
-    end
+          end
   end 
- 
+      post 'cases/paypal_show/:id' => 'cases#paypal_show',as: :show_not_cases
  get 'users/signin'
 
   #get 'users/index'
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
                                       passwords: "users/passwords",
                                       unlocks: "users/unlocks"}
 devise_scope :user do
-  root  "users/registrations#new"
+  root  "users/sessions#new"
 end
  # devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

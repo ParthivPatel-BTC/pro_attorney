@@ -1,0 +1,22 @@
+id <%= current_user.id %>
+<h1>Cases Purchase</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Detail</th>
+      <th>Amount</th>
+      <th colspan="1"></th>
+  </thead>
+   </tr>
+  <tbody>
+    <% @cases1.each do |case1| %>
+      <tr>
+          <td><%= case1.case_title %></td>
+          <td><%= case1.case_detail%></thd>
+
+          <td><%= link_to 'Purchase' ,id_cases_path(case1) %></td>
+      </tr>
+     <% end %>
+  </tbody>
+</table>
