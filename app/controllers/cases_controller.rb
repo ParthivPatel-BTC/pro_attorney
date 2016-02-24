@@ -2,7 +2,11 @@ class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
 
   def index
-    @cases = Case.all
+    if params[:search].blank?
+      @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
+    else
+      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
+    end 
   end
 
   def show
@@ -27,7 +31,7 @@ class CasesController < ApplicationController
   end
 
   def new
-    @case = Case.new
+    @case = Case.new(user_id: current_user)
     @documents = @case.documents
   end
 
@@ -38,9 +42,11 @@ class CasesController < ApplicationController
         params[:document].each { |image|
         @case.documents.create(doc: image)
         }
-        redirect_to cases_path 
+        flash[:success] = "Case created succefully"
+        redirect_to cases_path
       end
     else
+      flash[:danger] = @case.errors.full_messages
       @documents = @case.documents
       render :new
     end

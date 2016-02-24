@@ -9,7 +9,7 @@ class UserProfile < ActiveRecord::Base
             :address,
             :city,
             :pincode, presence: true
-  validates_format_of :first_name, :last_name, :city, :with => /[-a-z]+/
+  validates_format_of :first_name, :last_name, :city, :with => /[-a-z]+/ if  :first_name == nil
   has_attached_file :avatar, 
 	                        :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
 	                        :url => "/system/:attachment/:id/:style/:filename",

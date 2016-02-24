@@ -9,8 +9,8 @@ gem "paperclip", "~> 4.2"
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+gem 'pg_search'
 # Use SCSS for stylesheets
-
 gem 'devise','3.4.1'
 
 gem 'sass-rails', '~> 5.0'

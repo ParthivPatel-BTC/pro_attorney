@@ -1,6 +1,7 @@
 <h1>Cases</h1>
-        <%= link_to 'Back',:back, class: "btn btn-primary pull-right" %>
-        <table class="table table-striped">
+<%= render partial: "search_form" %>
+  <% if @cases.present? %>
+    <table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
@@ -15,3 +16,7 @@
   </tbody>
 </table>
 <%= link_to 'New Case', new_case_path %>
+<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
+  <% else %>
+  <p>No matching result found</p>
+<% end %>

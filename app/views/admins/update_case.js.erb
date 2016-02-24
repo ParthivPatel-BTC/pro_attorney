@@ -1,1 +1,2 @@
-$("#case1").html("<%= escape_javascript(render partial: 'case1', locals: { case1: @case1 } ) %>"); 
+<% puts ">>>>>>>>>>>>>>>>>>>>>>. #{@user_case}"%>
+$("#user_case").html("<%= escape_javascript(render partial: 'user_case', locals: { user_case: @user_case } ) %>"); 
