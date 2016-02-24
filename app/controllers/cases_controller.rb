@@ -1,7 +1,11 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
+ 
+@cases=Case.new
 
   def index
+
+  @cases=Case.search(params[:case_type_id])
     if params[:search].blank?
       @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
     else
@@ -13,7 +17,7 @@ class CasesController < ApplicationController
 
   def show
   end
-
+  
   def update
     if @case.update(case_params)
      redirect_to @case
