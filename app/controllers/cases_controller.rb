@@ -2,7 +2,11 @@ class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
 
   def index
-    @cases = Case.all
+    if params[:search].blank?
+      @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
+    else
+      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
+    end 
   end
 
   def show
