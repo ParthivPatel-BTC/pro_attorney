@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end 
  
+  post 'send_purchase_mail/:id' =>'cases#send_purchase_mail',as: :send_purchase_mail
+
   get 'users/signin'
   get 'users/after_signin' => 'users#after_signin'
     

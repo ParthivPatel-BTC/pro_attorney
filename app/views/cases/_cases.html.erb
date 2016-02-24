@@ -3,6 +3,8 @@
     <td><%= case1.case_title %></td>
     <td><%= case1.location%></td>
     <td><%=case1.status%></td>
+    <td> <%= link_to "purchase",send_purchase_mail_path(case1.id),{:method => "post"} %></td>
+
     <td><%= link_to case_path(case1) do%><%= image_tag "detail.png", size: "20x40" ,class: "some class here",alt: "show" %>
     <% end %><td>
     <td><%= link_to edit_case_path(case1) do%><%= image_tag "edit.png", size: "20x40" ,class: "some class here",alt: "Edit" %><%end%></td>

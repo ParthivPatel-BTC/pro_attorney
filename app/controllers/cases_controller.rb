@@ -5,6 +5,8 @@ class CasesController < ApplicationController
     @cases = Case.all
   end
 
+ 
+
   def show
   end
 
@@ -15,6 +17,19 @@ class CasesController < ApplicationController
       render :edit 
     end
   end
+
+  def send_purchase_mail
+      client=Case.find(params[:id]).user
+
+     
+      advocate=User.find(current_user.id)
+     puts "#{current_user.id}"
+
+      UserMailer.purchase(client,advocate).deliver_now
+      redirect_to cases_path
+  end
+
+
 
   def delete_document
     case_id = Document.find(params[:document]).case_id
@@ -32,8 +47,10 @@ class CasesController < ApplicationController
   end
 
   def create
+    
     @case = Case.new(case_params.merge({user_id: current_user.id}))
     if @case.save
+      
       if params[:document]
         params[:document].each { |image|
         @case.documents.create(doc: image)
@@ -47,6 +64,7 @@ class CasesController < ApplicationController
   end
 
   def destroy
+   
     if @case.destroy
       @case.documents.destroy
       redirect_to cases_path
