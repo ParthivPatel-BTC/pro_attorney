@@ -23,5 +23,5 @@
 		<% end %>
 	</tbody>
 </table>
-<%= will_paginate @users %>
+<%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right" %>
 </div>

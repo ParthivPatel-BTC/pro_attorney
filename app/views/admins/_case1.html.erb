@@ -3,23 +3,26 @@
 <thead>
 	<tr>
 		<th>No.</th>
-		<th>Title</th>
+		<th>
+		Title <%=link_to "Desc",admins_sorting_path(order: "desc"),remote: true,class: "pull-right" %>
+		</th>
 		<th>Name</th>
 		<th>Type</th>
 		<th>Actions</th>
 	</tr>
 </thead>
 <tbody>
-<% @case1.each_with_index do |c,index|%>
+<% @case1.each_with_index do |user_case,index|%>
 <tr>
 	<td><%= index+1 %></td>
-	<td><%= link_to case_path(c) do%><%= c.case_title %><%end%></td>
-	<td><%= c.user.user_profile.first_name.capitalize %> <%= c.user.user_profile.last_name.capitalize %></td>
-	<td><%= c.case_type.case_type %></td>
-	<td><%= link_to  active?(c),update_case_path(c),remote: true,method: :patch,title: "Activate/Deactivate Case" %></td>
+	<td><%= link_to case_path(user_case) do%><%= user_case.case_title %><%end%></td>
+	<td><%= user_case.user.user_profile.first_name.capitalize %> 
+	    <%= user_case.user.user_profile.last_name.capitalize %></td>
+	<td><%= user_case.case_type.case_type %></td>
+	<td><%= link_to  active?(user_case),update_case_path(user_case),remote: true,method: :patch,title: "Activate/Deactivate Case" %></td>
 </tr>
 <% end %>
 </tbody>
 </table>
-<%= will_paginate @case1 %>
+<%= will_paginate @case1, renderer: BootstrapPagination::Rails,class: "pull-right" %>
 </div>
