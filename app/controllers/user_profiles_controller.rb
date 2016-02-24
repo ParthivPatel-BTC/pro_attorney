@@ -22,8 +22,10 @@ class UserProfilesController < ApplicationController
   def create
     @user_profile = UserProfile.new(profile_params) 
     if @user_profile.save 
+      flash[:success] = "Profile created succefully"
       redirect_to user_profiles_path  
     else
+      flash[:danger] = @user_profile.errors.full_messages
       render :new
     end
   end
