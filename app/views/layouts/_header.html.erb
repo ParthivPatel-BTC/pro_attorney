@@ -204,13 +204,9 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <% if current_user.user_profile.avatar.exists? %>
-              <%= image_tag(current_user.user_profile.avatar.url(:small), class: "img-circle") %>
-            <% else %> 
-              <%= image_tag("default.jpg", class: "img-circle", height: "15px", width: "15px") %>
-            <% end %>
+                <img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />
             &nbsp;&nbsp;
-                  <span class="hidden-xs"><%= current_user.user_profile.first_name + " " + current_user.user_profile.last_name %></span>
+                  <span class="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
