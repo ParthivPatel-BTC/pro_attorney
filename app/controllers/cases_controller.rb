@@ -3,11 +3,9 @@ class CasesController < ApplicationController
 
   def index
     if params[:search].blank?
-      @cases = Case.paginate(page: params[:page], per_page: 1)
-    elsif Case.search_by_all(params[:search]).blank?
-      flash[:notice] = "Case not found"
+      @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
     else
-      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: 1)
+      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
     end 
   end
 
@@ -48,9 +46,11 @@ class CasesController < ApplicationController
         params[:document].each { |image|
         @case.documents.create(doc: image)
         }
-        redirect_to cases_path 
+        flash[:success] = "Case created succefully"
+        redirect_to cases_path
       end
     else
+      flash[:danger] = @case.errors.full_messages
       @documents = @case.documents
       render :new
     end
