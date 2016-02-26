@@ -1,9 +1,53 @@
-<div class="jumbotron">
-  <div class="container">
-    <h1>Welcome!</h1>
-    <p>Register to get started.</p>
-    <p>
-      <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>         
-    </p>
-  </div>
+ <div class = "col-md-8">
+  <h1>Client Detail</h1>
+  <table class = "table table-bordered table-hover"> 
+    <tr>
+      <td>Client Name</td>
+      <td><%= @profile.first_name %><%= @profile.last_name %></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td><%= @profile.gender %></td>
+    </tr>
+    <tr>
+      <td>Mobile_no</td>
+      <td><%= @profile.mobile_no %></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><%= @profile.city %></td>
+    </tr>
+      <td>Address</td>
+      <td><%= @profile.address %></td>
+    </tr>
+    <tr>
+      <td>Pincode</td>
+      <td><%= @profile.pincode %></td>
+    </tr>
+    <tr>
+      <td>avtar_file_name</td>
+      <td><%= @profile.avatar_file_name %></td>
+    </tr>
+</table>
+ <h1>Case Detail</h1>
+ <table class = "table table-bordered table-hover"> 
+	<tr>
+      <td>CaseTitle</td>
+      <td><%= @case.case_title %></td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td><%= @case.location %></td>
+    </tr>
+    <tr>
+      <td>CaseDetails</td>
+      <td><%= @case.case_detail %></td>
+    </tr>
+    <tr>
+      <td>CaseDocument</td>
+      <td><%= @case.case_document %></td>
+    </tr>
+
+
+</table>
 </div>

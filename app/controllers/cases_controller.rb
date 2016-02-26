@@ -1,11 +1,12 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: [:show,:edit,:update,:destroy]
+   before_action :authenticate_user!
+  before_action :set_case, only: [:show,:edit,:update,:destroy,:client_details]
  
-@cases=Case.new
+# @cases=Case.new
 
   def index
 
-  @cases=Case.search(params[:case_type_id])
+  
     if params[:search].blank?
       @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
     else
@@ -13,8 +14,11 @@ class CasesController < ApplicationController
     end 
   end
 
- 
 
+
+  def client_details
+      
+  end
   def show
   end
   
@@ -50,13 +54,15 @@ class CasesController < ApplicationController
   end
 
   def new
-    @case = Case.new
+    @case = Case.new(user_id: current_user.id)
     @documents = @case.documents
   end
 
   def create
     
     @case = Case.new(case_params.merge({user_id: current_user.id}))
+    
+
     if @case.save
       
       if params[:document]

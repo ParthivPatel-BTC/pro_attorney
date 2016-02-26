@@ -4,10 +4,11 @@ Rails.application.routes.draw do
  
   resources :user_profiles
   get 'home/index'
-
+  #get 'cases/set'
 	resources :cases do
     collection do
       get 'doc_upload'
+      get 'client_details' => 'cases#client_details'
       delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
     end
   end 
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   post 'send_purchase_mail/:id' =>'cases#send_purchase_mail',as: :send_purchase_mail
 
   get 'users/signin'
+  get 'users/index'
   get 'users/after_signin' => 'users#after_signin'
     
   devise_for :users, :controllers => { registrations: "users/registrations",
