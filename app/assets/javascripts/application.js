@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require jquery.raty
 //= require ratyrate
-//= require_tree .
+//= require_tree 

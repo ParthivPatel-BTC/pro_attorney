@@ -3,15 +3,16 @@ class AdminsController < ApplicationController
   before_action :set_case,only: [:update_case]
 
 	def view_advocates
-		@users = User.joins(:user_profile).order("user_profiles.first_name").where(role_id: Role.find_by(title: 'advocate').id).paginate(:page => params[:page], :per_page => t("per_page"))
+		@users = User.where(role_id: Role.find_by(title: 'advocate').id).paginate(:page => params[:page], :per_page => t("per_page"))
 	end
 
 	def view_clients
-		@users = User.joins(:user_profile).order("user_profiles.first_name").where(role_id: Role.find_by(title: 'client').id).paginate(:page => params[:page], :per_page => t("per_page"))
+		@users = User.where(role_id: Role.find_by(title: 'client').id).paginate(:page => params[:page], :per_page => t("per_page"))
 	end
 
 	def view_cases
 		@user_case = Case.order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
+		puts ">>>>>>>>>>>cont #{@user}"
 	end
 
 	def view_case
@@ -38,7 +39,14 @@ class AdminsController < ApplicationController
 	end
 
 	def sorting
-		@case1 = Case.order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
+		@user_case = Case.order("#{params[:col]} #{params[:order]}").paginate(:page => params[:page], :per_page => t("per_page"))
+		respond_to do |format|
+		format.js
+		end
+	end
+
+	def user_sorting
+		@users = User.joins(:user_profile).where(role_id: Role.find_by(title: "#{params[:role]}")).order("#{params[:col]} #{params[:order]}").paginate(:page => params[:page], :per_page => t("per_page"))
 		respond_to do |format|
 		format.js
 		end

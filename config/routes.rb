@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get 'view_cases'
     get 'view_case'
     get 'sorting'
+    get 'user_sorting'
   end
 
   patch 'admins/update_user/:id' => "admins#update_user", as: :update_user

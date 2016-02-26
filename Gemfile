@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#ajax sorting table
+gem 'jquery-rails'
 #pagination to tables
 gem 'will_paginate-bootstrap'
 #rating to user

@@ -2,11 +2,9 @@
 <table class="table table-bordered table-hover dataTable">
 <thead>
 	<tr>
-		<th>No.</th>
-		<th>
-		Title <%=link_to "Desc", admins_sorting_path(order: "desc"), remote: true, class: "pull-right" %>
-		</th>
-		<th>Name</th>
+		<th>No</th>
+		<th>Title <%=get_order("case_title") %></th>
+		<th>Name</th></th>
 		<th>Type</th>
 		<th>Actions</th>
 	</tr>
@@ -19,8 +17,7 @@
 	<td><%= user_case.user.user_profile.first_name.capitalize %> 
 	    <%= user_case.user.user_profile.last_name.capitalize %></td>
 	<td><%= user_case.case_type.case_type %></td>
-	<td><%= link_to  active?(user_case), update_case_path(user_case), remote: true, method: :patch,
-	        title: "Activate/Deactivate Case" %></td>
+	<td><%= active_case?(user_case)%></td>
 </tr>
 <% end %>
 </tbody>
