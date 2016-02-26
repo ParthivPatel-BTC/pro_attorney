@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20160223063018) do
     t.datetime "updated_at",    null: false
     t.integer  "case_type_id"
     t.integer  "user_id"
-
   end
 
   add_index "cases", ["case_type_id"], name: "index_cases_on_case_type_id", using: :btree
