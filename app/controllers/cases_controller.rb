@@ -1,7 +1,11 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy]
+ 
+@cases=Case.new
 
   def index
+
+  @cases=Case.search(params[:case_type_id])
     if params[:search].blank?
       @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
     else
@@ -9,9 +13,11 @@ class CasesController < ApplicationController
     end 
   end
 
+ 
+
   def show
   end
-
+  
   def update
     if @case.update(case_params)
      redirect_to @case
@@ -19,6 +25,19 @@ class CasesController < ApplicationController
       render :edit 
     end
   end
+
+  def send_purchase_mail
+      client=Case.find(params[:id]).user
+
+     
+      advocate=User.find(current_user.id)
+     puts "#{current_user.id}"
+
+      UserMailer.purchase(client,advocate).deliver_now
+      redirect_to cases_path
+  end
+
+
 
   def delete_document
     case_id = Document.find(params[:document]).case_id
@@ -36,8 +55,10 @@ class CasesController < ApplicationController
   end
 
   def create
+    
     @case = Case.new(case_params.merge({user_id: current_user.id}))
     if @case.save
+      
       if params[:document]
         params[:document].each { |image|
         @case.documents.create(doc: image)
@@ -53,6 +74,7 @@ class CasesController < ApplicationController
   end
 
   def destroy
+   
     if @case.destroy
       @case.documents.destroy
       redirect_to cases_path

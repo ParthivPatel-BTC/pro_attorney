@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223062448) do
+ActiveRecord::Schema.define(version: 20160223063018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160223062448) do
     t.datetime "updated_at",    null: false
     t.integer  "case_type_id"
     t.integer  "user_id"
+
   end
 
   add_index "cases", ["case_type_id"], name: "index_cases_on_case_type_id", using: :btree
@@ -88,6 +89,17 @@ ActiveRecord::Schema.define(version: 20160223062448) do
 
   add_index "payments", ["case_id"], name: "index_payments_on_case_id", using: :btree
   add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
+
+
+  create_table "purchases", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
+    t.integer  "case_id"
+    t.boolean  "payment_done"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
 
   create_table "rates", force: :cascade do |t|
     t.integer  "rater_id"

@@ -4,15 +4,15 @@ Rails.application.routes.draw do
  
   resources :user_profiles
   get 'home/index'
-  #get 'cases/set'
-  resources :cases do
+
+	resources :cases do
     collection do
       get 'doc_upload'
       delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
     end
   end 
  
-  #post 'send_purchase_mail/:id' =>'cases#send_purchase_mail',as: :send_purchase_mail
+  post 'send_purchase_mail/:id' =>'cases#send_purchase_mail',as: :send_purchase_mail
 
   get 'users/signin'
   get 'users/after_signin' => 'users#after_signin'
