@@ -1,23 +1,26 @@
 class CasesController < ApplicationController
-   before_action :authenticate_user!
-  before_action :set_case, only: [:show,:edit,:update,:destroy,:client_details]
- 
-# @cases=Case.new
+    before_action :authenticate_user!
+    before_action :set_case, only: [:show,:edit,:update,:destroy,:client_details]
 
   def index
-
-  
-    if params[:search].blank?
+    if current_user.is_client?
+     if params[:search].blank?
+      @cases = Case.find_by(user_id: current_user.id).paginate(page: params[:page], per_page: t("per_page")) unless Case.find_by(user_id: current_user.id)==nil
+     else
+      @cases = Case.find_by(user_id: current_user.id).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
+     end 
+   else
+      if params[:search].blank?
       @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
-    else
-      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
-    end 
+     else
+      @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
+     end 
+    end
   end
 
 
 
   def client_details
-      
   end
   def show
   end
@@ -32,11 +35,8 @@ class CasesController < ApplicationController
 
   def send_purchase_mail
       client=Case.find(params[:id]).user
-
-     
       advocate=User.find(current_user.id)
-     puts "#{current_user.id}"
-
+      puts "#{current_user.id}"
       UserMailer.purchase(client,advocate).deliver_now
       redirect_to cases_path
   end
@@ -59,12 +59,8 @@ class CasesController < ApplicationController
   end
 
   def create
-    
     @case = Case.new(case_params.merge({user_id: current_user.id}))
-    
-
-    if @case.save
-      
+    if @case.save  
       if params[:document]
         params[:document].each { |image|
         @case.documents.create(doc: image)
@@ -80,13 +76,12 @@ class CasesController < ApplicationController
   end
 
   def destroy
-   
     if @case.destroy
       @case.documents.destroy
       redirect_to cases_path
     end
   end
-
+  
   def doc_upload
   end
 

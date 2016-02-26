@@ -1,8 +1,7 @@
 class UserProfilesController < ApplicationController
-   before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
-
   def index
     @user_profile = UserProfile.order(first_name: :asc)
   end
