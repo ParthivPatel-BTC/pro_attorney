@@ -1,0 +1,26 @@
+<div id="user_case">
+<table class="table table-bordered table-hover dataTable">
+<thead>
+	<tr>
+		<th>No</th>
+		<th>Title <%=get_order("case_title") %></th>
+		<th>Name</th></th>
+		<th>Type</th>
+		<th>Actions</th>
+	</tr>
+</thead>
+<tbody>
+<% @user_case.each_with_index do |user_case, index|%>
+<tr>
+	<td><%= index+1 %></td>
+	<td><%= link_to case_path(user_case) do%><%= user_case.case_title %><%end%></td>
+	<td><%= user_case.user.user_profile.first_name.capitalize %> 
+	    <%= user_case.user.user_profile.last_name.capitalize %></td>
+	<td><%= user_case.case_type.case_type %></td>
+	<td><%= active_case?(user_case)%></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+</div>

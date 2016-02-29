@@ -1,18 +1,18 @@
 <h1>Cases</h1>
-
 <%= render partial: "search_form" %>
-  <% if @cases.present? %> 
-<table class="table table-striped">
+  <% if @user_case.present? %>
+    <table class="table table-striped">
   <thead>
     <tr>
       <th>Title</th>
       <th>Location</th>
+      <th>Price</th>
       <th>Status</th>
       <th colspan="1"></th>
     </tr>
   </thead>
   <tbody>
-  <%= render partial: "cases" %>
+    <%= render partial: "cases" %>
   </tbody>
 </table>
 <%= link_to 'New Case', new_case_path  if current_user.is_client?%>

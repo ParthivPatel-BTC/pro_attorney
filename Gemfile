@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
-
+#ajax sorting table
+gem 'jquery-rails'
+#pagination to tables
+gem 'will_paginate-bootstrap'
 #rating to user
 gem 'ratyrate'
 #paperclip for upload files
@@ -10,7 +13,6 @@ gem 'rails', '4.2.5'
 gem 'pg'
 gem 'pg_search'
 # Use SCSS for stylesheets
-gem 'will_paginate-bootstrap'
 gem 'devise','3.4.1'
 
 gem 'sass-rails', '~> 5.0'

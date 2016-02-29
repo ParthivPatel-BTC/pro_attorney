@@ -4,7 +4,6 @@
           <div class="user-panel">
             <div class="pull-left image">
               <img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-      
             </div>
             <div class="pull-left info">
               <% if @user_profile!=nil%>
@@ -35,32 +34,32 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
-
-          <% if current_user != nil %>
-            <% if current_user.is_advocate? %>
-            <li class="treeview">
-              <%= link_to cases_path do %>
-              <i class="fa fa-users"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
-              <% end %>
-            </li>
-
-             <li class="treeview">
-              <%= link_to user_profiles_path(current_user.id) do %>
-               <i class="fa fa-users"></i> <span>Profile</span> <i class="fa fa-angle-left pull-right"></i>
-              <% end %>
-            </li>
-          
-
-           <li class="treeview">
-              <%= link_to 'Purchase' do %>
-               <i class="fa fa-users"></i> <span>Your Case</span> <i class="fa fa-angle-left pull-right"></i>
-              <% end %>
-            </li>
+            <% if current_user.is_system_admin? %>
             
+            <li class="treeview">
+              <%=link_to  admins_view_advocates_path  do %>
+              <i class="fa fa-users"></i> <span>Advocates</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
 
+          <li class="treeview">
+              <%=link_to  admins_view_clients_path  do %>
+              <i class="fa fa-users"></i> <span>clients</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
 
+            <li class="treeview">
+              <%=link_to  admins_view_cases_path  do %>
+                <i class="fa fa-book"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
+
+            <% end %>
 
             <% elsif current_user.is_client? %>
+            
+            <li class="treeview">
+              <%=link_to   cases_path   do %>
             <li class="treeview">
               <%= link_to cases_path do %>
               <i class="fa fa-users"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
@@ -85,9 +84,35 @@
 
             <% end %>
 
+             <% if current_user != nil %>
+            <% if current_user.is_advocate? %>
+            <li class="treeview">
+              <%= link_to cases_path do %>
+              <i class="fa fa-users"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+            </li>
+
+             <li class="treeview">
+              <%= link_to user_profiles_path(current_user.id) do %>
+               <i class="fa fa-users"></i> <span>Profile</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+            </li>
+          
+
+           <li class="treeview">
+              <%= link_to 'Purchase' do %>
+               <i class="fa fa-users"></i> <span>Your Case</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+            </li>
+            
+
             <% else %>
             <p>Pro attoreny</p>
             <%end %>
+
+
+
+
             
             <li class="treeview">
               <a href="#">

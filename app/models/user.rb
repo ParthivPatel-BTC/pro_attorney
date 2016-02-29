@@ -11,10 +11,14 @@ class User < ActiveRecord::Base
 	end
 
 	def is_client?
-  	   self.role.title == Role::CLIENT
-    end
+  	self.role.title == Role::CLIENT
+  	end
 
 	def is_advocate?
-  	   self.role.title == Role::ADVOCATE
-    end
+  	self.role.title == Role::ADVOCATE
+  end
+
+  def active_for_authentication?
+	  super && is_active
+	end
 end
