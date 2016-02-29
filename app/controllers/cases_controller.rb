@@ -5,9 +5,9 @@ class CasesController < ApplicationController
   def index
     if current_user.is_client?
      if params[:search].blank?
-      @cases = Case.find_by(user_id: current_user.id).paginate(page: params[:page], per_page: t("per_page")) unless Case.find_by(user_id: current_user.id)==nil
+      @cases = Case.paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      else
-      @cases = Case.find_by(user_id: current_user.id).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
+      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      end 
    else
       if params[:search].blank?
