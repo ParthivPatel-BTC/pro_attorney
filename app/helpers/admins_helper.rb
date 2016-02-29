@@ -34,18 +34,18 @@ module AdminsHelper
   def get_order(col)
     style_enable="green" if (params[:col] == col) 
     if params[:order] == "DESC"
-       link_to("",admins_sorting_path(col: col,order: "ASC"),{remote: true,class: "pull-right fa fa-chevron-up",style: "color: #{style_enable}"})
+      link_to("",admins_sorting_path(col: col,order: "ASC"),{remote: true,class: "pull-right fa fa-sort-amount-asc ",style: "color: #{style_enable}"})
     else
-      link_to("",admins_sorting_path(col: col,order: "DESC"),{remote: true,class: "pull-right fa fa-chevron-down",style: "color: #{style_enable}"})
+      link_to("",admins_sorting_path(col: col,order: "DESC"),{remote: true,class: "pull-right fa fa-sort-amount-desc",style: "color: #{style_enable}"})
     end
   end
   #for sorting users data
   def get_user_order(col,role)
     style_enable="green" if (params[:col] == col) 
     if params[:order] == "DESC"  
-      link_to("", admins_user_sorting_path(col: col,order: "ASC",role: role),{remote: true,class: "pull-right fa fa-chevron-up",style: "color: #{style_enable}"})
+      link_to("", admins_user_sorting_path(col: col,order: "ASC",role: role),{remote: true,class: "pull-right fa fa-sort-amount-asc",style: "color: #{style_enable}"})
     else
-      link_to("", admins_user_sorting_path(col: col,order: "DESC",role: role),{remote: true,class: "pull-right fa fa-chevron-down",style: "color: #{style_enable}"})
+      link_to("", admins_user_sorting_path(col: col,order: "DESC",role: role),{remote: true,class: "pull-right fa fa-sort-amount-desc",style: "color: #{style_enable}"})
     end
   end
 end

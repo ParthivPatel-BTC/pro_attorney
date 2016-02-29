@@ -1,6 +1,6 @@
 <h1>Cases</h1>
 <%= render partial: "search_form" %>
-  <% if @cases.present? %>
+  <% if @user_case.present? %>
     <table class="table table-striped">
   <thead>
     <tr>
@@ -16,7 +16,7 @@
   </tbody>
 </table>
 <%= link_to 'New Case', new_case_path %>
-<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
+<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right"%>
   <% else %>
   <p>No matching result found</p>
 <% end %>

@@ -14,7 +14,10 @@ Rails.application.routes.draw do
 	resources :cases do 
     collection do
       get 'doc_upload'
+      get 'purchase/:id' => 'cases#purchase',as: :case
       delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
+      post "/:id" => "cases#show_purchased", as: :user_case
+      post "/hook" => "cases#hook"
     end
   end 
  

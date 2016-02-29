@@ -1,6 +1,8 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: [:show,:edit,:update,:destroy]
-
+  before_action :set_case, only: [:show,:edit,:update,:destroy,:purchase,:show_purchased]
+  protect_from_forgery except: [:hook]
+  after_action :hook,only: [:show_purchased]
+  skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
   def index
     if params[:search].blank?
       @user_case = Case.all.paginate(page: params[:page], per_page: t("per_page"))
@@ -59,13 +61,33 @@ class CasesController < ApplicationController
     end
   end
 
+  def show_purchased
+    render 'show'
+  end
+
+  def purchase
+    redirect_to @user_case.paypal_url(user_case_cases_path(@user_case))
+  end
+
+  def hook
+    params.permit! # Permit all Paypal input params
+    status = params[:payment_status]
+    if status == "Completed"
+         Payment.create(case_id: params[:item_number],
+                        user_id: current_user.id,
+                        notification_params: params,
+                        status: status,
+                        transaction_id: params[:invoice])
+    end
+  end
+
   def doc_upload
   end
 
   private
   
   def set_case
-    @case = Case.find(params[:id])
+    @user_case = Case.find(params[:id])
   end
 
   def case_params
