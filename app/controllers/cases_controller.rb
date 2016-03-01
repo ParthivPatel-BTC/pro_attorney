@@ -1,20 +1,20 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy,:purchase,:show_purchased]
   protect_from_forgery except: [:hook]
-  after_action :hook,only: [:show_purchased]
+  before_action :hook,only: [:show_purchased]
   skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
   def index
     if current_user.is_client?
      if params[:search].blank?
-      @cases = Case.paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
+      @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      else
-      @cases = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
+      @user_case = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      end 
    else
       if params[:search].blank?
-      @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
+      @user_case= Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      else
-      @cases = Case.paginate(page: params[:page], per_page: t("per_page"))
+      @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      end 
     end
   end
@@ -27,19 +27,18 @@ class CasesController < ApplicationController
   end
   
   def update
-    if @case.update(case_params)
-     redirect_to @case
+    if @user_case.update(case_params)
+     redirect_to @user_case
     else
       render :edit 
     end
   end
 
   def send_purchase_mail
-      client=Case.find(params[:id]).user
+      client=Case.find(params[:item_number]).user
       advocate=User.find(current_user.id)
       puts "#{current_user.id}"
       UserMailer.purchase(client,advocate).deliver_now
-      redirect_to cases_path
   end
 
 
@@ -51,12 +50,12 @@ class CasesController < ApplicationController
   end
   
   def edit
-    @documents = @case.documents
+    @documents = @user_case.documents
   end
 
   def new
-    @case = Case.new(user_id: current_user.id)
-    @documents = @case.documents
+    @user_case = Case.new(user_id: current_user.id)
+    @documents = @user_case.documents
   end
 
   def create
@@ -77,8 +76,8 @@ class CasesController < ApplicationController
   end
 
   def destroy
-    if @case.destroy
-      @case.documents.destroy
+    if @user_case.destroy
+      @user_case.documents.destroy
       redirect_to cases_path
     end
   end
@@ -99,9 +98,19 @@ class CasesController < ApplicationController
                         user_id: current_user.id,
                         notification_params: params,
                         status: status,
-                        transaction_id: params[:invoice])
+                        transaction_id: params[:txt_id],
+                          purchased_at: Time.now+0530)
+         send_purchase_mail
+         Case.find(params[:item_number]).update(status: "closed")
     end
   end
+
+
+  def purchase_case
+  @payments =current_user.payments
+   # @user_case=Payment.joins(:cases).where(user) 
+  end
+
   
   def doc_upload
   end

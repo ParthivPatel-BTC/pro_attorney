@@ -15,8 +15,9 @@
     <%= render partial: "cases" %>
   </tbody>
 </table>
-<%= link_to 'New Case', new_case_path  if current_user.is_client?%>
-<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
+<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
 <% else %>
   <p>No matching result found</p>
 <% end %>
+<%= link_to "New Case", new_case_path,class: "btn btn-primary"  if current_user.is_client?%>
+        <%= link_to 'Back',:back, class: "btn btn-primary" %>

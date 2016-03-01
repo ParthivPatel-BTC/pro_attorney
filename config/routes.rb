@@ -7,12 +7,13 @@ Rails.application.routes.draw do
   #get 'cases/set'
 	resources :cases do
     collection do
-          get 'purchase/:id' => 'cases#purchase',as: :case
-post "/:id" => "cases#show_purchased", as: :user_case
-      post "/hook" => "cases#hook"
-      get 'doc_upload'
-      get 'client_details' => 'cases#client_details'
-      delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
+    get 'purchase/:id' => 'cases#purchase',as: :case
+    post "/:id" => "cases#show_purchased", as: :user_case
+    post "/hook" => "cases#hook"
+    get 'doc_upload'
+    get 'client_details' => 'cases#client_details'
+    delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
+    get 'purchase_case'
     end
   end 
  
