@@ -10,20 +10,21 @@
       <td><%= link_to "Purchase", id_cases_path(user_case) %></td>
     <% elsif current_user.is_client? %>
       <td>
-        <%= link_to case_path(user_case) do %>
-          <%= image_tag "detail.png", size: "20x40" ,class: "some class here",alt: "show" %>
-        <% end %>
+        <%= link_to case_path(user_case), class: "fa fa-fw fa-eye", title: "view" do %><% end %>
       </td>
+      
       <td>
-        <%= link_to edit_case_path(user_case) do%>
-          <%= image_tag "edit.png", size: "20x40" ,class: "some class here",alt: "Edit" %>
-        <%end%>
+        <%= link_to edit_case_path(user_case), class: "fa fa-fw fa-pencil-square-o", title: "Edit" do %><%end%>
       </td>
+
       <td>
-        <%= link_to user_case, method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <%= image_tag "del.png", size: "20x40" ,class: "some class here",alt: "Edit" %>
-        <%end%>
+        <%= link_to user_case, method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-fw fa-trash", title: "delete" do %><%end%>
       </td>
     <% end %>
   </tr>
 <% end %>
+
+
+
+
+

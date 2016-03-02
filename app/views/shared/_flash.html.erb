@@ -1,8 +1,7 @@
 <% unless flash.empty? %>
   <div class="flash_msg alert_msg">
     <% flash.each do |name, message| %>
-      <div class="text-center alert alert-<%= name %>">
-        <a href="#" class="close" data-dismiss="alert">&times;</a>
+      <div class="align-center alert alert-<%= name %>">
         <ul>
           <% if message.is_a?Array%>
             <% message.each do |msg| %>
