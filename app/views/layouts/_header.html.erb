@@ -1,10 +1,10 @@
 <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>A</b>LT</span>
+          <span class="logo-mini"><b>P</b>AT</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Pro</b>ATTORNEY</span>
+          <span class="logo-lg"><b>Pro</b>Attorney</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -17,8 +17,8 @@
               <!-- Messages: style can be found in dropdown.less-->
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">4</span>
+<!--                   <i class="fa fa-envelope-o"></i>
+                   <span class="label label-success">4</span> -->
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 4 messages</li>
@@ -40,7 +40,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                            <!-- <img src="/assets/user3-128x128.jpg" class="img-circle" alt="User Image" /> -->
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -52,7 +52,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/user4-128x128.jpg" class="img-circle" alt="User Image" />
+                            <!-- <img src="/assets/user4-128x128.jpg" class="img-circle" alt="User Image" /> -->
                           </div>
                           <h4>
                             Developers
@@ -64,7 +64,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                            <!-- <img src="/user3-128x128.jpg" class="img-circle" alt="User Image" /> -->
                           </div>
                           <h4>
                             Sales Department
@@ -76,7 +76,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="user4-128x128.jpg" class="img-circle" alt="User Image" />
+                            <!-- <img src="user4-128x128.jpg" class="img-circle" alt="User Image" /> -->
                           </div>
                           <h4>
                             Reviewers
@@ -93,8 +93,8 @@
               <!-- Notifications: style can be found in dropdown.less -->
               <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-bell-o"></i>
-                  <span class="label label-warning">10</span>
+                  <!-- <i class="fa fa-bell-o"></i>
+                  <span class="label label-warning">10</span> -->
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 10 notifications</li>
@@ -134,8 +134,8 @@
               <!-- Tasks: style can be found in dropdown.less -->
               <li class="dropdown tasks-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-flag-o"></i>
-                  <span class="label label-danger">9</span>
+                  <!-- <i class="fa fa-flag-o"></i>
+                  <span class="label label-danger">9</span> -->
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">You have 9 tasks</li>
@@ -204,17 +204,16 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />
-                  <span class="hidden-xs">Alexander Pierce</span>
-            &nbsp;&nbsp;
-                  <span class="hidden-xs"></span>
+                  <!--<img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />-->
+                    <%= avatar_display({class: "user-image"}) %>
+                    <span class="hidden-xs"><%=user_name %></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      Alexander Pierce - Web Developer
+                      
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
@@ -243,7 +242,9 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                 <%= link_to destroy_user_session_path,method: :delete do %>
+                <i class="fa fa-power-off"></i>
+              <% end %>
               </li>
             </ul>
           </div>

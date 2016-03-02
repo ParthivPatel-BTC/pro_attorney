@@ -1,4 +1,4 @@
-<%= form_for @case, html: { :multipart => true }  do |f| %>
+<%= form_for @user_case, html: { :multipart => true }  do |f| %>
 <div class = "row">
   <div class = "col-md-6">
     <div class = "box box-primary"><!--start box 1 -->
@@ -7,10 +7,10 @@
       </div>
       <div class = "box-body">
         <div class = "col-md-12">
-          
           <div class = "form-group">
 	          <%= f.label :Case_Type %>
-	          <%= f.select :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type),class: "form-control",id:"sel1" %>
+	          <%= f.select :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type,
+            default_case_type(@user_case)),{},{class: "form-control"} %>
           </div>
 
           <div class = "form-group">
@@ -42,7 +42,7 @@
   
           <div class = "form-group">
             <%= f.label :status %>
-            <%= f.text_field :status ,class: "form-control",placeholder: "Enter status" %></td>
+            <%= f.select :status, options_for_select([ "open", "closed" ],@user_case.status),{},{class: "form-control"} %></td>
           </div>
     
           <div class = "form-group">

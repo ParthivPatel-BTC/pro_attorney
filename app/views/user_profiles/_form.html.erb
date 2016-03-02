@@ -7,7 +7,6 @@
         </div>
         <div class = "box-body">
           <div class = "col-md-12">
-
             <div class = "form-group">
               <%= f.label :first_name %>
               <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name" %>
@@ -65,11 +64,12 @@
               <%= f.label :pincode %>
               <%= f.number_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter pincode" %>
             </div>
-
+            <% if current_user.is_advocate? %>
             <div class = "form-group">
               <%= f.label :experience %>
               <%= f.text_area :experience, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter experience" %>
             </div>
+            <% end %>
           </div>
         </div>
       </div><!--end box 2 -->

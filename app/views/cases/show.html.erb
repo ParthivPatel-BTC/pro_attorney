@@ -6,22 +6,26 @@
       <td><%= @user_case.case_title %></td>
     </tr>
     <tr>
-	    <td>Detail</td> 
-      <td><%= @user_case.case_detail %></td>
-	  </tr>
-    <tr>
 	    <td>Location</td> 
       <td><%= @user_case.location %></td>
 	  </tr>
     <tr>
 	    <td>status</td> <td><%= @user_case.status %></td>
     </tr>
+
+    <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? || @user_case.user_id == current_user.id %>
+      <tr>
+      <td>Detail</td> 
+      <td><%= @user_case.case_detail %></td>
+    </tr>
+
     <tr>
  	    <td>Documents</td>
  	    <td><%= show_documents %></td>
     </tr>
+  <% end %>
   </table>
-
+ <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any?  %>
 <h3>Client Detail</h3>
   <table class = "table table-bordered table-hover"> 
     <tr>
@@ -49,5 +53,5 @@
       <td><%= @user_case.user.user_profile.pincode %></td>
     </tr>
   </table>  
+  <% end %>
   <%= link_to 'Back',:back, class: "btn btn-primary" %>
-</div>

@@ -1,27 +1,26 @@
 Rails.application.routes.draw do
 
-  # get 'admins/view_users'
-
-  # get 'admins/view_cases'
-
-  # get 'admins/view_case'
-
   post '/rate' => 'rater#create', :as => 'rate'
  
   resources :user_profiles
   get 'home/index'
-
-	resources :cases do 
+  #get 'cases/set'
+	resources :cases do
     collection do
-      get 'doc_upload'
-      get 'purchase/:id' => 'cases#purchase',as: :case
-      delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
-      post "/:id" => "cases#show_purchased", as: :user_case
-      post "/hook" => "cases#hook"
+    get 'purchase/:id' => 'cases#purchase',as: :case
+    post "/:id" => "cases#show_purchased", as: :user_case
+    post "/hook" => "cases#hook"
+    get 'doc_upload'
+    get 'client_details' => 'cases#client_details'
+    delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
+    get 'purchase_case'
     end
   end 
  
+  post 'send_purchase_mail/:id' =>'cases#send_purchase_mail',as: :send_purchase_mail
+
   get 'users/signin'
+  get 'users/index'
   get 'users/after_signin' => 'users#after_signin'
     
   devise_for :users, :controllers => { registrations: "users/registrations",
@@ -29,11 +28,12 @@ Rails.application.routes.draw do
                                       confirmations: "users/confirmations",
                                       passwords: "users/passwords",
                                       unlocks: "users/unlocks"}
+
   devise_scope :user do
   root  "users/sessions#new"
-  end
+end
 
-  namespace :admins do
+namespace :admins do
     get 'view_advocates'
     get 'view_clients'
     get 'view_cases'
@@ -45,59 +45,4 @@ Rails.application.routes.draw do
   patch 'admins/update_user/:id' => "admins#update_user", as: :update_user
   patch 'admins/update_case/:id' => "admins#update_case", as: :update_case
 
- # devise_for :useseers
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

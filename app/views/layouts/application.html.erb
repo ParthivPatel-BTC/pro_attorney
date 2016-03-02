@@ -3,21 +3,25 @@
 	<head>
   	<meta charset="UTF-8">
   	<title>ProAttorney</title>
+    
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  	<%= csrf_meta_tag %>
-	</head>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tag %>
+  </head>
 
-	<body class="skin-blue sidebar-mini">
-		<%= render 'layouts/header' %>
-		<div class="wrapper">
-			<div class="content-wrapper">
+  <body class="skin-blue sidebar-mini">
+    <%= render 'layouts/header' %>
+    <div class="wrapper">
+      <div class="content-wrapper">
         <section class="content-header">
           <%= render partial: 'shared/flash' %>
-				<%= yield %>
+        <%= yield %>
         </section>
         </div>
         <%= render 'layouts/sidebar' %>
-    </div>		
-	</body>
+    </div>    
+  </body>
 </html>
