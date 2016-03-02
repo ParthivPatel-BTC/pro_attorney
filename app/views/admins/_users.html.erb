@@ -7,7 +7,7 @@
 		<tr>
 		 	<th>No</th>
 		 	<th>Name<%=get_user_order("user_profiles.first_name",@users.first.role.title)%></th>
-		 	<th>Email<%=get_user_order("email",@users.first.role.title)%></th>
+		 	<th>Email <%=get_user_order("email",@users.first.role.title)%></th>
 		 	<th>Actions</th>
 	 	</tr>
 	</thead>
@@ -27,5 +27,5 @@
 	</tbody>
 </table>
 <%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right" %>
-<% end %>
 </div>
+<% end %>

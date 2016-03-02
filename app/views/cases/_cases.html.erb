@@ -1,5 +1,5 @@
 <% @user_case.each do |user_case| %>
-  <tr>
+ <tr>
     <td><%= user_case.case_title %></td>
     <td><%= user_case.location%></td>
     <td><%= user_case.case_type.amount %>$</td>
@@ -10,7 +10,6 @@
     <td><%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %></td>
     <td><%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %></td>
 	<% end %>
-    <td><%= link_to "purchase" , case_cases_path(user_case) ,class:" btn btn-primary fa fa-cc-paypal" if current_user.is_advocate? %> </td>    
-    
-    </tr>
+    <td><%= link_to "purchase" , case_cases_path(user_case) ,class:" btn btn-primary fa fa-cc-paypal" if current_user.is_advocate? %> </td> 
+ </tr>
 <% end %>

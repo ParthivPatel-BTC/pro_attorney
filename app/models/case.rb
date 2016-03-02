@@ -2,6 +2,7 @@ class Case < ActiveRecord::Base
 	include PgSearch
 	belongs_to :user
 	belongs_to :case_type
+    has_many :payments, dependent: :destroy
 	has_many :documents , dependent: :destroy
   has_many :payments , dependent: :destroy
 	validates :case_type_id, :case_title, :case_detail, :location, :status, presence:true 
