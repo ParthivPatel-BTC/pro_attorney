@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :cases, dependent: :destroy
+  has_many :payments, dependent: :destroy
 	devise :database_authenticatable, :registerable, :recoverable,
 				 :rememberable, :trackable, :validatable, :confirmable, :lockable
 	belongs_to :role, dependent: :destroy

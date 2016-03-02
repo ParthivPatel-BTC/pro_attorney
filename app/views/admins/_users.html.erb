@@ -1,4 +1,7 @@
 <div id="users">
+<% if(@users==nil) %>
+<b> No Record Found </b>
+<% else %>
 <table class="table table-bordered table-hover dataTable">
 	<thead>
 		<tr>
@@ -25,3 +28,4 @@
 </table>
 <%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right" %>
 </div>
+<% end %>
