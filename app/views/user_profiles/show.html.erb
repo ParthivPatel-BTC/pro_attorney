@@ -9,7 +9,7 @@
 						<% if @user_profile.avatar.exists? %>
 							<%= image_tag(@user_profile.avatar.url, class: "img-circle", height: "236", width: "236") %>
 						<% else %> 
-							<%= image_tag(@avatarsrc, class: "img-circle", height: "236", width: "236") %>
+							<%= image_tag("default.jpg", class: "img-circle", height: "236", width: "236") %>
 						<% end %>
 					</div><!--end inner box 1 -->
 					<div class= "col-md-7 pull-right"><!--start inner box 2 -->

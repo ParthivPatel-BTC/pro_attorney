@@ -1,5 +1,5 @@
 <aside class="main-sidebar">
-<section class="sidebar">
+ <section class="sidebar" style="height: auto;">
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
@@ -43,18 +43,13 @@
 
             <% if current_user.is_client? %>
             <li class="treeview">
-              <%= link_to cases_path do %>
-              <i class="fa-folder-open"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
-              <% end %>
-            </li>
-            <li class="treeview">
               <%= link_to new_case_path do %>
               <i class="fa fa-files-o"></i> <span>New Case</span> <i class="fa fa-angle-left pull-right"></i>
               <% end %>
             </li>
 
              <li class="treeview">
-              <%= link_to user_profiles_path(current_user.id) do %>
+              <%= link_to user_profiles_path do %>
                <i class="fa fa-users"></i> <span>Profiles</span> <i class="fa fa-angle-left pull-right"></i>
               <% end %>
             </li>   
@@ -75,10 +70,11 @@
             </li>
 
             <li class="treeview">
+            <% if current_user.is_advocate? || current_user.is_client? %>
               <%= link_to cases_path do %>
               <i class="fa-folder-open"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
               <% end %>
-          
+          <% end %>
 
            <li class="treeview">
               <%= link_to destroy_user_session_path,method: :delete do %>

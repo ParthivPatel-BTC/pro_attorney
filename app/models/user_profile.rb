@@ -24,6 +24,5 @@ class UserProfile < ActiveRecord::Base
   
   def default_values
     self.avatar_file_name ||= "default.jpg"
-    self.default_url ||= ":rails_root/assets/avatar/default.jpg"
   end
 end

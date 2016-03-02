@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-  	<meta charset="UTF-8">
+    <meta charset="UTF-8">
   	<title>ProAttorney</title>
     
     <!-- Tell the browser to be responsive to screen width -->
@@ -12,16 +12,18 @@
     <%= csrf_meta_tag %>
   </head>
 
-  <body class="skin-blue sidebar-mini">
-    <%= render 'layouts/header' %>
+ <body class="skin-blue sidebar-mini">
     <div class="wrapper">
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/sidebar' %>
       <div class="content-wrapper">
-        <section class="content-header">
+        <section class="content">
           <%= render partial: 'shared/flash' %>
         <%= yield %>
         </section>
+        
+        
         </div>
-        <%= render 'layouts/sidebar' %>
     </div>    
   </body>
-</html>
+</html> 
