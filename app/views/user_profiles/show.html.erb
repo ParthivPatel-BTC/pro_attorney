@@ -48,7 +48,13 @@
 			&nbsp;&nbsp;&nbsp;<%= @user_profile.city %> -	
 			<%= @user_profile.pincode %>
 			</p>
-			
+			<br>
+			&nbsp;&nbsp;
+			<%= link_to edit_user_profile_path(@user_profile), class: "btn btn-primary" do %>
+			<i class="fa fa-fw fa-edit"></i>
+			<%end if @user_profile.user.id==current_user.id%>
+			  <%= link_to 'Back',:back, class: "btn btn-primary" %>
+			<br>
 		</div>
 	</div><!--end box 2 -->
 </div>

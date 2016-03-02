@@ -1,6 +1,6 @@
 <h1>Cases' Details</h1>
 <%= render partial: "search_form" %>
-  <% if @cases.present? %>
+  <% if @user_case.present? %>
     <table class="table table-striped">
   <thead>
     <tr>
@@ -8,7 +8,7 @@
       <th>Type</th>
       <th>Description</th>
       <th>Location</th>
-      <th>Amount</th>.
+      <th>Price</th>
       <th>Status</th>
       <th colspan="3">Actions</th>
 
@@ -18,8 +18,9 @@
     <%= render partial: "cases" %>
   </tbody>
 </table>
-<%= link_to 'New Case', new_case_path %>
-<%= will_paginate @cases, renderer: BootstrapPagination::Rails, class: "pull-right"%>
-  <% else %>
+<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+<% else %>
   <p>No matching result found</p>
 <% end %>
+<%= link_to "New Case", new_case_path,class: "btn btn-primary"  if current_user.is_client?%>
+        <%= link_to 'Back',:back, class: "btn btn-primary" %>

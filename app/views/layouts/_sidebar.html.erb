@@ -3,78 +3,98 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />
+              <%= avatar_display({class: "user-image"}) %>
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <p><%=user_name %></p>
+            </div>
+            <div class="pull-left info">
+              <p></p>
+              <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
             </div>
           </div>
-          
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search..." />
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            
+            <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
+            <% if current_user.is_system_admin? %>
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Layout Options</span>
-                <span class="label label-primary pull-right">4</span>
-              </a>
+              <%=link_to  admins_view_advocates_path  do %>
+              <i class="fa fa-users"></i> <span>Advocates</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
+
+          <li class="treeview">
+              <%=link_to  admins_view_clients_path  do %>
+              <i class="fa fa-users"></i> <span>clients</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
+
+            <li class="treeview">
+              <%=link_to  admins_view_cases_path  do %>
+                <i class="fa fa-book"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
+               <% end %>
+            </li>
+
+            <% end %>
+
+            <% if current_user.is_client? %>
+            <li class="treeview">
+              <%= link_to cases_path do %>
+              <i class="fa-folder-open"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+            </li>
+            <li class="treeview">
+              <%= link_to new_case_path do %>
+              <i class="fa fa-files-o"></i> <span>New Case</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+            </li>
 
              <li class="treeview">
-              
-              <i class="fa fa-user"></i> <span>Profile</span>
-               
-            </li>
-            
+              <%= link_to user_profiles_path(current_user.id) do %>
+               <i class="fa fa-users"></i> <span>Profiles</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+            </li>   
+
+            <% end %>
+
+          
+           <li class="treeview">
+            <%=advocate_links %>
+           </li>
+
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
+              <% if current_user.user_profile!=nil %>
+              <%= link_to  edit_user_profile_path (current_user.user_profile)  do %>
+               <i class="fa fa-user"></i> <span>Edit Profile</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+              <% end %>
             </li>
-            
+
             <li class="treeview">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
+              <%= link_to cases_path do %>
+              <i class="fa-folder-open"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
+          
+
+           <li class="treeview">
+              <%= link_to destroy_user_session_path,method: :delete do %>
+               <i class="fa fa-power-off"></i> <span>Logout</span> <i class="fa fa-angle-left pull-right"></i>
+              <% end %>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-share"></i> <span>Multilevel</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                    <li>
-                      <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-              </ul>
-            </li>
-            <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span> 
-            <%= link_to "LOGOUT",destroy_user_session_path,method: :delete %></span></a></li>
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-          </ul>
         </section>
     </aside>
