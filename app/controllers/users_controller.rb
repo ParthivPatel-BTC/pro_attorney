@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-   before_action :authenticate_user!,only: [:index]
+  before_action :authenticate_user!,only: [:index]
+  layout 'registration_layout'
   def index
   	      # @client=Case.find(1).user
   	      # @case=Case.find(1)

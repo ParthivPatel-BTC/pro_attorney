@@ -1,0 +1,31 @@
+<h1>Purchased cases</h1>
+<table class="table table-striped">
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+<% @payments.each do |payment| %>
+  <tr>
+    <td>
+    	<%= link_to case_path(payment.case) do %>
+       <%= payment.case.case_title %></td>
+       <% end %>
+    <td><%= payment.case.location%></td>
+    <td><%= payment.case.case_type.amount %>$</td>
+    <td><%= payment.case.status%></td>
+    <% if current_user.id == payment.case.user_id %>
+    <td><%= link_to "",payment.case_path(payment.case),class: "fa fa-fw fa-eye", title: "view" %>
+    </td>
+    <td><%= link_to "", edit_payment.case_path(payment.case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %></td>
+    <td><%= link_to "",payment.case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %></td>
+	<% end %>
+    
+    </tr>
+    
+<% end %>
+</table>

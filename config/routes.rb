@@ -7,9 +7,13 @@ Rails.application.routes.draw do
   #get 'cases/set'
 	resources :cases do
     collection do
-      get 'doc_upload'
-      get 'client_details' => 'cases#client_details'
-      delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
+    get 'purchase/:id' => 'cases#purchase',as: :case
+    post "/:id" => "cases#show_purchased", as: :user_case
+    post "/hook" => "cases#hook"
+    get 'doc_upload'
+    get 'client_details' => 'cases#client_details'
+    delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
+    get 'purchase_case'
     end
   end 
  
@@ -28,4 +32,17 @@ Rails.application.routes.draw do
   devise_scope :user do
   root  "users/sessions#new"
 end
+
+namespace :admins do
+    get 'view_advocates'
+    get 'view_clients'
+    get 'view_cases'
+    get 'view_case'
+    get 'sorting'
+    get 'user_sorting'
+  end
+
+  patch 'admins/update_user/:id' => "admins#update_user", as: :update_user
+  patch 'admins/update_case/:id' => "admins#update_case", as: :update_case
+
 end
