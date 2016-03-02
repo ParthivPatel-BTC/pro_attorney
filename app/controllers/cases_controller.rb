@@ -35,34 +35,34 @@ class CasesController < ApplicationController
   end
   
   def edit
-    @documents = @case.documents
+    @documents = @user_case.documents
   end
 
   def new
-    @case = Case.new(user_id: current_user)
-    @documents = @case.documents
+    @user_case = Case.new(user_id: current_user)
+    @documents = @user_case.documents
   end
 
   def create
-    @case = Case.new(case_params.merge({user_id: current_user.id}))
-    if @case.save
+    @user_case = Case.new(case_params.merge({user_id: current_user.id}))
+    if @user_case.save
       if params[:document]
         params[:document].each { |image|
-        @case.documents.create(doc: image)
+        @user_case.documents.create(doc: image)
         }
         flash[:success] = "Case created succefully"
         redirect_to cases_path
       end
     else
-      flash[:danger] = @case.errors.full_messages
-      @documents = @case.documents
+      flash[:danger] = @user_case.errors.full_messages
+      @documents = @user_case.documents
       render :new
     end
   end
 
   def destroy
-    if @case.destroy
-      @case.documents.destroy
+    if @user_case.destroy
+      @user_case.documents.destroy
       redirect_to cases_path
     end
   end
