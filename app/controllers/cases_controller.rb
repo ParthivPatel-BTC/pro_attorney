@@ -15,8 +15,14 @@ class CasesController < ApplicationController
   end
 
   def update
-    if @case.update(case_params)
-     redirect_to @case
+    if @user_case.update(case_params)
+      if params[:document]
+        params[:document].each { |image|
+        @user_case.documents.create(doc: image)
+        }
+        flash[:success] = "Case update succefully"
+      end
+      redirect_to @user_case
     else
       render :edit 
     end
