@@ -1,0 +1,31 @@
+<div id="users">
+<% if(@users==nil) %>
+<b> No Record Found </b>
+<% else %>
+<table class="table table-bordered table-hover dataTable">
+	<thead>
+		<tr>
+		 	<th>No</th>
+		 	<th>Name<%=get_user_order("user_profiles.first_name",@users.first.role.title)%></th>
+		 	<th>Email<%=get_user_order("email",@users.first.role.title)%></th>
+		 	<th>Actions</th>
+	 	</tr>
+	</thead>
+	<tbody>
+		<% @users.each.with_index do |user,index|%>
+			<tr>
+				<td><%= index+1 %></td>
+				<td>
+				<%=link_to user_profile_path(user.user_profile) do%>
+				<%= user.user_profile.first_name.capitalize+" "+user.user_profile.last_name.capitalize %>
+				<%end %>
+				</td>
+				<td><%= user.email %></td>
+			    <td><%= active_user?(user)%></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right" %>
+<% end %>
+</div>

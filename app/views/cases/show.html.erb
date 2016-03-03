@@ -1,26 +1,57 @@
 <div class = "col-md-8">
-  <h1>Case Detail</h1>
+  <h3>Case Detail</h3>
   <table class = "table table-bordered table-hover"> 
     <tr>
       <td>Case Title</td>
-      <td><%= @case.case_title %></td>
+      <td><%= @user_case.case_title %></td>
     </tr>
-    <tr>
-	    <td>Detail</td> 
-      <td><%= @case.case_detail %></td>
-	  </tr>
     <tr>
 	    <td>Location</td> 
-      <td><%= @case.location %></td>
+      <td><%= @user_case.location %></td>
 	  </tr>
     <tr>
-	    <td>status</td> <td><%= @case.status %></td>
+	    <td>status</td> <td><%= @user_case.status %></td>
     </tr>
+
+    <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? %>
+      <tr>
+      <td>Detail</td> 
+      <td><%= @user_case.case_detail %></td>
+    </tr>
+
     <tr>
  	    <td>Documents</td>
  	    <td><%= show_documents %></td>
     </tr>
+  <% end %>
   </table>
-
-  <%= link_to 'Back', cases_path, class: "btn btn-primary" %>
-</div>
+ <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? %>
+<h3>Client Detail</h3>
+  <table class = "table table-bordered table-hover"> 
+    <tr>
+      <td>Name</td>
+      <td><%= @user_case.user.user_profile.first_name %> <%= @user_case.user.user_profile.last_name %></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td><%= @user_case.user.user_profile.last_name %></td>
+    </tr>
+    <tr>
+      <td>Contact</td>
+      <td><%= @user_case.user.user_profile.mobile_no %></td>
+    </tr>
+    <tr>
+      <td>Address</td>
+      <td><%= @user_case.user.user_profile.address %></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><%= @user_case.user.user_profile.city %></td>
+    </tr>
+    <tr>
+      <td>Pincode</td>
+      <td><%= @user_case.user.user_profile.pincode %></td>
+    </tr>
+  </table>  
+  <% end %>
+  <%= link_to 'Back',:back, class: "btn btn-primary" %>

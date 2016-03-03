@@ -7,7 +7,6 @@
         </div>
         <div class = "box-body">
           <div class = "col-md-12">
-
             <div class = "form-group">
               <%= f.label :first_name %>
               <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name" %>
@@ -25,7 +24,7 @@
             </div>
 
             <div class = "form-group">
-              <%= f.label :mobile_no %>
+              <%= f.label :contact %>
               <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter mobile number" %>
             </div>
 
@@ -36,13 +35,15 @@
                 <%= image_tag(@user_profile.avatar.url, height: "85px", width: "85px") %>
                 <% else %> 
                 <%= image_tag('default.jpg', height: "85px", width: "85px") %>
-                <% end %>  
+                <% end %>
+                <br><br>
                 <%= f.file_field :avatar %><p class="help-block">File should be less than 5Mb.</p>
                 </div>
             </div>
           </div>
         </div>
       </div> <!--end box 1 -->
+
     </div>
     <div class="col-md-6">
       <div class="box box-primary"><!--start box 2 -->
@@ -72,6 +73,7 @@
             </div>
           </div>
         </div>
+
       </div><!--end box 2 -->
       <%=f.submit class: "btn btn-primary" %>
     </div>
