@@ -19,10 +19,9 @@ class CasesController < ApplicationController
     end
   end
 
-
-
   def client_details
   end
+
   def show
   end
   
@@ -35,13 +34,11 @@ class CasesController < ApplicationController
   end
 
   def send_purchase_mail
-      client=Case.find(params[:item_number]).user
-      advocate=User.find(current_user.id)
-      puts "#{current_user.id}"
-      UserMailer.purchase(client,advocate).deliver_now
+    client=Case.find(params[:item_number]).user
+    advocate=User.find(current_user.id)
+    puts "#{current_user.id}"
+    UserMailer.purchase(client,advocate).deliver_now
   end
-
-
 
   def delete_document
     case_id = Document.find(params[:document]).case_id

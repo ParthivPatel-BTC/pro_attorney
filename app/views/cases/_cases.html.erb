@@ -5,12 +5,13 @@
     <td><%= user_case.case_type.amount %>$</td>
     <td><%= user_case.status%></td>
     <% if current_user.id == user_case.user_id %>
-    <td><%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
+    <td><%= link_to "",case_path(user_case), class: "fa fa-fw fa-eye", title: "view" %>
     </td>
-    <td><%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %></td>
-    <td><%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %></td>
+    <td><%= link_to "", edit_case_path(user_case), class: "fa fa-fw fa-pencil-square-o", title: "Edit" %></td>
+    <td><%= link_to "", user_case, method: :delete, data: { confirm: 'Are you sure?' }, class: "fa fa-fw fa-trash", title: "delete" %></td>
 	<% end %>
-    <td><%= link_to "purchase" , case_cases_path(user_case) ,class:" btn btn-primary fa fa-cc-paypal" if current_user.is_advocate? %> </td>    
-    
+    <% if current_user.is_advocate? %>
+    <td><%= link_to "purchase" , case_cases_path(user_case), class: "btn btn-primary fa fa-cc-paypal" %> </td>    
+    <% end %>
     </tr>
 <% end %>

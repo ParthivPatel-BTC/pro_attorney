@@ -1,36 +1,17 @@
 <aside class="main-sidebar">
-<section class="sidebar">
+<section class="sidebar" style="height: auto;">
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <%= avatar_display({class: "user-image"}) %>
+              <%= avatar_display({class: "user-image"}) %>              
             </div>
             <div class="pull-left info">
                 <p><%=user_name %></p>
-            </div>
-            <div class="pull-left info">
-              <p></p>
-              <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
             </div>
           </div>
-          <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search..." />
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form>
-          <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li>
             <% if current_user.is_system_admin? %>
             <li class="treeview">
               <%=link_to  admins_view_advocates_path  do %>
@@ -65,7 +46,7 @@
             </li>
 
              <li class="treeview">
-              <%= link_to user_profiles_path(current_user.id) do %>
+              <%= link_to user_profiles_path do %>
                <i class="fa fa-users"></i> <span>Profiles</span> <i class="fa fa-angle-left pull-right"></i>
               <% end %>
             </li>   
@@ -86,12 +67,6 @@
             </li>
 
             <li class="treeview">
-              <%= link_to cases_path do %>
-              <i class="fa-folder-open"></i> <span>Cases</span> <i class="fa fa-angle-left pull-right"></i>
-              <% end %>
-          
-
-           <li class="treeview">
               <%= link_to destroy_user_session_path,method: :delete do %>
                <i class="fa fa-power-off"></i> <span>Logout</span> <i class="fa fa-angle-left pull-right"></i>
               <% end %>

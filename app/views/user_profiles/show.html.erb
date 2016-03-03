@@ -9,7 +9,7 @@
 						<% if @user_profile.avatar.exists? %>
 							<%= image_tag(@user_profile.avatar.url, class: "img-circle", height: "236", width: "236") %>
 						<% else %> 
-							<%= image_tag(@avatarsrc, class: "img-circle", height: "236", width: "236") %>
+							<%= image_tag("default.jpg", class: "img-circle", height: "236", width: "236") %>
 						<% end %>
 					</div><!--end inner box 1 -->
 					<div class= "col-md-7 pull-right"><!--start inner box 2 -->
@@ -17,20 +17,23 @@
 						<div class="current-position"><i class="fa fa-fw fa-mortar-board"></i>Advocate</div><br>
 						<p><%= @user_profile.experience %></p><br>
 						<table>
-							<tr><td>My Ratings:</td><td>
-							<%= rating_for @user_profile,"ratings",:disable_after_rate => true, :enable_half => true,
+							<tr><td>My Ratings: </td><td>
+							<%= rating_for @user_profile, "ratings", :disable_after_rate => true, :enable_half => true,
     																								  :half_show => true %>
 							</td></tr>
 							<!-- <tr><td>Average Ratings:</td>
 							<td><%= rating_for @user_profile, "ratings", disabled: true, imdb_avg: true %> </td>
 							</tr> -->
 						</table>
-					</div><!--end inner box 2 -->
+					</div><!--end inner box 1 -->
 				</div>
 		</div>
 		<br>
 			&nbsp;&nbsp;
-			<%= link_to "Edit", edit_user_profile_path(@user_profile), class: "fa fa-fw fa-edit" %>
+			<%= link_to edit_user_profile_path(@user_profile), class: "btn btn-primary" do %>
+			<i class="fa fa-fw fa-edit"></i>
+			<%end if @user_profile.user.id==current_user.id%>
+			  <%= link_to 'Back',:back, class: "btn btn-primary" %>
 			
 			<br>
 	</div><!--end box 1 -->

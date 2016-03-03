@@ -13,15 +13,17 @@
   </head>
 
   <body class="skin-blue sidebar-mini">
-    <%= render 'layouts/header' %>
     <div class="wrapper">
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/sidebar' %>
       <div class="content-wrapper">
-        <section class="content-header">
+        <section class="content">
           <%= render partial: 'shared/flash' %>
         <%= yield %>
         </section>
+        
+        
         </div>
-        <%= render 'layouts/sidebar' %>
     </div>    
   </body>
 </html>
