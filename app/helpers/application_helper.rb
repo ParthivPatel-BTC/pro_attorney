@@ -1,5 +1,4 @@
 module ApplicationHelper
-
  def header(text)
    content_for(:header) { text.to_s }
  end
@@ -15,8 +14,6 @@ def avatar_display(options)
 		image_tag("default.jpg",{height: 20,width: 20,class: "user-image"})
 	else
 		image_tag(current_user.user_profile.avatar.url(:small),options)
-	else
-		image_tag("default.jpg",{height: 20,width: 20,class: "user-image"})
 	end
 end
 
