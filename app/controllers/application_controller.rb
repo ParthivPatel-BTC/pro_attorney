@@ -9,12 +9,11 @@ class ApplicationController < ActionController::Base
     else
 
         if current_user.is_system_admin? 
-              cases_path
+              admins_view_advocates_path
         elsif current_user.is_client?
              new_case_path 
         elsif current_user.is_advocate?
               cases_path
-          
         end
     end
 end
