@@ -15,4 +15,5 @@
 //= require jquery.raty
 //= require ratyrate
 //= require app.min
-//= require_tree 
+
+

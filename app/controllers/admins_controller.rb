@@ -39,7 +39,7 @@ class AdminsController < ApplicationController
 	end
 
 	def sorting
-		@user_case = Case.order("#{params[:col]} #{params[:order]}").paginate(:page => params[:page], :per_page => t("per_page"))
+		@user_case = Case.joins(:case_type).joins(:user_profile).order("#{params[:col]} #{params[:order]}").paginate(:page => params[:page], :per_page => t("per_page"))
 		respond_to do |format|
 		format.js
 		end

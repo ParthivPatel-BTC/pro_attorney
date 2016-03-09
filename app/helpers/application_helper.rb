@@ -22,7 +22,7 @@ end
 def advocate_links
   if current_user.is_advocate?
 	  link_to(purchase_case_cases_path) do
-     "<i class='fa fa-users'></i> <span>Purchase Case</span> <i class='fa fa-angle-left pull-right'></i>".html_safe
+     "<i class='fa fa-users'></i> <span>Purchase Cases</span> <i class='fa fa-angle'></i>".html_safe
 	  end
   end
 end

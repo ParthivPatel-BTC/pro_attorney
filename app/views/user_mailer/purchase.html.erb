@@ -1,7 +1,6 @@
-
-    <h1>IF you get this mail then multiple mail send to client and advocate</h1>
-    <p>
-      To login to the site, just follow this link
-    </p>
-    <p>Thanks for joining and have a great day!</p>
- 
+<h1>Case Invoice</h1>
+<p><b>Payment Id:</b><%=@cu.payments.last.id%></p>
+<p><b>Amount:</b><%=@cu.payments.last.case.case_type.amount%>$</p>
+<p><b>Case Title:</b><%=@cu.payments.last.case.case_title %></p>
+<p><b>Purchased At:</b><%=@cu.payments.last.purchased_at %></p>
+<p>Thanks</p>

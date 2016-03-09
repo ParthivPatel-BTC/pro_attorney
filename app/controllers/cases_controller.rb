@@ -12,9 +12,9 @@ class CasesController < ApplicationController
      end 
    else
       if params[:search].blank?
-      @user_case= Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      @user_case=Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      else
-      @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      @user_case =Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
      end 
     end
   end
@@ -44,8 +44,9 @@ class CasesController < ApplicationController
   def send_purchase_mail
     client=Case.find(params[:item_number]).user
     advocate=User.find(current_user.id)
+    @cu=current_user.id
     puts "#{current_user.id}"
-    UserMailer.purchase(client,advocate).deliver_now
+    UserMailer.purchase(client,advocate,current_user).deliver_now
   end
 
 
@@ -74,6 +75,9 @@ class CasesController < ApplicationController
         }
         flash[:success] = "Case created succefully"
         redirect_to cases_path
+      else
+         flash[:success] = "Case created succefully without documents"
+         redirect_to cases_path
       end
     else
       flash[:danger] = @user_case.errors.full_messages
@@ -114,7 +118,7 @@ class CasesController < ApplicationController
 
 
   def purchase_case
-  @payments =current_user.payments
+  @payments =current_user.payments.paginate(page: params[:page], per_page: t("per_page"))
    # @user_case=Payment.joins(:cases).where(user) 
   end
 

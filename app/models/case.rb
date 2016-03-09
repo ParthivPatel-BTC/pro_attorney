@@ -2,13 +2,15 @@ class Case < ActiveRecord::Base
 	include PgSearch
 	belongs_to :user
 	belongs_to :case_type
-    has_many :payments, dependent: :destroy
+  has_many :payments, dependent: :destroy
 	has_many :documents , dependent: :destroy
   has_many :payments , dependent: :destroy
+  has_one :user_profile,:through => :user
 	validates :case_type_id, :case_title, :case_detail, :location, :status, presence:true 
 
-	pg_search_scope :search_by_all,
-	 :against => [:case_title, :case_detail, :location]
+ pg_search_scope :search_by_all,
+	:against => [:case_title, :case_detail, :location],
+  :using => {:tsearch => {:prefix => true}}
 
 	 #will_paginate @cases
   #paypal methods
@@ -32,5 +34,4 @@ class Case < ActiveRecord::Base
     }
     "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   end
-
 end

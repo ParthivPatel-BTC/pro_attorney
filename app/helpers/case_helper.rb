@@ -12,9 +12,9 @@ module CaseHelper
   def show_documents
     docs = ""
     @user_case.documents.each do |doc|
-      docs += "<a href='/documents/#{doc.id}/#{doc.doc_file_name}'> #{doc.doc_file_name}</a><br>"
+      docs += "<br><a href='/documents/#{doc.id}/#{doc.doc_file_name}' target='new'> #{doc.doc_file_name}</a>"
     end
-    return docs.html_safe
+    return "<span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>Attachements#{docs}".html_safe
   end
 
   def default_case_type(user_case)

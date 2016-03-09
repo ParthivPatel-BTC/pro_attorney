@@ -2,13 +2,18 @@
 <% if(@user_case==nil) %>
 <b> No Record Found </b>
 <% else %>
+<div class="box box-primary">
+<div class="box-header with-border">
+<h3 class="box-title custom-header">Cases</h3>
+</div>
+<div class="box-body">
 <table class="table table-bordered table-hover dataTable">
 <thead>
 	<tr>
 		<th>No</th>
 		<th>Title <%=get_order("case_title") %></th>
-		<th>Name</th></th>
-		<th>Type</th>
+		<th>Name<%=get_order("user_profiles.first_name")%></th>
+		<th>Type<%=get_order("case_types.case_type")%></th>
 		<th>Actions</th>
 	</tr>
 </thead>
@@ -16,15 +21,17 @@
 <% @user_case.each_with_index do |user_case, index|%>
 <tr>
 	<td><%= index+1 %></td>
-	<td><%= link_to case_path(user_case) do%><%= user_case.case_title %><%end%></td>
+	<td><%= link_to case_path(user_case) do%><%= user_case.case_title.capitalize %><%end%></td>
 	<td><%= user_case.user.user_profile.first_name.capitalize %> 
 	    <%= user_case.user.user_profile.last_name.capitalize %></td>
-	<td><%= user_case.case_type.case_type %></td>
+	<td><%= user_case.case_type.case_type.capitalize %></td>
 	<td><%= active_case?(user_case)%></td>
 </tr>
 <% end %>
 </tbody>
 </table>
+</div>
+</div>
 <%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
 </div>
 <% end %>

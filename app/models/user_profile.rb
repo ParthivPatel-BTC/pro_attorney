@@ -4,11 +4,10 @@ class UserProfile < ActiveRecord::Base
   after_initialize :default_values
   validates :first_name,      
             :last_name,
-            :gender,
             :mobile_no,
-            :address,
-            :city,
-            :pincode, presence: true
+            :address, presence: true
+
+  validates :pincode, numericality: {only_integer: true}
   validates_format_of :first_name, :last_name, :city, :with => /[-a-z]+/ if  :first_name == nil
   has_attached_file :avatar, 
 	                        :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
