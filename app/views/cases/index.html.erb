@@ -1,24 +1,9 @@
-<h1>Cases' Details</h1>
-<br>
+<h2>Cases</h2>
 <%= render partial: "search_form" %>
   <% if @user_case.present? %>
-    <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Location</th>
-        <th>Price</th>
-        <th>Status</th>
-        <th colspan="3">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: "cases" %>
-    </tbody>
-    </table>
-    <%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
-  <% else %>
-    <p>No matching result found</p>
-  <% end %>
-<%= link_to "New Case", new_case_path, class: "btn btn-primary"  if current_user.is_client?%>
-<%= link_to 'Back',:back, class: "btn btn-primary" %>
+   <%= render partial: "cases" %>
+<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+<% else %>
+  <p>No matching result found</p>
+<% end %>
+<br>

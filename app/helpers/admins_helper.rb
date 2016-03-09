@@ -4,13 +4,13 @@ module AdminsHelper
   		link_to(update_case_path(user_case), method: :patch, remote:true, 
   		data: { confirm: 'Are you sure you want to de-activate this Case?' }, 
   		class: "btn-link", title: "De-activate") do
-      content_tag("De-activate", "Deactivate", class: "fa fa-fw fa-pause")
+      content_tag("De-activate", "", class: "fa fa-toggle-off fa-lg")
       end
 		else
 			link_to(update_case_path(user_case), method: :patch, remote:true, 
   		data: { confirm: 'Are you sure you want to activate this Case?' }, 
   		class: "btn-link", title: "Activate") do
-      content_tag("activate", "Activate", class: "fa fa-fw fa-play")
+      content_tag("activate", "", class: "fa fa-toggle-on fa-lg")
       end
 		end
 	end
@@ -18,15 +18,15 @@ module AdminsHelper
 	def active_user? user
 		if user.is_active? 
   		link_to(update_user_path(user), method: :patch, remote:true, 
-  		data: { confirm: 'Are you sure you want to de-activate this Case?' }, 
+  		data: { confirm: 'Are you sure you want to de-activate this User?' }, 
   		class: "btn-link", title: "De-activate") do
-      content_tag("De-activate", "Deactivate", class: "fa fa-fw fa-pause")
+      content_tag("De-activate", "", class: "fa fa-toggle-off fa-lg")
       end
 		else
 			link_to(update_user_path(user), method: :patch, remote:true, 
-  		data: { confirm: 'Are you sure you want to activate this case?' }, 
+  		data: { confirm: 'Are you sure you want to activate this User?' }, 
   		class: "btn-link", title: "Activate") do
-      content_tag("activate", "Activate", class: "fa fa-fw fa-play")
+      content_tag("activate", "", class: "fa fa-toggle-on fa-lg")
       end
 		end
 	end

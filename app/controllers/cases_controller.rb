@@ -12,33 +12,44 @@ class CasesController < ApplicationController
      end 
    else
       if params[:search].blank?
-      @user_case= Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      @user_case=Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      else
-      @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      @user_case =Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
      end 
     end
   end
 
   def client_details
   end
-
+  
   def show
   end
   
   def update
     if @user_case.update(case_params)
-     redirect_to @user_case
+      if params[:document]
+        params[:document].each { |image|
+        @user_case.documents.create(doc: image)
+        }
+        
+      end
+      redirect_to @user_case
+      flash[:success] = "Case updated succefully"
     else
-      render :edit 
+      render :edit
+      flash[:danger] = @user_case.errors.full_messages
     end
   end
 
   def send_purchase_mail
     client=Case.find(params[:item_number]).user
     advocate=User.find(current_user.id)
+    @cu=current_user.id
     puts "#{current_user.id}"
-    UserMailer.purchase(client,advocate).deliver_now
+    UserMailer.purchase(client,advocate,current_user).deliver_now
   end
+
+
 
   def delete_document
     case_id = Document.find(params[:document]).case_id
@@ -56,18 +67,21 @@ class CasesController < ApplicationController
   end
 
   def create
-    @case = Case.new(case_params.merge({user_id: current_user.id}))
-    if @case.save  
+    @user_case = Case.new(case_params.merge({user_id: current_user.id}))
+    if @user_case.save  
       if params[:document]
         params[:document].each { |image|
-        @case.documents.create(doc: image)
+        @user_case.documents.create(doc: image)
         }
-        flash[:success] = "Case created succefully"
+        flash[:success] = "Case created successfully"
         redirect_to cases_path
+      else
+         flash[:success] = "Case created successfully without documents"
+         redirect_to cases_path
       end
     else
-      flash[:danger] = @case.errors.full_messages
-      @documents = @case.documents
+      flash[:danger] = @user_case.errors.full_messages
+      @documents = @user_case.documents
       render :new
     end
   end
@@ -76,10 +90,12 @@ class CasesController < ApplicationController
     if @user_case.destroy
       @user_case.documents.destroy
       redirect_to cases_path
+      flash[:success] = "Case deleted successfully"
     end
   end
 
   def show_purchased
+    flash[:success] = "Case purchased successfully"
     render 'show'
   end
 
@@ -104,7 +120,7 @@ class CasesController < ApplicationController
 
 
   def purchase_case
-  @payments =current_user.payments
+  @payments =current_user.payments.paginate(page: params[:page], per_page: t("per_page"))
    # @user_case=Payment.joins(:cases).where(user) 
   end
 
