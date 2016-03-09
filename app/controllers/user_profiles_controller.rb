@@ -1,8 +1,9 @@
 class UserProfilesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
   def index
-    @user_profile = UserProfile.order(first_name: :asc)
+    @user_profile = UserProfile.joins(:user).where("role_id= '#{Role.find_by(title: 'advocate').id}'").paginate(page: params[:page], per_page: t("per_page")) if current_user.is_client?
+    #@up1=User.where(role_id: Role.find_by(title: 'advocate')) 
   end
 
   def show
@@ -20,10 +21,11 @@ class UserProfilesController < ApplicationController
   end
 
   def create
-    @user_profile = UserProfile.new(profile_params) 
+     @user_profile = UserProfile.new(profile_params.merge({user_id: current_user.id}))
+    # @user_profile = UserProfile.new(profile_params) 
     if @user_profile.save 
       flash[:success] = "Profile created succefully"
-      redirect_to user_profiles_path  
+      redirect_to user_profile_path(current_user.id)  
     else
       flash[:danger] = @user_profile.errors.full_messages
       render :new
@@ -32,7 +34,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to user_profiles_path  
+      redirect_to user_profile_path(current_user.id)  
     else
       redirect_to :back 
     end
@@ -45,6 +47,6 @@ class UserProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user_profile).permit(:first_name, :last_name, :gender, :mobile_no, :address, :city, :pincode, :qualification, :experience, :avatar)
+    params.require(:user_profile).permit(:first_name, :last_name, :gender, :mobile_no, :address, :city, :pincode, :qualification, :experience, :avatar,:user_id)
   end
 end

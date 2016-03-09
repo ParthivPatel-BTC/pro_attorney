@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+   before_action :authenticate_user!
   layout 'registration_layout'
   def sign_up_params
     devise_parameter_sanitizer.sanitize(:sign_up)
@@ -9,6 +10,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_inactive_sign_up_path_for(resource)
-    users_signin_path(resource)
+    root_path
   end
 end

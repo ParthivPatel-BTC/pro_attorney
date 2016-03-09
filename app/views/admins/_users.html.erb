@@ -1,0 +1,43 @@
+<div id="users">
+<% if(!@users.any?) %>
+<b> No Record Found </b>
+<% else %>
+<div class="box box-primary">
+	<div class="box-header with-border">
+	<h3 class="box-title custom-header"><%= @users.first.role.title.titleize %>s</h3>
+	</div>
+
+	<div class="box-body">
+
+
+<table class="table table-bordered table-hover dataTable">
+	<thead>
+		<tr>
+		 	<th>No</th>
+		 	<th>Name<%=get_user_order("user_profiles.first_name",@users.first.role.title)%></th>
+		 	<th>Email<%=get_user_order("email",@users.first.role.title)%></th>
+		 	<th>Actions</th>
+	 	</tr>
+	</thead>
+	<tbody>
+		<% @users.each.with_index do |user,index|%>
+			<tr>
+				<td><%= index+1 %></td>
+				<td>
+			    <% if user.user_profile.present? %>
+				<%=link_to user_profile_path(user.user_profile) do%>
+				<%= user.user_profile.first_name.capitalize+" "+user.user_profile.last_name.capitalize %>
+				<%end %>
+				<% end %>
+				</td>
+				<td><%= user.email %></td>
+			    <td><%= active_user?(user)%></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+</div>
+</div>
+<%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right" %>
+<% end %>
+</div>

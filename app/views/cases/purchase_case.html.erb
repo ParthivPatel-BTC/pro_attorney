@@ -1,0 +1,38 @@
+<div class = "box box-primary"><!--start box 1 -->
+  <div class="box-header with-border">
+  <h3 class="box-title custom-header">Purchased cases</h3>
+  </div>
+  <div class = "box-body">
+  <table class="table table-bordered table-striped">
+<thead>
+    <tr>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Price</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+<% @payments.each do |payment| %>
+  <tr>
+    <td>
+    	<%= link_to case_path(payment.case) do %>
+       <%= payment.case.case_title.titleize %></td>
+       <% end %>
+    <td><%= payment.case.location.titleize %></td>
+    <td><%= payment.case.case_type.amount %>$</td>
+    <td><%= payment.case.status.titleize %></td>
+    <% if current_user.id == payment.case.user_id %>
+    <td><%= link_to "",payment.case_path(payment.case),class: "fa fa-fw fa-eye", title: "view" %>
+    </td>
+    <td><%= link_to "", edit_payment.case_path(payment.case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %></td>
+    <td><%= link_to "",payment.case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %></td>
+	<% end %>
+    
+    </tr>
+    
+<% end %>
+</table>
+</div>
+<%= will_paginate @payments, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+</div>
+

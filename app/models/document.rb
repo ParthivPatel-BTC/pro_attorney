@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
 	belongs_to :case
-	has_attached_file :doc, path: ":rails_root/app/assets/documents/:basename.:extension"
+	has_attached_file :doc, path: ":rails_root/public/documents/:id/:basename.:extension"
   validates :doc, presence: true
   validates_attachment_content_type :doc, content_type: ["application/pdf","application/vnd.ms-excel",     
              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

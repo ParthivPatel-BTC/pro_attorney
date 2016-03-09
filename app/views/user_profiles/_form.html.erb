@@ -3,11 +3,10 @@
     <div class = "col-md-6">
       <div class = "box box-primary"><!--start box 2 -->
         <div class = "box-header with-border">
-          <h3 class = "box-title">Basic Info</h3><br>
+          <h3 class = "box-title custom-header">Basic Info</h3><br>
         </div>
         <div class = "box-body">
           <div class = "col-md-12">
-
             <div class = "form-group">
               <%= f.label :first_name %>
               <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name" %>
@@ -25,29 +24,36 @@
             </div>
 
             <div class = "form-group">
-              <%= f.label :mobile_no %>
+              <%= f.label :contact %>
               <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter mobile number" %>
             </div>
 
             <div class = "form-group" >
               <%= f.label "Profile Picture" %>
                 <div class = "form-group" >
+                  <div class="upload-preview" id="target">
                 <% if @user_profile.avatar.exists? %>
-                <%= image_tag(@user_profile.avatar.url, height: "85px", width: "85px") %>
+                <%= image_tag(@user_profile.avatar.url, height: "85px", width: "85px",id: "output") %><br><br>
                 <% else %> 
-                <%= image_tag('default.jpg', height: "85px", width: "85px") %>
-                <% end %>  
-                <%= f.file_field :avatar %><p class="help-block">File should be less than 5Mb.</p>
+                <%= image_tag('default.jpg', height: "85px", width: "85px",id: "output") %><br>
+                <% end %> 
+                </div>
+                <%= f.file_field :avatar,onchange: "loadFile(event)",id: "pictureInput" %><p class="help-block">File should be less than 5Mb.</p>
+
+                  <div class="upload-preview">
+                    <img />
+                  </div>
                 </div>
             </div>
           </div>
         </div>
       </div> <!--end box 1 -->
+       <%=f.submit class: "btn btn-primary" %>
     </div>
     <div class="col-md-6">
       <div class="box box-primary"><!--start box 2 -->
         <div class="box-header with-border">
-          <h3 class="box-title">Address</h3><br>
+          <h3 class="box-title custom-header">Address</h3><br>
         </div>
         <div class="box-body">
           <div class="col-md-12">
@@ -62,18 +68,28 @@
             </div>
 
             <div class = "form-group">
-              <%= f.label :pincode %>
-              <%= f.number_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter pincode" %>
+              <%= f.label :zipcode %>
+              <%= f.text_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter pincode" %>
             </div>
-
+            <% if current_user.is_advocate? %>
             <div class = "form-group">
               <%= f.label :experience %>
               <%= f.text_area :experience, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter experience" %>
             </div>
+            <% end %>
           </div>
         </div>
       </div><!--end box 2 -->
-      <%=f.submit class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
+<script type="text/javascript">
+ var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+</script>

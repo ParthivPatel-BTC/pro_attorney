@@ -1,5 +1,5 @@
 <div class="alert alert-info">
-  <%= devise_error_messages! %>
+  <%=devise_error_messages! %>
   </div>
     
 <div class="register-box">
@@ -14,7 +14,7 @@
     
     <div class="form-group has-feedback">
       <%= f.email_field :email,autofocus: true,class: "form-control" ,placeholder: "Email" %>
-      <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> -->
     </div>
     
     <div class="form-group has-feedback">
@@ -22,12 +22,12 @@
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" ,class: "form-control",placeholder: "password"  %>
-    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
     </div>
 
     <div class="form-group has-feedback">
       <%= f.password_field :password_confirmation, autocomplete: "off",class: "form-control", placeholder: "confirm password"%>
-       <span class="glyphicon glyphicon-log-in"></span>
+       <!-- <span class="glyphicon glyphicon-log-in"></span> -->
     </div>
 
     <div class="form-group has-feedback">
