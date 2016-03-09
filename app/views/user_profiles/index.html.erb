@@ -7,7 +7,12 @@
 		<tr><th>Name</th></tr>
 		<% @user_profile.each do |user_profile|  %>
 		<tr>
-			<td> <%=link_to user_profile_path(user_profile) do%>
+			<td><% if user_profile.avatar.exists? %>
+                <%= image_tag(user_profile.avatar.url,height: "50px", width: "50px",id: "output" ,class: "img-circle") %>
+                <% else %> 
+                <%= image_tag('default.jpg', height: "50px", width: "50px",id: "output",class: "img-circle") %>
+                <% end %> 
+                <%=link_to user_profile_path(user_profile) do%>
 				<%= user_profile.first_name.titleize + " " + user_profile.last_name.titleize %>
 			<%end %></td>
 			<% if user_profile.user.id==current_user.id %>

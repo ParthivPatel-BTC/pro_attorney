@@ -35,7 +35,7 @@
                 <% if @user_profile.avatar.exists? %>
                 <%= image_tag(@user_profile.avatar.url, height: "85px", width: "85px",id: "output") %><br><br>
                 <% else %> 
-                <%= image_tag('default.jpg', height: "85px", width: "85px",id: "output") %><br>
+                <%= image_tag('default.jpg', height: "85px", width: "85px",id: "output") %><br><br>
                 <% end %> 
                 </div>
                 <%= f.file_field :avatar,onchange: "loadFile(event)",id: "pictureInput" %><p class="help-block">File should be less than 5Mb.</p>

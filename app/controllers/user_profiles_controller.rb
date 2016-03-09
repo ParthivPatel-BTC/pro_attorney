@@ -34,9 +34,11 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to user_profile_path(current_user.id)  
+      redirect_to user_profile_path(current_user.id)
+      flash[:success] = "Profile updated successfully"
     else
-      redirect_to :back 
+      flash[:danger] = @user_profile.errors.full_messages
+      redirect_to :back
     end
   end
 

@@ -33,11 +33,13 @@ class CasesController < ApplicationController
         params[:document].each { |image|
         @user_case.documents.create(doc: image)
         }
-        flash[:success] = "Case update succefully"
+        
       end
       redirect_to @user_case
+      flash[:success] = "Case updated succefully"
     else
-      render :edit 
+      render :edit
+      flash[:danger] = @user_case.errors.full_messages
     end
   end
 
@@ -73,10 +75,10 @@ class CasesController < ApplicationController
         params[:document].each { |image|
         @user_case.documents.create(doc: image)
         }
-        flash[:success] = "Case created succefully"
+        flash[:success] = "Case created successfully"
         redirect_to cases_path
       else
-         flash[:success] = "Case created succefully without documents"
+         flash[:success] = "Case created successfully without documents"
          redirect_to cases_path
       end
     else
@@ -90,10 +92,12 @@ class CasesController < ApplicationController
     if @user_case.destroy
       @user_case.documents.destroy
       redirect_to cases_path
+      flash[:success] = "Case deleted successfully"
     end
   end
 
   def show_purchased
+    flash[:success] = "Case purchased successfully"
     render 'show'
   end
 
