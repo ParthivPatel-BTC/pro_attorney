@@ -1,6 +1,6 @@
 <% if current_user.role.title == "client" %>
 <h3>hello client</h3>
-	<%= link_to "Edit profile", edit_user_profile_path(@user_profile) %>
+<%= link_to "Edit profile", edit_user_profile_path(@user_profile) %>
 <%= link_to "Add case", new_case_path %>
 <% elsif current_user.role.title == "advocate" %>
 <h3>hello advocate</h3>

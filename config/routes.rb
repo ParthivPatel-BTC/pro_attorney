@@ -19,8 +19,9 @@ Rails.application.routes.draw do
  
   post 'send_purchase_mail/:id' =>'cases#send_purchase_mail',as: :send_purchase_mail
 
+ 
   get 'users/signin'
-  get 'users/index'
+  get 'users/index' 
   get 'users/after_signin' => 'users#after_signin'
     
   devise_for :users, :controllers => { registrations: "users/registrations",

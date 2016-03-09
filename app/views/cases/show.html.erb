@@ -1,57 +1,111 @@
-<div class = "col-md-8">
-  <h3>Case Detail</h3>
-  <table class = "table table-bordered table-hover"> 
-    <tr>
-      <td>Case Title</td>
-      <td><%= @user_case.case_title %></td>
-    </tr>
-    <tr>
-	    <td>Location</td> 
-      <td><%= @user_case.location %></td>
-	  </tr>
-    <tr>
-	    <td>status</td> <td><%= @user_case.status %></td>
-    </tr>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title custom-header">Case Details</h3>
+  </div>
 
-    <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? %>
-      <tr>
-      <td>Detail</td> 
-      <td><%= @user_case.case_detail %></td>
-    </tr>
+  <div class="box-body">
+ 
+    <ul class="todo-list ui-sortable">
+      <li>
+        <span class="handle ui-sortable-handle">
+          <h4><i class="fa fa-fw fa-list"></i></h4>
+        </span>
+        <span class="text">
+          <h4><%= @user_case.case_title.titleize %></h4>
+        </span>
+      </li>
+      
+      <li>
+        <span class="handle ui-sortable-handle">
+          <h4><i class="fa fa-fw fa-location-arrow"></i></h4>
+        </span>
+        <span class="text">
+          <h4><%= @user_case.location %></h4>
+        </span>
+      </li>
+      
+      <li>
+        <span class="handle ui-sortable-handle">
+          <h4><i class="fa fa-flag"></i></h4>
+        </span>
+        <span class="text">
+          <h4><%= @user_case.status %></h4>
+        </span>
+      </li>
+	      
+    <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? || @user_case.user_id == current_user.id %>
+      <li>
+        <span class="handle ui-sortable-handle">
+          <h4><i class="fa fa-fw fa-file-text-o"></i></h4>
+        </span>
+        <span class="text">Details</span>
+          <h5><%= @user_case.case_detail %></h5>
+        
+      </li>
 
-    <tr>
- 	    <td>Documents</td>
- 	    <td><%= show_documents %></td>
-    </tr>
+      <li>
+        <span class="text"><%= show_documents %></span>
+      </li>
   <% end %>
-  </table>
- <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? %>
-<h3>Client Detail</h3>
-  <table class = "table table-bordered table-hover"> 
-    <tr>
-      <td>Name</td>
-      <td><%= @user_case.user.user_profile.first_name %> <%= @user_case.user.user_profile.last_name %></td>
-    </tr>
-    <tr>
-      <td>Gender</td>
-      <td><%= @user_case.user.user_profile.last_name %></td>
-    </tr>
-    <tr>
-      <td>Contact</td>
-      <td><%= @user_case.user.user_profile.mobile_no %></td>
-    </tr>
-    <tr>
-      <td>Address</td>
-      <td><%= @user_case.user.user_profile.address %></td>
-    </tr>
-    <tr>
-      <td>City</td>
-      <td><%= @user_case.user.user_profile.city %></td>
-    </tr>
-    <tr>
-      <td>Pincode</td>
-      <td><%= @user_case.user.user_profile.pincode %></td>
-    </tr>
-  </table>  
-  <% end %>
-  <%= link_to 'Back',:back, class: "btn btn-primary" %>
+  
+</div>
+</div>
+   
+
+<% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any?  %>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title custom-header">Client Details</h3>
+    </div>
+    <div class="box-body">
+  <ul class="todo-list ui-sortable">
+  <li>
+    <span class="handle ui-sortable-handle">
+      <h4><i class="fa fa-user"></i></h4>
+    </span>
+    <span class="text">
+      <h4>
+        <%= @user_case.user.user_profile.first_name.titleize %> <%= @user_case.user.user_profile.last_name.titleize %>
+      </h4>
+    </span>
+  </li>
+    
+  <li>
+    <span class="handle ui-sortable-handle">
+      <h4><i class="fa fa-fw fa-male"></i></h4>
+    </span>
+    <span class="text">
+      <h4><%= @user_case.user.user_profile.gender %></h4>
+    </span>
+  </li>
+
+  <li>
+    <span class="handle ui-sortable-handle">
+      <h4><i class="fa fa-fw fa-mobile-phone"></i></h4>
+    </span>
+    <span class="text">
+      <h4><%= @user_case.user.user_profile.mobile_no %></h4>
+    </span>
+  </li>
+    
+  <li>
+    <span class="handle ui-sortable-handle">
+      <h4><i class="fa fa-fw fa-map-marker"></i></h4>
+    </span>
+    <span class="text">
+      <h4>
+        <%= @user_case.user.user_profile.address.titleize %><br>
+        <%= @user_case.user.user_profile.city.titleize %> - <%= @user_case.user.user_profile.pincode %>
+      </h4>
+    </span>
+  </li>
+  
+    
+      <% end %>
+
+
+  </div>
+</div>
+<%= link_to 'Back',:back, class: "btn btn-primary" %>
+</div>
+</div>

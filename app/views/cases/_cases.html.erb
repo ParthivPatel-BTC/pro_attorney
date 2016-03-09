@@ -1,15 +1,30 @@
 <% @user_case.each do |user_case| %>
- <tr>
-    <td><%= user_case.case_title %></td>
-    <td><%= user_case.location%></td>
-    <td><%= user_case.case_type.amount %>$</td>
-    <td><%= user_case.status%></td>
-    <% if current_user.id == user_case.user_id %>
-    <td><%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
-    </td>
-    <td><%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %></td>
-    <td><%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %></td>
-	<% end %>
-    <td><%= link_to "purchase" , case_cases_path(user_case) ,class:" btn btn-primary fa fa-cc-paypal" if current_user.is_advocate? %> </td> 
- </tr>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+<div class = "box box-primary"><!--start box 2 -->
+        <div class = "box-header with-border ">
+          <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3><br>
+        </div>
+   <div class="box-body">
+   <dl class="dl-horizontal">
+   <dt>Location</dt><dd><%= user_case.location.titleize%></dd>
+   <dt>Type</dt><dd><%= user_case.case_type.case_type.titleize%></dd>
+   <dt>Amount</dt><dd><%= user_case.case_type.amount %>$</dd>
+   <dt>Status</dt><dd><%= user_case.status.titleize%></dd>
+   <dt>Details</dt><dd><%= user_case.case_detail %></dd>
+   
+
+    <% if current_user.id == user_case.user_id %><br>
+   <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
+    <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
+    <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
+	 <% end %>
+   <%= link_to "<img src='paypal2.png' align='right'>".html_safe,case_cases_path(user_case) if current_user.is_advocate? %>
+   
+</div>
+</div>
+</div>
+</div>
 <% end %>
+
