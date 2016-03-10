@@ -13,9 +13,10 @@
    <dt>Amount</dt><dd><%= user_case.case_type.amount %>$</dd>
    <dt>Status</dt><dd><%= user_case.status.titleize%></dd>
    <dt>Details</dt><dd><%= user_case.case_detail %></dd>
-   
+   </dl>
 
     <% if current_user.id == user_case.user_id %><br>
+    <div class = "pull-right">
    <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
     <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
     <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
