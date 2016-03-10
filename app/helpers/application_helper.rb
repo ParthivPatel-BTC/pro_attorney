@@ -27,4 +27,12 @@ def advocate_links
   end
 end
 
+def submit_value(obj)
+  if obj.id == nil
+  	"Save"
+  else
+  	"Update"
+  end
+end
+
 end

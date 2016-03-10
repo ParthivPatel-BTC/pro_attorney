@@ -13,7 +13,7 @@ class UserProfilesController < ApplicationController
   end
 
   def new
-    @user_profile = UserProfile.new
+    @user_profile = UserProfile.new(user_id: current_user.id)
   end
 
   def destroy

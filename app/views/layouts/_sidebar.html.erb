@@ -68,19 +68,19 @@
                <%end%>
 
           <ul class="treeview-menu menu-open" style="display: block;">
+          <% if current_user.user_profile!=nil %>
 
            <li>
-              <%= link_to user_profile_path(current_user.id) do %>
+              <%= link_to user_profile_path(current_user.user_profile) do %>
                <i class="fa fa-circle-o"></i> <span>My Profile</span> <i class="fa fa-angle"></i>
               <% end %>
             </li>
 
            <li>
-              <% if current_user.user_profile!=nil %>
               <%= link_to  edit_user_profile_path (current_user.user_profile)  do %>
                <i class="fa fa-circle-o"></i> <span>Edit Profile</span> <i class="fa fa-angle"></i>
               <% end %>
-              <% end %>
+          <% end %>
             </li>
 
           </ul>   
