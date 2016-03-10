@@ -64,6 +64,10 @@ class CasesController < ApplicationController
   end
 
   def new
+    if(!current_user.user_profile.present?)
+      flash[:danger] = "Create Profile Before creating case"
+      redirect_to  new_user_profile_path 
+    end
     @user_case = Case.new(user_id: current_user.id)
     @documents = @user_case.documents
   end

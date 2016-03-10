@@ -21,4 +21,17 @@
 
 en:
   per_page: 5
-
+  activerecord:
+    attributes:
+      user_profile:
+        pincode: "Zip code"
+        avatar: "Profile picture"
+        avatar_content_type: "Profile picture type"
+    errors:  
+      models:
+        user_profile:
+          attributes:
+            pincode:
+              blank: "is required"
+          
+              
