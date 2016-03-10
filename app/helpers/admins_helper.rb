@@ -48,4 +48,12 @@ module AdminsHelper
       link_to("", admins_user_sorting_path(col: col,order: "DESC",role: role),{remote: true,class: "pull-right fa fa-sort-amount-desc",style: "color: #{style_enable}"})
     end
   end
+
+  def tab_class(tab_name, active_tab)
+    if (tab_name==active_tab)
+      "active"
+    else
+      ""
+    end
+  end
 end

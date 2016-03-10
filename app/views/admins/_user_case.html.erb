@@ -5,13 +5,13 @@
 		<h3 class="box-title custom-header">Cases</h3>
 		<span class="label label-primary"><%= Case.count %></span>
 		<ul class="nav nav-tabs pull-right">
-			<li class="active">
+			<li class=<%= tab_class(@tab, "all") %>>
 				<%= link_to "All", admins_view_cases_path %>
 			</li>
-			<li>
+			<li class=<%= tab_class(@tab, "open") %>>
 				<%= link_to "open", admins_view_cases_path(status: "open")%>
 			</li>
-			<li>
+			<li class=<%= tab_class(@tab, "closed") %>>
 				<%= link_to "closed", admins_view_cases_path(status: "closed")%>
 			</li>
 		</ul>
