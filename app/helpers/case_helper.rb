@@ -24,4 +24,13 @@ module CaseHelper
       return  user_case.case_type.id.to_s
     end
 	end
+
+  def selected_case_type
+        if @cases.first.case_type_id ==nil
+          return 1
+        else
+          return @cases.first.case_type_id
+        end
+      end
 end
+

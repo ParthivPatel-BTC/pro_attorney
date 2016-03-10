@@ -3,8 +3,12 @@ class CasesController < ApplicationController
   protect_from_forgery except: [:hook]
   before_action :hook,only: [:show_purchased]
   skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
+
+    @cases= Case.new
   def index
-    if current_user.is_client?
+  @cases=Case.search(params[:case_type_id])
+  puts @user_case.inspect
+      if current_user.is_client?
      if params[:search].blank?
       @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      else
@@ -19,8 +23,7 @@ class CasesController < ApplicationController
     end
   end
 
-
-
+  
   def client_details
   end
   
@@ -133,7 +136,7 @@ class CasesController < ApplicationController
   private
   
   def set_case
-    @user_case = Case.find(params[:id])
+     @user_case = Case.find(params[:id])
   end
 
   def case_params

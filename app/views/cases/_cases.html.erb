@@ -1,4 +1,9 @@
-<% @user_case.each do |user_case| %>
+<% if @cases %>
+<% use=@cases%>
+<%else%>
+<% use=@user_case%>
+<%end%>
+<% use.each do |user_case| %>
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-10">

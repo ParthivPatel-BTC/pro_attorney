@@ -34,4 +34,16 @@ class Case < ActiveRecord::Base
     }
     "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   end
+def self.search(search)
+  puts "------------"+search.to_s
+  if search
+    puts "-------true-----"
+    self.where(case_type_id:search.to_i)
+  else
+    puts "-------false-----"
+    self.all
+
+  end
+end
+
 end
