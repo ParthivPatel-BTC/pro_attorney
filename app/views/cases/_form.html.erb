@@ -1,3 +1,4 @@
+<% if @user_case.user_id == current_user.id %>
 <%= form_for @user_case, html: { :multipart => true }  do |f| %>
 <div class = "row">
   <div class = "col-md-6">
@@ -65,13 +66,12 @@
             <%= f.label :document %>
             <%= file_field_tag "document[]", type: :file, multiple: true %>
           </div>
-
-        
-  
-
         </div>
       </div>
       </div>
     </div>
   </div>
+<% end %>
+<% else %>
+<h3>you are not allowed to view this page</h3>
 <% end %>
