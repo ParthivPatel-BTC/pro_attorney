@@ -4,18 +4,17 @@ class CasesController < ApplicationController
   before_action :hook,only: [:show_purchased]
   skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
   def index
-    params[:case_type]=CaseType.first.case_type if(params[:case_type] == nil)
     if current_user.is_client?
      if params[:search].blank?
-      @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id,case_type: CaseType.find_by(case_type: params[:case_type]).id)
+      @user_case = Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      else
-      @user_case = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id,case_type: CaseType.find_by(case_type: params[:case_type]).id)
+      @user_case = Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      end 
-   else
+    else
       if params[:search].blank?
-      @user_case=Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open",case_type: CaseType.find_by(case_type: params[:case_type]).id)
+      @user_case=Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      else
-      @user_case =Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(case_type: CaseType.find_by(case_type: params[:case_type]).id)
+      @user_case =Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      end 
     end
     respond_to do |format|

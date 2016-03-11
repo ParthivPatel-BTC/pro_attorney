@@ -12,7 +12,6 @@ class AdminsController < ApplicationController
 
 	def view_cases
 		@user_case = Case.order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
-		puts ">>>>>>>>>>>cont #{@user}"
 	end
 
 	def view_case
