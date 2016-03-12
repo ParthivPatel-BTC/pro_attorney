@@ -32,6 +32,12 @@
                <% end %>
             </li>
 
+            <li class="treeview">
+              <%=link_to   admins_user_log_path   do %>
+                <i class="fa fa-fw fa-files-o"></i> <span>User Log Report</span> <i class="fa fa-angle"></i>
+               <% end %>
+            </li>
+
             <% end %>
 
             <% if current_user.is_client? %>
@@ -85,10 +91,7 @@
 
           </ul>  
 
-
-
-
-           <li class="treeview">
+          <li class="treeview">
               <%= link_to destroy_user_session_path,method: :delete do %>
                <i class="fa fa-sign-out"></i><span>Logout</span>
               <% end %>
