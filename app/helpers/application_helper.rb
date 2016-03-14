@@ -10,11 +10,15 @@ module ApplicationHelper
 		current_user.user_profile.first_name+" "+current_user.user_profile.last_name
 	end
 end
-def avatar_display(options)
+def avatar_display(options,image_size=nil)
 	if current_user.user_profile == nil || current_user.user_profile.avatar_file_name == "default.jpg"
 		image_tag("default.jpg",{height: 20,width: 20,class: "user-image"})
 	else
-		image_tag(current_user.user_profile.avatar.url(:small),options)
+		unless image_size == nil
+			image_tag(current_user.user_profile.avatar.url(:small),options)
+		else
+			image_tag(current_user.user_profile.avatar.url(image_size),options)
+		end
 	end
 end
 

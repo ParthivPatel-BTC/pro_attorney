@@ -11,7 +11,13 @@ class AdminsController < ApplicationController
 	end
 
 	def view_cases
-		@user_case = Case.order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
+		if (params[:status]==nil)
+			@user_case = Case.order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
+			@tab = "all"
+		else
+			@user_case = Case.where(status: params[:status]).order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
+			@tab=params[:status]
+		end
 	end
 
 	def view_case

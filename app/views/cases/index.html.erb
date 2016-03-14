@@ -2,6 +2,7 @@
 	<div class="col-md-3">
 		<h2 style="display:inline">Cases</h2>
 	</div>
+	<% if @user_case.present? %>
 	<div class="col-md-3">
 
 		<%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type,
@@ -11,7 +12,6 @@
 			<%= render partial: "search_form" %>
 		</div>
 		<div class="col-md-12">
-			<% if @user_case.present? %>
 			<%= render partial: "cases" %>
 			<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
 			<% else %>

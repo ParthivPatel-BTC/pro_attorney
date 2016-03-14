@@ -13,12 +13,28 @@
     </div><br>
    </div>
   <div class="box-body">
-    <dl class="dl-horizontal">
-    <dt><i class="fa fa-fw fa-location-arrow fa-lg"></i></dt><dd><%= user_case.location.titleize%></dd>
-    <dt>Type</dt><dd><%= user_case.case_type.case_type.titleize%></dd>
-    <dt>Amount</dt><dd><%= user_case.case_type.amount %>$</dd>
-    <dt><i class="fa fa-flag fa-lg"></i></dt><dd><%= user_case.status.titleize%></dd>
-    <dt><i class="fa fa-fw fa-file-text-o fa-lg"></i></dt><dd>
+    <div class="row">
+      <div class="col-sm-3">
+        <i class="fa fa-fw fa-location-arrow"></i>
+        <%= user_case.location.titleize%>
+      </div>
+      <div class="col-sm-3">
+        <span class="label label-primary"><%= user_case.case_type.case_type.titleize%></span>
+      </div>
+      <div class="col-sm-3">
+        <i class="fa fa-fw fa-dollar"></i>
+        <%= user_case.case_type.amount %>$
+      </div>
+      <div class="col-sm-3">
+        <% if user_case.status.titleize == "Open"%>
+          <span class="label label-success"><%= user_case.status.titleize%></span>
+        <% else %>
+          <span class="label label-danger"><%= user_case.status.titleize%></span>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    <dt><i class="fa fa-fw fa-file-text-o fa-lg"></i>Details</dt><dd>
 
       <div><%= user_case.case_detail[0,20] %>
         <a data-toggle="collapse" data-target="#demo<%= user_case.id %>">read more</a>
