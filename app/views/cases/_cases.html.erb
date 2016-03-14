@@ -1,4 +1,5 @@
 <div id="user_case">
+<% if @user_case.any?%>  
 <% @user_case.each do |user_case| %>
 <div class = "box box-primary"><!--start box 2 -->
   <div class = "box-header with-border ">
@@ -44,5 +45,8 @@
       </div>
   </div>
 </div><br>
+<% end %>
+<%else%>
+<b>No matching records found</b>
 <% end %>
 </div>

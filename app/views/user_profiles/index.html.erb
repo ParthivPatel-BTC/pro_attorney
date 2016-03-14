@@ -14,10 +14,10 @@
                 <% end %> 
                 <%=link_to user_profile_path(user_profile) do%>
 				<%= user_profile.first_name.titleize + " " + user_profile.last_name.titleize %>
-				<%end %>
+			<%end %>
 				<div class= "pull-right" >
-				<%= rating_for user_profile, "ratings", disabled: true, imdb_avg: true %>
-			</div>
+				<%= rating_for user_profile, "ratings", disabled: true, imdb_avg: true%>
+				</div>
 			</td>
 			<% if user_profile.user.id==current_user.id %>
 				<td>

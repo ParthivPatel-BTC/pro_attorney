@@ -36,7 +36,7 @@ class Case < ActiveRecord::Base
   end
 
   def self.case_type_search(case_type_param=nil)
-    if( case_type_param == nil)
+    if( case_type_param == nil || case_type_param == "All")
       Case.all
     else
       Case.where(case_type_id: CaseType.find_by(case_type: case_type_param).id)
