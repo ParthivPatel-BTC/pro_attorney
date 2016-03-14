@@ -205,20 +205,20 @@
               <li class="dropdown user user-menu">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <!--<img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />-->
-                    <%= avatar_display({class: "user-image"}) %>
-                    <span class="hidden-xs"><%=user_name %></span>
+                    <%= avatar_display({class: "user-image"},:medium) %>
+                    <span class="hidden-xs"><%=user_name.titleize %></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <%= avatar_display({class: "img-circle"}) %>
                     <p>
                       
-                      <small>Member since Nov. 2012</small>
+                      <small><%=user_name.titleize %></small>
                     </p>
                   </li>
                   <!-- Menu Body -->
-                  <li class="user-body">
+                 <!--  <li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="#">Followers</a>
                     </div>
@@ -228,15 +228,16 @@
                     <div class="col-xs-4 text-center">
                       <a href="#">Friends</a>
                     </div>
-                  </li>
+                  </li> -->
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <% unless current_user.user_profile== nil %>
+            <%= link_to "Profile",user_profile_path(current_user.user_profile.id),class: "btn btn-default btn-flat" %>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
+<%= link_to "Logout",destroy_user_session_path,method: :delete,class: "btn btn-default btn-flat" %>                     </div>
+  <% end %>
                   </li>
                 </ul>
               </li>

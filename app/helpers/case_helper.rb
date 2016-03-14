@@ -24,4 +24,12 @@ module CaseHelper
       return  user_case.case_type.id.to_s
     end
 	end
+
+  def case_status_style(user_case)
+    if user_case.status == "open"
+      "green"
+    else
+      "red"
+    end
+  end
 end

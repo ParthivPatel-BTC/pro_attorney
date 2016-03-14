@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.raty
+//= require bootstrap.min
 //= require ratyrate
 //= require app.min
-
-

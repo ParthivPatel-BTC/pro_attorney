@@ -57,6 +57,10 @@ class AdminsController < ApplicationController
 		end
 	end
 
+	def user_log
+		@users=User.where("role_id != '1'");
+	end
+
 	private
 	def set_user
 		@user = User.find(params[:id])

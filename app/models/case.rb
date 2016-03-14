@@ -9,7 +9,7 @@ class Case < ActiveRecord::Base
 	validates :case_type_id, :case_title, :case_detail, :location, :status, presence:true 
 
  pg_search_scope :search_by_all,
-	:against => [:case_title, :case_detail, :location],
+	:against => [:case_title, :case_detail, :location, :status],
   :using => {:tsearch => {:prefix => true}}
 
 	 #will_paginate @cases
@@ -34,4 +34,12 @@ class Case < ActiveRecord::Base
     }
     "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   end
+
+  def self.case_type_search(case_type_param=nil)
+    if( case_type_param == nil)
+      Case.all
+    else
+      Case.where(case_type_id: CaseType.find_by(case_type: case_type_param).id)
+    end
+  end   
 end
