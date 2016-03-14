@@ -6,17 +6,22 @@ class CasesController < ApplicationController
   def index
     if current_user.is_client?
      if params[:search].blank?
-      @user_case = Case.paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
+      @user_case = Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      else
-      @user_case = Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
+      @user_case = Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
      end 
-   else
+    else
       if params[:search].blank?
-      @user_case=Case.paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      @user_case=Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      else
-      @user_case =Case.search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page"))
+      @user_case =Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
      end 
     end
+    respond_to do |format|
+    format.js
+    format.html
+    end
+
   end
 
 
@@ -56,7 +61,12 @@ class CasesController < ApplicationController
   def delete_document
     case_id = Document.find(params[:document]).case_id
     Document.destroy(params[:document])
+
+    if params[:action1] == 'show'
+      redirect_to case_path(case_id)
+    else
     redirect_to edit_case_path(Case.find(case_id)) 
+  end
   end
   
   def edit
@@ -64,6 +74,10 @@ class CasesController < ApplicationController
   end
 
   def new
+    if(!current_user.user_profile.present?)
+      flash[:danger] = "Create Profile Before creating case"
+      redirect_to  new_user_profile_path 
+    end
     @user_case = Case.new(user_id: current_user.id)
     @documents = @user_case.documents
   end

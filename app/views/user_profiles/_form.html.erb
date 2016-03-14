@@ -1,3 +1,4 @@
+<% if @user_profile.user_id == current_user.id %>
 <%= form_for @user_profile, role: "form", html: { :multipart => true } do |f| %>
   <div class = "row">
     <div class = "col-md-6">
@@ -8,12 +9,12 @@
         <div class = "box-body">
           <div class = "col-md-12">
             <div class = "form-group">
-              <%= f.label :first_name%><font color="red" class="pull-right">*</font>
+              <%= f.label :first_name%><font color="red">*</font>
               <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name"%>
             </div>
 
             <div class = "form-group">
-              <%= f.label :last_name %><font color="red" class="pull-right">*</font>  
+              <%= f.label :last_name %><font color="red">*</font>  
               <%= f.text_field :last_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter last name"%>
             </div>
 
@@ -48,7 +49,7 @@
           </div>
         </div>
       </div> <!--end box 1 -->
-       <%=f.submit class: "btn btn-primary" %>
+       <%=f.submit submit_value(@user_profile),class: "btn btn-primary" %>
     </div>
     <div class="col-md-6">
       <div class="box box-primary"><!--start box 2 -->
@@ -58,18 +59,18 @@
         <div class="box-body">
           <div class="col-md-12">
             <div class = "form-group">
-              <%= f.label :address %><font color="red" class="pull-right">*</font>  
+              <%= f.label :address %><font color="red">*</font>  
               <%= f.text_area :address, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter address" %>
             </div>
 
-            <div class = "form-group"><font color="red" class="pull-right">*</font>  
-              <%= f.label :city %>
+            <div class = "form-group">  
+              <%= f.label :city %><font color="red">*</font>
               <%= f.text_field :city, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter city" %>
             </div>
 
             <div class = "form-group">
               <%= f.label :zipcode %>
-              <%= f.text_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter pincode" %>
+              <%= f.text_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter zipcode" %>
             </div>
             <% if current_user.is_advocate? %>
             <div class = "form-group">
@@ -83,6 +84,9 @@
     </div>
   <% end %>
 </div>
+<% else %>
+<h3>you are not allowed to view this page</h3>
+<% end %>
 <script type="text/javascript">
  var loadFile = function(event) {
     var reader = new FileReader();

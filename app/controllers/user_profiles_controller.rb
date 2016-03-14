@@ -25,7 +25,7 @@ class UserProfilesController < ApplicationController
     # @user_profile = UserProfile.new(profile_params) 
     if @user_profile.save 
       flash[:success] = "Profile created succefully"
-      redirect_to user_profile_path(current_user.user_profile.id)  
+      redirect_to user_profile_path(current_user.user_profile)  
     else
       flash[:danger] = @user_profile.errors.full_messages
       render :new
@@ -34,7 +34,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(profile_params)  
-      redirect_to user_profile_path(current_user.user_profile.id)
+      redirect_to user_profile_path(current_user.user_profile)
       flash[:success] = "Profile updated successfully"
     else
       flash[:danger] = @user_profile.errors.full_messages

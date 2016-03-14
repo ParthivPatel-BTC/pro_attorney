@@ -24,13 +24,15 @@
         </span>
       </li>
       
-      <li>
+      <li >
+        <font color=<%= case_status_style(@user_case) %>>
         <span class="handle ui-sortable-handle">
           <h4><i class="fa fa-flag"></i></h4>
         </span>
         <span class="text">
           <h4><%= @user_case.status %></h4>
         </span>
+      </font>
       </li>
 	      
     <% if Payment.where(case_id: @user_case.id,user_id: current_user.id).any? || @user_case.user_id == current_user.id %>
@@ -43,8 +45,16 @@
         
       </li>
 
-      <li>
+       <li>
+        <% if @user_case.user.id == current_user.id %>
+        <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>
+        <span class="text">Attachments</span><br><% @user_case.documents.each do |document| %>
+              <%= document.doc_file_name %>
+              <%= link_to "Delete", document_cases_path(document,action1:'show'), method: :delete, data: { confirm: 'Are you sure?' }  %><br>
+            <% end %></span>
+        <%else%>
         <span class="text"><%= show_documents %></span>
+        <%end%>
       </li>
   <% end %>
   

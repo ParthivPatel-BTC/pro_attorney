@@ -41,6 +41,7 @@ namespace :admins do
     get 'view_case'
     get 'sorting'
     get 'user_sorting'
+    get 'user_log'
   end
 
   patch 'admins/update_user/:id' => "admins#update_user", as: :update_user
