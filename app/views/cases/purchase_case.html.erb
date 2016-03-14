@@ -33,10 +33,11 @@
 
       <% end %>
       </table>
-      <%= will_paginate @payments, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+      
     <% else %>
       <h4>you have not purchase any cases</h4>
     <% end %>
   </div>
 </div>
 
+<%= will_paginate @payments, renderer: BootstrapPagination::Rails, class: "pull-right" %>

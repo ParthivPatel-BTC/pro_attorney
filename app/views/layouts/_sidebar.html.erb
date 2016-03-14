@@ -6,7 +6,7 @@
               <%= avatar_display({class: "img-circle"}) %>
             </div>
             <div class="pull-left info">
-                <p><%=user_name %></p>
+                <p><%= user_name.titleize %></p>
                 <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
             </div>
           </div>
@@ -34,7 +34,7 @@
 
             <li class="treeview">
               <%=link_to   admins_user_log_path   do %>
-                <i class="fa fa-fw fa-files-o"></i> <span>User Log Report</span> <i class="fa fa-angle"></i>
+                <i class="fa fa-file-text-o"></i> <span>User Log Report</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
 
@@ -63,7 +63,8 @@
             <li class="treeview">
             <% if current_user.is_advocate? || current_user.is_client? %>
               <%= link_to cases_path do %>
-              <i class="fa fa-fw fa-files-o"></i> <span>Cases</span> <i class="fa fa-angle"></i>
+              <i class="fa fa-fw fa-files-o"></i> <span>Cases</span>
+              <%= case_count %> <i class="fa fa-angle"></i>
               <% end %>
           <% end %>
 

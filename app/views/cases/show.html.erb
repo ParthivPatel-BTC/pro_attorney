@@ -46,7 +46,7 @@
       </li>
 
       <li>
-        <% unless @user_case.id == current_user.id %>
+        <% if @user_case.user_id == current_user.id %>
         <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>
         <span class="text">Attachments</span><br><% @user_case.documents.each do |document| %>
         <a href="<%= "/documents/#{document.id}/#{document.doc_file_name}"%>" target='new'> 
@@ -116,9 +116,9 @@
     
       <% end %>
 
-
+<%= link_to 'Back',:back, class: "btn btn-primary" %>
   </div>
 </div>
-<%= link_to 'Back',:back, class: "btn btn-primary" %>
+
 </div>
 </div>
