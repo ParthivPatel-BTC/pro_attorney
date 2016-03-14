@@ -20,7 +20,7 @@
           <h4><i class="fa fa-fw fa-location-arrow"></i></h4>
         </span>
         <span class="text">
-          <h4><%= @user_case.location %></h4>
+          <h4><%= @user_case.location.titleize %></h4>
         </span>
       </li>
       
@@ -29,7 +29,7 @@
           <h4><i class="fa fa-flag"></i></h4>
         </span>
         <span class="text">
-          <h4><%= @user_case.status %></h4>
+          <h4><%= @user_case.status.titleize %></h4>
         </span>
       </li>
 	      
@@ -47,8 +47,10 @@
         <% unless @user_case.id == current_user.id %>
         <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>
         <span class="text">Attachments</span><br><% @user_case.documents.each do |document| %>
+        <a href="<%= "/documents/#{document.id}/#{document.doc_file_name}"%>" target='new'> 
               <%= document.doc_file_name %>
-              <%= link_to "Delete", document_cases_path(document), method: :delete, data: { confirm: 'Are you sure?' }  %><br>
+              </a>
+              <%= link_to "Delete", document_cases_path(document), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %><br>
             <% end %></span>
         <%else%>
         <span class="text"><%= show_documents %></span>
