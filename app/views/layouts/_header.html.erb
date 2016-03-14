@@ -205,13 +205,13 @@
               <li class="dropdown user user-menu">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <!--<img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image" />-->
-                    <%= avatar_display({class: "user-image"},:medium) %>
+                    <%= avatar_display({class: "user-image"}) %>
                     <span class="hidden-xs"><%=user_name.titleize %></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <%= avatar_display({class: "img-circle"}) %>
+                    <%= avatar_display({class: "img-circle"}) %><br>
                     <p>
                       
                       <small><%=user_name.titleize %></small>
@@ -235,9 +235,10 @@
                       <% unless current_user.user_profile== nil %>
             <%= link_to "Profile",user_profile_path(current_user.user_profile.id),class: "btn btn-default btn-flat" %>
                     </div>
+                      <% end %>
+
                     <div class="pull-right">
 <%= link_to "Logout",destroy_user_session_path,method: :delete,class: "btn btn-default btn-flat" %>                     </div>
-  <% end %>
                   </li>
                 </ul>
               </li>

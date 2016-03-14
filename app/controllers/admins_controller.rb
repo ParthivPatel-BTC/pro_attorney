@@ -3,11 +3,11 @@ class AdminsController < ApplicationController
   before_action :set_case,only: [:update_case]
 
 	def view_advocates
-		@users = User.where(role_id: Role.find_by(title: 'advocate').id).paginate(:page => params[:page], :per_page => t("per_page"))
+		@users = User.where(role_id: Role.find_by(title: 'advocate').id).order(:email).paginate(:page => params[:page], :per_page => t("per_page"))
 	end
 
 	def view_clients
-		@users = User.where(role_id: Role.find_by(title: 'client').id).paginate(:page => params[:page], :per_page => t("per_page"))
+		@users = User.where(role_id: Role.find_by(title: 'client').id).order(:email).paginate(:page => params[:page], :per_page => t("per_page"))
 	end
 
 	def view_cases
