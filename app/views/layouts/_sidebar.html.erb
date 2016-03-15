@@ -2,12 +2,18 @@
  <section class="sidebar" style="height: auto;">
           <!-- Sidebar user panel -->
           <div class="user-panel">
+          <div class="zoomin">
             <div class="pull-left image">
-              <%= avatar_display({class: "img-circle"}) %>
-            </div>
+            
+              <%= avatar_display({class: "img-circle"}) %>&nbsp;&nbsp;
+              </div>
+            
             <div class="pull-left info">
-                <p><%=user_name %></p>
-                <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+              
+                <p><b><font color="green"><%=user_name %></font></b></p>
+                              &nbsp;&nbsp;
+               <i class="fa fa-circle text-success"></i><font color="green">Online</font>
+            </div>
             </div>
           </div>
           <br><br>
@@ -68,20 +74,22 @@
                   <% if current_user.user_profile!=nil %>
 
 
-           <ul class="treeview-menu menu">
+           <ul class="treeview-menu">
+           <li class="treeview">
               <%= link_to user_profile_path(current_user.user_profile.id) do %>
-               <i class="fa fa-circle-o"></i> <span>My Profile</span> <i class="fa fa-angle"></i>
+               <i class="fa fa-user-md"></i> <span>My Profile</span> <i class="fa fa-angle"></i>
               <% end %>
-            </ul>
+          </li>
+            
 
-           <ul class="treeview-menu menu">
+           <li class="treeview">
               <%= link_to  edit_user_profile_path (current_user.user_profile.id)  do %>
-               <i class="fa fa-circle-o"></i> <span>Edit Profile</span> <i class="fa fa-angle"></i>
+               <i class="fa fa-user-md"></i> <span>Edit Profile</span> <i class="fa fa-angle"></i>
               <% end %>
           <% end %>
-            </ul>
+            </li>
 
-          </li>   
+          </ul>   
 
 
 

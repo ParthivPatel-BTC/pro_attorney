@@ -3,7 +3,7 @@
 <%else%>
 <% use=@user_case%>
 <%end%>
-<% @user_case.each do |user_case| %>
+<% use.each do |user_case| %>
 <div class = "box box-primary"><!--start box 2 -->
   <div class = "box-header with-border ">
     <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3>
@@ -18,18 +18,19 @@
    </div>
   <div class="box-body">
     <dl class="dl-horizontal">
-    <dt><i class="fa fa-fw fa-location-arrow fa-lg"></i></dt><dd><%= user_case.location.titleize%></dd>
+    <dt>CaseTitle</dt><dd><%= user_case.location.titleize%></dd>
     <dt>Type</dt><dd><%= user_case.case_type.case_type.titleize%></dd>
-    <dt>Amount</dt><dd><%= user_case.case_type.amount %>$</dd>
-    <dt><i class="fa fa-flag fa-lg"></i></dt><dd><%= user_case.status.titleize%></dd>
-    <dt><i class="fa fa-fw fa-file-text-o fa-lg"></i></dt><dd>
+    <dt>Amount &nbsp<i class="fa fa-money"></i>&nbsp</dt><dd><%= user_case.case_type.amount %>$</dd>
+    <dt>Status &nbsp<i class="fa fa-gavel"></i>&nbsp</dt><dd><%= user_case.status.titleize%></dd>
+    <dt>Details &nbsp<i class="fa fa-thumb-tack"></i></i>&nbsp</dt><dd>
 
       <div><%= user_case.case_detail[0,20] %>
-        <a data-toggle="collapse" data-target="#demo<%= user_case.id %>">read more</a>
-        <div id="demo<%= user_case.id %>" class="collapse">
-          <%= user_case.case_detail%>
+        <a data-toggle="collapse" data-target="#demo<%= user_case.id %>"><%if user_case.case_detail.size >20 %>....readmore<%end%></a>
         </div>
+        <div id="demo<%= user_case.id %>" class="collapse" >
+          <%= user_case.case_detail%>
       </div>
+      </dd>
   </div>
 </div><br>
 <% end %>

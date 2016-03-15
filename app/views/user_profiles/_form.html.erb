@@ -1,32 +1,48 @@
 <% if @user_profile.user_id == current_user.id %>
 <%= form_for @user_profile, role: "form", html: { :multipart => true } do |f| %>
   <div class = "row">
-    <div class = "col-md-6">
+    <div class = "col-md-1"></div>
+    <div class = "col-md-8">
       <div class = "box box-primary"><!--start box 2 -->
         <div class = "box-header with-border">
           <h3 class = "box-title custom-header">Basic Info</h3><br>
         </div>
         <div class = "box-body">
-          <div class = "col-md-12">
+          
             <div class = "form-group">
-              <%= f.label :first_name%><font color="red" class="pull-right">*</font>
+              <%= f.label :first_name%><font class="small" color="#9F6000" >(can't be blank)*</font>
               <%= f.text_field :first_name, class: "form-control ", id: "exampleInputEmail1", placeholder: "Enter first name"%>
             </div>
 
             <div class = "form-group">
-              <%= f.label :last_name %><font color="red" class="pull-right">*</font>  
+              <%= f.label :last_name %><font class="small" color="#9F6000" >(can't be blank)*</font>  
               <%= f.text_field :last_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter last name"%>
             </div>
 
             <div class = "form-group">
               <%= f.label :gender %>
-              <%= f.radio_button :gender, "Male", checked: (@user_profile.gender == "Male" || @user_profile.gender == nil) %>Male 
-              <%= f.radio_button :gender,"Female", checked: (@user_profile.gender == "Female")%>Female<br>
+              <%= f.radio_button :gender, "Male", checked: (@user_profile.gender == "Male" || @user_profile.gender == nil) %>&nbsp;male&nbsp;<i class="fa fa-male"></i>
+              <%= f.radio_button :gender,"Female", checked: (@user_profile.gender == "Female")%>Female &nbsp;<i class="fa fa-female"></i><br>
             </div>
 
             <div class = "form-group">
-              <%= f.label :contact %>
+              <%= f.label :contact %>&nbsp;<i class="fa fa-mobile"></i>
               <%= f.text_field :mobile_no, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter contact number" ,onkeypress:"return isNumber(event)"%>
+            </div>
+
+             <div class = "form-group">
+              <%= f.label :address %>&nbsp;<i class="fa fa-home"></i><font class="small" color="#9F6000" >(can't be blank)*</font>  
+              <%= f.text_area :address, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter address" %>
+            </div>
+
+            <div class = "form-group">  
+              <%= f.label :city %><font class="small" color="#9F6000" >(can't be blank)*</font>
+              <%= f.text_field :city, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter city" %>
+            </div>
+
+            <div class = "form-group">
+              <%= f.label :zipcode %>
+              <%= f.text_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter zipcode" %>
             </div>
 
             <div class = "form-group" >
@@ -44,41 +60,14 @@
                   <div class="upload-preview">
                     <img />
                   </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div> <!--end box 1 -->
-       <%=f.submit submit_value(@user_profile),class: "btn btn-primary" %>
-    </div>
-    <div class="col-md-6">
-      <div class="box box-primary"><!--start box 2 -->
-        <div class="box-header with-border">
-          <h3 class="box-title custom-header">Address</h3><br>
-        </div>
-        <div class="box-body">
-          <div class="col-md-12">
-            <div class = "form-group">
-              <%= f.label :address %><font color="red" class="pull-right">*</font>  
-              <%= f.text_area :address, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter address" %>
-            </div>
-
-            <div class = "form-group"><font color="red" class="pull-right">*</font>  
-              <%= f.label :city %>
-              <%= f.text_field :city, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter city" %>
-            </div>
-
-            <div class = "form-group">
-              <%= f.label :zipcode %>
-              <%= f.text_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter zipcode" %>
-            </div>
+              
             <% if current_user.is_advocate? %>
             <div class = "form-group">
-              <%= f.label :experience %><font color="red" class="pull-right">*</font>
+              <%= f.label :experience %><font class="small" color="#9F6000" >(can't be blank)*</font>
               <%= f.text_area :experience, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter experience" %>
             </div>
             <% end %>
-          </div>
+          <%=f.submit submit_value(@user_profile),class: "btn btn-primary" %>
         </div>
       </div><!--end box 2 -->
     </div>

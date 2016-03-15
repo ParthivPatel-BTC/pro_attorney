@@ -32,7 +32,6 @@ module CaseHelper
           return @cases.first.case_type_id
         end
       end
-end
 
   def case_status_style(user_case)
     if user_case.status == "open"

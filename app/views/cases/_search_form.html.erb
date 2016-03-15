@@ -1,21 +1,12 @@
+<%= form_tag("cases", method: "get") do %>
+<div class="form-group pull-right">
 <table>
   <tr>
-    <%= form_tag("cases", method: "get") do %>
-      <td> 
-          <%= "Case Type" %> 
-      </td>
-      
-
-          <td><%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all,    :id, :case_type,selected_case_type),class: "form-control pull-right",style: "width:100px"%>
-          </td>
-          
-      <td>
-          <%= submit_tag("Search") %>
-      </td>
+      <td><%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all,:id,:case_type,selected_case_type),class: "form-control pull-right",style: "width:180px"%></td> <td> <%= submit_tag("Search") %></td>
   </tr>
-
-    <% end %>
 </table>
+</div>
+<% end %>
 
 
 <%= form_tag(cases_path, method: :get, class: "navbar-form", role: 'search', id: "search-form") do %>

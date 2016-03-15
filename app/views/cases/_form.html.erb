@@ -1,13 +1,17 @@
 <% if @user_case.user_id == current_user.id %>
 <%= form_for @user_case, html: { :multipart => true }  do |f| %>
+  <div class = "col-md-1">
+</div>
 <div class = "row">
-  <div class = "col-md-6">
+  
+  <div class = "col-md-8">
     <div class = "box box-primary"><!--start box 1 -->
       <div class = "box-header with-border">
         <h3 class = "box-title custom-header">Case Info</h3><br>
       </div>
       <div class = "box-body">
-        <div class = "col-md-12">
+
+          <div class = "col-md-8">
           <div class = "form-group">
 	          <%= f.label :Case_Type %>
 	          <%= f.select :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type,
@@ -15,33 +19,17 @@
           </div>
 
           <div class = "form-group">
-            <%= f.label :Case_Title %><font color="red" class="pull-right">*</font>
+            <%= f.label :Case_Title %><font class="small" color="#9F6000" >(can't be blank)*</font>
             <%= f.text_field :case_title,class: "form-control",placeholder: "Enter Case title" %>
           </div>
 
           <div class = "form-group">
-            <%= f.label :Case_detail %><font color="red" class="pull-right">*</font>
+            <%= f.label :Case_detail %><font class="small" color="#9F6000" >(can't be blank)*</font>
             <%= f.text_area :case_detail,class: "form-control",placeholder: "Enter Case detail" %>
           </div>
-        </div>
-      </div>
-
-    </div>
-
-       <%= f.submit submit_value(@user_case),class: "btn btn-primary" %>    
-  </div><!--end box 1 -->
-
-    
-  <div class = "col-md-6">
-    <div class = "box box-primary"><!--start box 2 -->
-      <div class = "box-header with-border">
-        <h3 class = "box-title custom-header">Case Info</h3><br>
-      </div>
-      <div class = "box-body">
-        <div class = "col-md-12">
-
+        
           <div class = "form-group">
-            <%= f.label :location %><font color="red" class="pull-right">*</font>
+            <%= f.label :location %><font class="small" color="#9F6000" >(can't be blank)*</font>
             <%= f.text_field :location,class: "form-control",placeholder: "Enter Case Location" %>
           </div> 
   
@@ -60,13 +48,19 @@
 
           <div class = "form-group">
             <%= f.label :document %>
+            <i class="fa fa-file-pdf-o"></i>
             <%= file_field_tag "document[]", type: :file, multiple: true %>
           </div>
-        </div>
+
+
+<%= f.submit submit_value(@user_case),class: "btn btn-primary" %>
+          </div>
       </div>
-      </div>
+
     </div>
-  </div>
+         
+       </div>
+
 <% end %>
 <% else %>
 <h3>you are not allowed to view this page</h3>

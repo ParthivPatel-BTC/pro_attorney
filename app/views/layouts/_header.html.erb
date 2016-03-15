@@ -1,8 +1,8 @@
 <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a  class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>P</b>AT</span>
+         
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>Pro</b>Attorney</span>
         </a>
@@ -27,9 +27,7 @@
                     <ul class="menu">
                       <li><!-- start message -->
                         <a href="#">
-                          <div class="pull-left">
-                            <img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image" >
-                          </div>
+                          
                           <h4>
                             Support Team
                             <small><i class="fa fa-clock-o"></i> 5 mins</small>
@@ -211,10 +209,10 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="/assets/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <%= avatar_display({class: "user-image"}) %>
                     <p>
                       
-                      <small>Member since Nov. 2012</small>
+                      <small><%=user_name %></small>
                     </p>
                   </li>
                   <!-- Menu Body -->
