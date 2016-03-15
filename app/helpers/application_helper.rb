@@ -1,5 +1,4 @@
 module ApplicationHelper
-
  def header(text)
    content_for(:header) { text.to_s }
  end
@@ -26,7 +25,8 @@ end
 def advocate_links
   if current_user.is_advocate?
 	  link_to(purchase_case_cases_path) do
-     "<i class='fa fa-users'></i> <span>Purchase Cases</span> <i class='fa fa-angle'></i>".html_safe
+     "<i class='fa fa-users'></i> <span>Purchase Cases</span>
+      <span class = 'label label-primary pull-right'>#{Payment.where(user_id: current_user.id).count}</span> <i class='fa fa-angle'></i>".html_safe
 	  end
   end
 end
@@ -39,4 +39,13 @@ def submit_value(obj)
   end
 end
 
+def case_count
+	if current_user.is_advocate?
+		"<span class = 'label label-primary pull-right'>#{Case.where(status: "open").count}</span>".html_safe		
+	else
+
+		"<div class='pull-right'><span class = 'label label-danger'>#{Case.where(user_id: current_user.id, status:'closed').count}</span>	
+		<span class = 'label label-success'>#{Case.where(user_id: current_user.id, status:'open').count}</span></div>".html_safe
+	end
+end
 end

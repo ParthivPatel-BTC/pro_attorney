@@ -24,8 +24,6 @@ class CasesController < ApplicationController
 
   end
 
-
-
   def client_details
   end
   

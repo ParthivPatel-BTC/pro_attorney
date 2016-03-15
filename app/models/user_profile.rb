@@ -4,6 +4,7 @@ class UserProfile < ActiveRecord::Base
   after_initialize :default_values
   validates :first_name,      
             :last_name,
+            :city,
             :pincode,
             :address, presence: true
 

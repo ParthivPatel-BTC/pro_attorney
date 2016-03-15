@@ -69,7 +69,7 @@
             </div>
 
             <div class = "form-group">
-              <%= f.label :zipcode %>
+              <%= f.label :zipcode %><font color="red">*</font>
               <%= f.text_field :pincode, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter zipcode" %>
             </div>
             <% if current_user.is_advocate? %>

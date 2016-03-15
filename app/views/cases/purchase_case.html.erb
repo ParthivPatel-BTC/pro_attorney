@@ -21,7 +21,10 @@
       <% end %>
       <td><%= payment.case.location.titleize %></td>
       <td><%= payment.case.case_type.amount %>$</td>
-      <td><%= payment.case.status.titleize %></td>
+      <td>
+        <b style="color: <%= case_status_style(payment.case) %>;" >
+        <%= payment.case.status.titleize %></b>
+      </td>
       <% if current_user.id == payment.case.user_id %>
       <td><%= link_to "",payment.case_path(payment.case),class: "fa fa-fw fa-eye", title: "view" %>
       </td>
@@ -33,10 +36,11 @@
 
       <% end %>
       </table>
-      <%= will_paginate @payments, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+      
     <% else %>
       <h4>you have not purchase any cases</h4>
     <% end %>
   </div>
 </div>
 
+<%= will_paginate @payments, renderer: BootstrapPagination::Rails, class: "pull-right" %>

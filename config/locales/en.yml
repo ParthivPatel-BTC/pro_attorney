@@ -33,5 +33,3 @@ en:
           attributes:
             pincode:
               blank: "is required"
-          
-              
