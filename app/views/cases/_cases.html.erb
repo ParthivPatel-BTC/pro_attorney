@@ -41,7 +41,7 @@
       </div>
     </div>
     <br>
-    <dt><i class="fa fa-fw fa-file-text-o fa-lg"></i>Details</dt><dd>
+    <dt><i class="fa fa-fw fa-file-text-o fa-lg"></i>Details</dt><dd><p>
 
       <div><%= user_case.case_detail[0,20] %>
         <a data-toggle="collapse" data-target="#demo<%= user_case.id %>">read more</a>
@@ -49,6 +49,7 @@
           <%= user_case.case_detail%>
         </div>
       </div>
+    </p>
   </div>
 </div><br>
 <% end %>
