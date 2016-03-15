@@ -1,33 +1,31 @@
 <div id="user_case">
+<% if @user_case.any?%>  
 <% @user_case.each do |user_case| %>
-<div class="row">
-<div class="col-md-1"></div>
-<div class="col-md-10">
 <div class = "box box-primary"><!--start box 2 -->
-        <div class = "box-header with-border ">
-          <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3><br>
+  <div class = "box-header with-border ">
+    <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3>
     <div class="pull-right">
-    <% if current_user.id == user_case.user_id %><br>
-   <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
-    <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
-    <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
-	 <% end %>
-   <%= link_to "<img src='paypal2.png' align='right'>".html_safe,case_cases_path(user_case) if current_user.is_advocate? %>
-   
-</div>
+      <% if current_user.id == user_case.user_id %>
+      <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
+      <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
+      <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
+      <% end %>
+      <%= link_to "<img src='paypal2.png' align='right'>".html_safe,case_cases_path(user_case) if current_user.is_advocate? %>
+    </div><br>
+   </div>
   <div class="box-body">
     <div class="row">
       <div class="col-sm-3">
         <i class="fa fa-fw fa-location-arrow"></i>
         <%= user_case.location.titleize%>
-</div>
+      </div>
       <div class="col-sm-3">
         <span class="label label-primary"><%= user_case.case_type.case_type.titleize%></span>
-</div>
+      </div>
       <div class="col-sm-3">
         <i class="fa fa-fw fa-dollar"></i>
         <%= user_case.case_type.amount %>$
-</div>
+      </div>
       <div class="col-sm-3">
         <% if user_case.status.titleize == "Open"%>
           <span class="label label-success"><%= user_case.status.titleize%></span>
@@ -47,5 +45,8 @@
       </div>
   </div>
 </div><br>
+<% end %>
+<%else%>
+<b>No matching records found</b>
 <% end %>
 </div>

@@ -21,7 +21,6 @@ class CasesController < ApplicationController
     format.js
     format.html
     end
-
   end
 
 
@@ -61,12 +60,11 @@ class CasesController < ApplicationController
   def delete_document
     case_id = Document.find(params[:document]).case_id
     Document.destroy(params[:document])
-
-    if params[:action1] == 'show'
-      redirect_to case_path(case_id)
+    if(params[:action1] == "show")
+     redirect_to case_path(Case.find(case_id)) 
     else
-    redirect_to edit_case_path(Case.find(case_id)) 
-  end
+      redirect_to edit_case_path(Case.find(case_id)) 
+    end
   end
   
   def edit

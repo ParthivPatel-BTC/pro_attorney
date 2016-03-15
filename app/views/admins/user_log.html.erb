@@ -1,0 +1,30 @@
+<% if @users.any? %>
+<table class="table table-bordered table-hover dataTable">
+	<thead>
+		<tr>
+		 	<th>No</th>
+		 	<th>Email</th>
+		 	<th>Role</th>
+		 	<th>Confirm at</th>
+		 	<th>Last Login at</th>
+		 	<th>IP from last Login</th>
+		 	<th>Failed attempts</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @users.each.with_index do |user,index|%>
+			<tr>
+				<td><%= index+1 %></td>
+				<td><%= user.email %></td>
+				<td><%= user.role.title %></td>
+				<td><%= user.confirmed_at %></td>
+				<td><%= user.last_sign_in_at %></td>
+				<td><%= user.last_sign_in_ip %></td>
+				<td><%= user.failed_attempts %></td>
+	    </tr>
+	<% end %>
+	</tbody>    
+</table>
+<% else %>
+<p> No Records Found</p>
+<% end %>

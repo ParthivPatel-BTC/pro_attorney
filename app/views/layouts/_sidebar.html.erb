@@ -22,7 +22,7 @@
 
           <li class="treeview">
               <%=link_to  admins_view_clients_path  do %>
-              <i class="fa fa-users"></i> <span>clients</span> <i class="fa fa-angle"></i>
+              <i class="fa fa-users"></i> <span>Clients</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
 
@@ -37,6 +37,18 @@
                 <i class="fa fa-fw fa-files-o"></i> <span>User Log Report</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
+
+
+
+
+            <li class="treeview">
+              <%=link_to   admins_user_payment_path  do %>
+                <i class="fa fa-fw fa-files-o"></i> <span>Payment Report</span> <i class="fa fa-angle"></i>
+               <% end %>
+            </li>
+
+
+
 
             <% end %>
 
@@ -79,18 +91,19 @@
               <%= link_to user_profile_path(current_user.user_profile.id) do %>
                <i class="fa fa-circle-o"></i> <span>My Profile</span> <i class="fa fa-angle"></i>
               <% end %>
-              <li>
+              </li>
             
 
            <li class="treeview">
               <%= link_to  edit_user_profile_path (current_user.user_profile.id)  do %>
                <i class="fa fa-circle-o"></i> <span>Edit Profile</span> <i class="fa fa-angle"></i>
               <% end %>
-          
             </li>
-          </ul>  
+          </ul> 
+
           <% end %>
-         </li>
+
+          </li> 
           <li class="treeview">
               <%= link_to destroy_user_session_path,method: :delete do %>
                <i class="fa fa-sign-out"></i><span>Logout</span>

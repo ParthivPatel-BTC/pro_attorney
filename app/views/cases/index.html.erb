@@ -4,11 +4,9 @@
 	</div>
 	<% if @user_case.present? %>
 	<div class="col-md-3">
-
 		<%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type,
-            default_case_type(Case.first)),{class: "form-control",id: "type"} %>
-		
-		</div><div class="col-md-6">
+            default_case_type(Case.first)),{class: "form-control",id: "type",include_blank: "All"} %>
+	</div><div class="col-md-6">
 			<%= render partial: "search_form" %>
 		</div>
 		<div class="col-md-12">
