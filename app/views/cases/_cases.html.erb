@@ -3,7 +3,13 @@
 <% @user_case.each do |user_case| %>
 <div class = "box box-primary"><!--start box 2 -->
   <div class = "box-header with-border ">
-    <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3>
+    <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3>&nbsp;&nbsp;
+    <font color="#808080">
+      <span class="time">
+        <i class="fa fa-clock-o"></i>
+        <%= case_created_time(user_case)%>
+      </span>
+    </font>
     <div class="pull-right">
       <% if current_user.id == user_case.user_id %>
       <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
