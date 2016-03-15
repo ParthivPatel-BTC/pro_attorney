@@ -16,6 +16,10 @@
       <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
       <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
       <% end %>
+      <% if current_user.is_advocate? %>
+  <%=link_to "<i class='fa fa-bookmark-o' style='font-size:20px;color:red';></i></i>".html_safe,   favorite_cases_path(id: user_case.id, type: "favorite"), method: :put,remote: true ,id: "f#{user_case.id}"%>
+  <%=link_to "<i class='fa fa-bookmark-o' style='font-size:20px;' ></i></i>".html_safe, favorite_cases_path(id: user_case.id, type: "unfavorite"), method: :put,remote: true,id: "uf#{user_case.id}" %>
+<% end %>&nbsp;&nbsp;&nbsp;&nbsp;
       <%= link_to "<img src='paypal2.png' align='right'>".html_safe,case_cases_path(user_case) if current_user.is_advocate? %>
     </div><br>
    </div>
@@ -51,6 +55,27 @@
       </div>
   </div>
 </div><br>
+
+<script>
+$("#f<%=user_case.id%>").click(function(){
+  $("#f<%=user_case.id%>").hide()
+  $("#uf<%=user_case.id%>").show()
+});
+
+$("#uf<%=user_case.id%>").click(function(){
+  $("#uf<%=user_case.id%>").hide()
+  $("#f<%=user_case.id%>").show()
+});
+
+
+<% if FavoriteCase.find_by(case_id: user_case.id,user_id: current_user.id).present? %>
+      $("#f<%=user_case.id%>").hide()
+        $("#uf<%=user_case.id%>").show()
+<%else%>
+       $("#uf<%=user_case.id%>").hide()
+        $("#f<%=user_case.id%>").show()
+<%end%>
+</script>
 <% end %>
 <%else%>
 <b>No matching records found</b>

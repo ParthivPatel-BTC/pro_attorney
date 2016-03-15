@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	
+	has_many :favorite_cases
 	has_many :cases, dependent: :destroy
 	has_many :payments, dependent: :destroy
 	devise :database_authenticatable, :registerable, :recoverable,
