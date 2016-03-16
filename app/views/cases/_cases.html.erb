@@ -45,6 +45,8 @@
       </div>
   </div>
 </div><br>
+<%= paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+
 <% end %>
 <%else%>
 <b>No matching records found</b>
