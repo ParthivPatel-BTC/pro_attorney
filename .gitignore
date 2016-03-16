@@ -18,3 +18,4 @@
 /config/database.yml
 /public/*
 /app/assets/*
+/config/environments/*

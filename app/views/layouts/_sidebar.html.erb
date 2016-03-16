@@ -6,7 +6,7 @@
               <%= avatar_display({class: "img-circle"}) %>
             </div>
             <div class="pull-left info">
-                <p><%= user_name.titleize %></p>
+                <p><%=user_name %></p>
                 <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
             </div>
           </div>
@@ -14,52 +14,45 @@
           <ul class="sidebar-menu">
             
             <% if current_user.is_system_admin? %>
-            <li class="treeview">
+            <li class="treeview <%= active_class(admins_view_advocates_path) %>">
               <%=link_to  admins_view_advocates_path  do %>
               <i class="fa fa-users"></i> <span>Advocates</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
 
-          <li class="treeview">
+          <li class="treeview <%= active_class(admins_view_clients_path) %>">
               <%=link_to  admins_view_clients_path  do %>
               <i class="fa fa-users"></i> <span>Clients</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
 
-            <li class="treeview">
+            <li class="treeview <%= active_class(admins_view_cases_path) %>">
               <%=link_to  admins_view_cases_path  do %>
                 <i class="fa fa-fw fa-files-o"></i> <span>Cases</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
 
-            <li class="treeview">
+            <li class="treeview <%= active_class(admins_user_log_path) %>">
               <%=link_to   admins_user_log_path   do %>
-                <i class="fa fa-file-text-o"></i> <span>User Log Report</span> <i class="fa fa-angle"></i>
+                <i class="fa fa-fw fa-files-o"></i> <span>User Log Report</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
 
-
-
-
-            <li class="treeview">
+            <li class="treeview <%= active_class(admins_user_payment_path) %>">
               <%=link_to   admins_user_payment_path  do %>
                 <i class="fa fa-fw fa-files-o"></i> <span>Payment Report</span> <i class="fa fa-angle"></i>
                <% end %>
             </li>
-
-
-
-
             <% end %>
 
             <% if current_user.is_client? %>
-            <li class="treeview">
+            <li class="treeview  <%= active_class(new_case_path) %>">
               <%= link_to new_case_path do %>
               <i class="fa fa-file-text-o"></i> <span>New Case</span> <i class="fa fa-angle"></i>
               <% end %>
             </li>
 
-             <li class="treeview">
+             <li class="treeview <%= active_class(user_profiles_path) %>">
               <%= link_to user_profiles_path do %>
                <i class="fa fa-users"></i> <span>Advocates</span> <i class="fa fa-angle"></i>
               <% end %>
@@ -68,44 +61,41 @@
             <% end %>
 
           
-           <li class="treeview">
+           <li class="treeview <%= active_class(purchase_case_cases_path) %>">
             <%=advocate_links %>
            </li>
 
-            
+            <li class="treeview  <%= active_class(cases_path) %>">
             <% if current_user.is_advocate? || current_user.is_client? %>
-            <li class="treeview">
               <%= link_to cases_path do %>
-              <i class="fa fa-fw fa-files-o"></i> <span>Cases</span>
-              <%= case_count %> <i class="fa fa-angle"></i>
+              <i class="fa fa-fw fa-files-o"></i> <span>Cases</span> <i class="fa fa-angle"></i>
               <% end %>
-              </li>
           <% end %>
-        
 
-        <% if current_user.is_advocate? %>
-          <li class="treeview">
+
+           <% if current_user.is_advocate? %>
+          <li class="treeview <%= active_class(bookmark_case_cases_path) %>">
             <%= link_to bookmark_case_cases_path do %>
             <i class="fa fa-fw fa-files-o"></i> <span>Bookmarked Cases</span>
             <% end %>
           </li>
-        <% end %>
+          <% end %>
 
-              <li class="treeview">
+              <li class="treeview ">
                <a><i class="fa fa-user"></i> <span>Profiles</span> <i class="fa fa-angle-left pull-right"></i>
                </a>
                   <% if current_user.user_profile!=nil %>
            
           
            <ul class="treeview-menu">
-            <li class="treeview">
+            <li class="treeview <%= active_class(user_profile_path(current_user.user_profile.id)) %>">
               <%= link_to user_profile_path(current_user.user_profile.id) do %>
                <i class="fa fa-circle-o"></i> <span>My Profile</span> <i class="fa fa-angle"></i>
               <% end %>
               </li>
             
 
-           <li class="treeview">
+           <li class="treeview <%= active_class(edit_user_profile_path (current_user.user_profile.id)) %>">
               <%= link_to  edit_user_profile_path (current_user.user_profile.id)  do %>
                <i class="fa fa-circle-o"></i> <span>Edit Profile</span> <i class="fa fa-angle"></i>
               <% end %>
@@ -115,10 +105,12 @@
           <% end %>
 
           </li> 
-          <li class="treeview">
+          <li class="treeview <%= active_class(destroy_user_session_path) %>">
+          
               <%= link_to destroy_user_session_path,method: :delete do %>
                <i class="fa fa-sign-out"></i><span>Logout</span>
               <% end %>
+           
             </li>
         </section>
       </ul>
