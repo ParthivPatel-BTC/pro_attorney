@@ -31,15 +31,12 @@ config.action_mailer.default_url_options = { :host => '192.168.1.240:3000' }
   address:              'smtp.gmail.com',
   port:                 '587',
   domain:               'gmail.com',
-  :user_name           => 'proattoreny@gmail.com',
-  :password            => 'indiapro',
+  user_name:            'proattoreny@gmail.com',
+  password:             'indiapro',
   authentication:       'login',
   enable_starttls_auto: true  
   }
-
-
-
-  # Show full error reports and disable caching.
+ # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
