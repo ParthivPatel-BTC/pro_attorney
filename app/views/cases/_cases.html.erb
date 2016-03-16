@@ -57,6 +57,11 @@
         </div>
       </div>
     </p>
+    <div id="tags"><b>Tags:</b>
+      <% user_case.tag_list.each do |tag| %>
+        <%= link_to "##{tag}",cases_path(tag: tag,find_by_tag: true),remote: true %>
+        <% end %>
+    </div>
   </div>
 </div><br>
 
