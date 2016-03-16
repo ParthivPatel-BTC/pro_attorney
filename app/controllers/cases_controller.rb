@@ -5,18 +5,23 @@ class CasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
   def index
     if current_user.is_client?
-     if params[:search].blank?
-      @user_case = Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
-     else
-      @user_case = Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
-     end 
+      if(params[:find_by_tag])
+        @user_case=Case.tagged_with(params[:tag]).where(user_id: current_user.id).paginate(page: params[:page], per_page: t("per_page"))
+      elsif params[:search].blank?
+        @user_case = Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
+      else
+        @user_case = Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(user_id:current_user.id)
+      end 
     else
-      if params[:search].blank?
-      @user_case=Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
-     else
-      @user_case =Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
-     end 
+      if(params[:find_by_tag])
+        @user_case=Case.tagged_with(params[:tag]).where(status: "open").paginate(page: params[:page], per_page: t("per_page"))
+      elsif params[:search].blank?
+        @user_case=Case.case_type_search(params[:case_type]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      else
+        @user_case =Case.case_type_search(params[:case_type]).search_by_all(params[:search]).paginate(page: params[:page], per_page: t("per_page")).where(status: "open")
+      end 
     end
+
     respond_to do |format|
     format.js
     format.html
@@ -80,6 +85,8 @@ class CasesController < ApplicationController
 
   def create
     @user_case = Case.new(case_params.merge({user_id: current_user.id}))
+     @user_case.tag_list=(@user_case.tag_list[0]).split(" ")
+
     if @user_case.save  
       if params[:document]
         params[:document].each { |image|
@@ -166,7 +173,7 @@ class CasesController < ApplicationController
   end
 
   def case_params
-    params.require(:case).permit(:user_id, :case_type_id, :case_title, :case_detail, :location,:status)
+    params.require(:case).permit(:user_id, :case_type_id, :case_title, :case_detail, :location,:status,:tag_list)
   end
 
   def doc_params

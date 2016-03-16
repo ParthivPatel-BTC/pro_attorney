@@ -13,7 +13,9 @@ class Case < ActiveRecord::Base
 	:against => [:case_title, :case_detail, :location, :status],
   :using => {:tsearch => {:prefix => true}}
 
-	 #will_paginate @cases
+	#will_paginate @cases
+  #for tags
+  acts_as_taggable
   #paypal methods
   if(Payment.count == 0)
     @invoice=1

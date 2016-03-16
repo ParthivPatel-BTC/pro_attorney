@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 #ajax sorting table
 gem 'jquery-rails'
+#tags enable
+gem 'acts-as-taggable-on', '~> 3.4'
 #pagination to tables
 gem 'will_paginate-bootstrap'
 #rating to user
