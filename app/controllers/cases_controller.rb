@@ -1,5 +1,5 @@
 class CasesController < ApplicationController
-  before_action :set_case, only: [:show,:edit,:update,:destroy,:purchase,:show_purchased]
+  before_action :set_case, only: [:show,:edit,:update,:destroy,:purchase,:show_purchased,:favorite]
   protect_from_forgery except: [:hook]
   before_action :hook,only: [:show_purchased]
   skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
@@ -131,6 +131,15 @@ class CasesController < ApplicationController
     end
   end
 
+  def favorite
+    type = params[:type]
+    if type == "favorite"
+      FavoriteCase.create!(user_id: current_user.id,case_id: params[:id])
+      
+    else type == "unfavorite"
+       FavoriteCase.find_by(user_id: current_user.id,case_id: params[:id]).destroy
+    end
+  end
 
   def purchase_case
   @payments =current_user.payments.paginate(page: params[:page], per_page: t("per_page"))

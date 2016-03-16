@@ -1,6 +1,7 @@
 class Case < ActiveRecord::Base	
 	include PgSearch
 	belongs_to :user
+  has_many :favorite_cases
 	belongs_to :case_type
   has_many :payments, dependent: :destroy
 	has_many :documents , dependent: :destroy

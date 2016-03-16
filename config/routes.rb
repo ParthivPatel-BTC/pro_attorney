@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'client_details' => 'cases#client_details'
     delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
     get 'purchase_case'
+    put :favorite
     end
   end 
  
