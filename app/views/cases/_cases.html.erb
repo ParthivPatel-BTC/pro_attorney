@@ -23,7 +23,7 @@
         <%= link_to "<span class='label label-primary'> #{user_case.case_type.case_type.titleize} </span>".html_safe,
          cases_path(case_type: user_case.case_type.case_type),remote: true %>
       </div>
-      <div class="col-sm-3">_
+      <div class="col-sm-3">
         <i class="fa fa-fw fa-dollar"></i>
         <%= user_case.case_type.amount %>$
       </div>
@@ -41,7 +41,7 @@
       <div><%= user_case.case_detail[0,20] %>
         <a data-toggle="collapse" data-target="#demo<%= user_case.id %>">read more</a>
         <div id="demo<%= user_case.id %>" class="collapse">
-          <%= user_case.case_detail%>
+          <%= user_case.case_detail %>
         </div>
       </div>
   </div>

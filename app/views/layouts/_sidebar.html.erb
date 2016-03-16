@@ -14,7 +14,7 @@
           <ul class="sidebar-menu">
             
             <% if current_user.is_system_admin? %>
-            <li class="treeview">
+            <li class="treeview <%= active_class(admins_view_advocates_path) %>">
               <%=link_to  admins_view_advocates_path  do %>
               <i class="fa fa-users"></i> <span>Advocates</span> <i class="fa fa-angle"></i>
                <% end %>
@@ -112,3 +112,8 @@
         </section>
       </ul>
     </aside>
+
+
+
+    
+    
