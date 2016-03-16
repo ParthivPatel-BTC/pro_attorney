@@ -46,6 +46,9 @@ def case_count
 
 		"<div class='pull-right'><span class = 'label label-danger'>#{Case.where(user_id: current_user.id, status:'closed').count}</span>	
 		<span class = 'label label-success'>#{Case.where(user_id: current_user.id, status:'open').count}</span></div>".html_safe
-	end
+  end
 end
+def paginate(collection, params= {})
+    will_paginate collection, params.merge(:renderer => RemoteLinkPaginationHelper::LinkRenderer)
+  end
 end

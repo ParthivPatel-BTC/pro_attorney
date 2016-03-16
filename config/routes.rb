@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'client_details' => 'cases#client_details'
     delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
     get 'purchase_case'
+    put :favorite
     end
   end 
  
@@ -43,6 +44,7 @@ namespace :admins do
     get 'sorting'
     get 'user_sorting'
     get 'user_log'
+    get 'user_payment'
   end
 
   patch 'admins/update_user/:id' => "admins#update_user", as: :update_user

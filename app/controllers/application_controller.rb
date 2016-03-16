@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery with: :exception
 
-  def after_sign_in_path_for(resource)
+   def after_sign_in_path_for(resource)
 
     if current_user.user_profile == nil
           new_user_profile_path
@@ -16,12 +16,5 @@ class ApplicationController < ActionController::Base
               cases_path
         end
     end
-  end
-
-  def before_action_create_profile
-    if(!current_user.user_profile.present?)
-      flash[:danger] = "Please Create Profile.."
-      redirect_to  new_user_profile_path 
-    end
-  end
+end
 end

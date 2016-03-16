@@ -38,6 +38,7 @@
 </table>
 </div>
 </div>
-<%= will_paginate @users, renderer: BootstrapPagination::Rails,class: "pull-right" %>
+
+<%= paginate @users, renderer: BootstrapPagination::Rails, class: "pull-right" ,style:  'font-size: medium;' %>
 <% end %>
 </div>
