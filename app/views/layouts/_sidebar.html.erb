@@ -72,14 +72,24 @@
             <%=advocate_links %>
            </li>
 
-            <li class="treeview">
+            
             <% if current_user.is_advocate? || current_user.is_client? %>
+            <li class="treeview">
               <%= link_to cases_path do %>
               <i class="fa fa-fw fa-files-o"></i> <span>Cases</span>
               <%= case_count %> <i class="fa fa-angle"></i>
               <% end %>
+              </li>
           <% end %>
+        
 
+        <% if current_user.is_advocate? %>
+          <li class="treeview">
+            <%= link_to bookmark_case_cases_path do %>
+            <i class="fa fa-fw fa-files-o"></i> <span>Bookmarked Cases</span>
+            <% end %>
+          </li>
+        <% end %>
 
               <li class="treeview">
                <a><i class="fa fa-user"></i> <span>Profiles</span> <i class="fa fa-angle-left pull-right"></i>

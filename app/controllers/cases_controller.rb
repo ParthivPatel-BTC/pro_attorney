@@ -140,6 +140,16 @@ class CasesController < ApplicationController
     end
   end
 
+  def bookmark_case
+    @favorite=true
+    @user_case = FavoriteCase.where(user_id: current_user.id).paginate(page: params[:page], per_page: t("per_page"))
+    respond_to do |format|
+    format.js
+    format.html
+    end
+
+  end
+
   def purchase_case
   @payments =current_user.payments.paginate(page: params[:page], per_page: t("per_page"))
    # @user_case=Payment.joins(:cases).where(user) 
