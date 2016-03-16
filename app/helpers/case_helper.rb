@@ -17,11 +17,11 @@ module CaseHelper
     return "<span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>Attachements#{docs}".html_safe
   end
 
-  def default_case_type
-    if params[:case_type] == nil
-      return "All"
+  def default_case_type(user_case)
+    if user_case.case_type_id == nil
+      return CaseType.first.id.to_s 
     else
-      return params[:case_type] 
+      return  user_case.case_type.id.to_s
     end
 	end
 

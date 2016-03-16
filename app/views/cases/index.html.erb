@@ -3,10 +3,9 @@
 		<h2 style="display:inline">Cases</h2>
 	</div>
 	<% if @user_case.present? %>
-	<div class="col-md-3">
-		<%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type,
-            default_case_type),{class: "form-control",id: "type",include_blank: "All"} %>
-	</div><div class="col-md-6">
+	<div class="col-md-9">
+	
+	
 			<%= render partial: "search_form" %>
 		</div>
 		<div class="col-md-12">
@@ -16,11 +15,3 @@
 			<% end %><br>
 	</div>
 </div>
-<script type="text/javascript">
-$('#type').change(function() {
-  $.ajax({ type: "GET",   
-           url: "<%= cases_path %>",
-           data: {case_type: $('#type option:selected').text()},
-  });
-});
-</script>
