@@ -21,7 +21,6 @@ class CasesController < ApplicationController
     format.js
     format.html
     end
-
   end
 
   def client_details

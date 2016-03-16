@@ -30,9 +30,10 @@
         <%= user_case.location.titleize%>
       </div>
       <div class="col-sm-3">
-        <span class="label label-primary"><%= user_case.case_type.case_type.titleize%></span>
+        <%= link_to "<span class='label label-primary'> #{user_case.case_type.case_type.titleize} </span>".html_safe,
+         cases_path(case_type: user_case.case_type.case_type),remote: true %>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-3">_
         <i class="fa fa-fw fa-dollar"></i>
         <%= user_case.case_type.amount %>$
       </div>
@@ -81,4 +82,4 @@ $("#uf<%=user_case.id%>").click(function(){
 <%else%>
 <b>No matching records found</b>
 <% end %>
-</div>
+<%= paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>

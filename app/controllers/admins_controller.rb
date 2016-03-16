@@ -17,7 +17,10 @@ class AdminsController < ApplicationController
 		else
 			@user_case = Case.where(status: params[:status]).order(:case_title).paginate(:page => params[:page], :per_page => t("per_page"))
 			@tab=params[:status]
+
 		end
+     
+  
 	end
 
 	def view_case
@@ -60,6 +63,12 @@ class AdminsController < ApplicationController
 	def user_log
 		@users=User.where("role_id != '1'");
 	end
+
+   def user_payment
+   	  @payment=Payment.all
+   end
+
+
 
 	private
 	def set_user

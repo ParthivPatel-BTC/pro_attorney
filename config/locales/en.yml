@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  per_page: 5
+  per_page: 2
   activerecord:
     attributes:
       user_profile:

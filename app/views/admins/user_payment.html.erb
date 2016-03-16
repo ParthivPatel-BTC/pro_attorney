@@ -1,0 +1,35 @@
+<% if @payment.any? %>
+<table class="table table-bordered table-hover dataTable">
+	<thead>
+		<tr>
+			<th>No</th>
+		 	<th>Case Type</th>
+		 	<th>Case Title</th>
+		 	<th>Advocate Name</th>
+		 	<th>Client Name</th>
+		 	<th>Amount</th>
+		 	<th>Purchased Date</th>
+
+		 	
+		</tr>
+	</thead>
+	<tbody>
+	<% @payment.each.with_index do |payment,index|%>
+			<tr>
+
+				<td><%= index+1 %></td>
+				<td><%=payment.case.case_type.case_type.titleize %></td>
+				<td><%=payment.case.case_title.titleize%></td>
+				<td><%=payment.user.user_profile.first_name.titleize+" "+payment.user.user_profile.last_name.titleize %></td>
+				<td><%=payment.case.user.user_profile.first_name.titleize + " "+payment.case.user.user_profile.last_name.titleize %></td>
+				<td><%=payment.case.case_type.amount %>$</td>
+				<td><%=payment.purchased_at %></td>
+				
+	    </tr>
+	   
+	<% end %>
+	</tbody>    
+</table>
+<% else %>
+<p> No Records Found</p>
+<% end %>

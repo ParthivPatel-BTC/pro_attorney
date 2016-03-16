@@ -1,5 +1,4 @@
 <div id="user_case">
-
 <div class="box box-primary">
 <div class="box-header with-border">
 <h3 class="box-title custom-header">Cases</h3>
@@ -45,6 +44,14 @@
 </table>
 </div>
 </div>
-<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+
+  <%=paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right"  %>
+   
 </div>
 <% end %>
+
+
+
+
+
+
