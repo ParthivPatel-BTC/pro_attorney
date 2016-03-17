@@ -68,9 +68,10 @@
             <li class="treeview  <%= active_class(cases_path) %>">
             <% if current_user.is_advocate? || current_user.is_client? %>
               <%= link_to cases_path do %>
-              <i class="fa fa-fw fa-files-o"></i> <span>Cases</span> <i class="fa fa-angle"></i>
+              <i class="fa fa-fw fa-files-o"></i> <span>Cases</span>
+              <%= case_count %><i class="fa fa-angle"></i>
               <% end %>
-          <% end %>
+            <% end %>
 
 
            <% if current_user.is_advocate? %>
