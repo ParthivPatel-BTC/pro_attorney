@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	include PgSearch
 	has_many :cases, dependent: :destroy
 	has_many :payments, dependent: :destroy
 	devise :database_authenticatable, :registerable, :recoverable,
@@ -6,6 +7,12 @@ class User < ActiveRecord::Base
 	belongs_to :role
 	has_one :user_profile, dependent: :destroy
 	ratyrate_rater
+
+ 	 pg_search_scope :search_by_all,
+	:against => [:eamil],
+ 	:using => {:tsearch => {:prefix => true}}
+
+
 
 	def is_system_admin?
  		self.role.title == Role::SYSTEM_ADMIN

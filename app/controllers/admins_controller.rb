@@ -68,6 +68,21 @@ class AdminsController < ApplicationController
    	  @payment=Payment.all
    end
 
+   def print_pdf
+   
+   	respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'admins_user_payment_path',
+               template: admins_user_payment_path,
+               dpi: '96',
+               :show_as_html=> params[:debug].present?,
+               disable_internal_links: true, disable_external_links: true,
+               :print_media_type => false, :no_background => false
+        return
+      end
+    end
+     end
 
 
 	private
