@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229101915) do
+ActiveRecord::Schema.define(version: 20160316073136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 20160229101915) do
   end
 
   add_index "documents", ["case_id"], name: "index_documents_on_case_id", using: :btree
+
+  create_table "favorite_cases", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "case_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "feedbacks", force: :cascade do |t|
     t.datetime "created_at",      null: false
@@ -124,11 +131,49 @@ ActiveRecord::Schema.define(version: 20160229101915) do
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
+  create_table "registers", force: :cascade do |t|
+    t.string   "bussiness"
+    t.string   "string"
+    t.string   "cmd"
+    t.integer  "uplod"
+    t.integer  "invoice"
+    t.integer  "amount"
+    t.string   "case_title"
+    t.integer  "case_id"
+    t.integer  "quantity"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.text     "notification_params"
+    t.string   "status"
+    t.string   "transaction_id"
+    t.datetime "purchased_at"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "user_profiles", force: :cascade do |t|
     t.string   "first_name"

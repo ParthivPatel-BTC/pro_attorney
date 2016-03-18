@@ -1,12 +1,24 @@
 <div id="user_case">
-<% if(@user_case==nil) %>
-<b> No Record Found </b>
-<% else %>
 <div class="box box-primary">
 <div class="box-header with-border">
 <h3 class="box-title custom-header">Cases</h3>
+<span class="label label-primary"><%= Case.count %></span>
+		<ul class="nav nav-tabs pull-right">
+			<li class=<%= tab_class(@tab, "all") %>>
+				<%= link_to "All", admins_view_cases_path %>
+			</li>
+			<li class=<%= tab_class(@tab, "open") %>>
+				<%= link_to "open", admins_view_cases_path(status: "open")%>
+			</li>
+			<li class=<%= tab_class(@tab, "closed") %>>
+				<%= link_to "closed", admins_view_cases_path(status: "closed")%>
+			</li>
+		</ul>
 </div>
 <div class="box-body">
+<% unless(@user_case.any?) %>
+<b> No Record Found </b>
+<% else %>
 <table class="table table-bordered table-hover dataTable">
 <thead>
 	<tr>
@@ -32,6 +44,14 @@
 </table>
 </div>
 </div>
-<%= will_paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
+
+  <%=paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right"  %>
+   
 </div>
 <% end %>
+
+
+
+
+
+

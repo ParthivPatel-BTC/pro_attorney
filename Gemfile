@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 #ajax sorting table
 gem 'jquery-rails'
+#tags enable
+gem 'acts-as-taggable-on', '~> 3.4'
 #pagination to tables
 gem 'will_paginate-bootstrap'
 #rating to user
@@ -21,8 +23,8 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
+# gem for chart implementation
+gem "chartkick"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -54,3 +56,5 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'

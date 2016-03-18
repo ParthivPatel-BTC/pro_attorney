@@ -1,1 +1,2 @@
 <%= render 'users' %>
+<%= line_chart User.group(:created_at).count,district: 2 %>

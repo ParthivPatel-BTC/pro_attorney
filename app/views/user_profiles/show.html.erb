@@ -26,7 +26,7 @@
 						<p> <b><u>Experience: </u></b><%= @user_profile.experience %></p>
 						<% end %>
 						<table>
-							<% unless current_user.user_profile.id == @user_profile.id  %>	
+							<% unless (current_user.user_profile.present? && current_user.user_profile.id == @user_profile.id)  %>	
 							<tr><td>Give your Ratings:</td><td>
 							<%= (rating_for @user_profile,"ratings",:disable_after_rate => true, :enable_half => true, :half_show => true) %>
 							</td></tr>
@@ -41,7 +41,7 @@
 		<br>
 		
 			<% if @user_profile.user.id==current_user.id%>
-			<%= link_to 'Edit',edit_user_profile_path(current_user.id), class: "btn btn-primary" %>
+			<%= link_to 'Edit',edit_user_profile_path(current_user.user_profile.id), class: "btn btn-primary" %>
 			<%end %>
 			  <%= link_to 'Back',:back, class: "btn btn-primary" %>
 			  <br>

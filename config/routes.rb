@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
  
   resources :user_profiles
+
   get 'home/index'
   #get 'cases/set'
 	resources :cases do
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
     get 'client_details' => 'cases#client_details'
     delete 'doc_delete/:document' =>  'cases#delete_document', as: :document
     get 'purchase_case'
+    get 'bookmark_case'
+    put :favorite
     end
   end 
  
@@ -41,6 +44,8 @@ namespace :admins do
     get 'view_case'
     get 'sorting'
     get 'user_sorting'
+    get 'user_log'
+    get 'user_payment'
   end
 
   patch 'admins/update_user/:id' => "admins#update_user", as: :update_user

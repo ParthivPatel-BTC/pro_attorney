@@ -1,7 +1,9 @@
-<%= form_tag(cases_path, method: :get, class: "navbar-form", role: 'search', id: "search-form") do %>
+<%= form_tag(cases_path, method: :get,remote: true, class: "navbar-form", role: 'search', id: "search-form") do %>
 <div class="form-group pull-right">
+	<%= select_tag :case_type_id,options_from_collection_for_select(CaseType.all, :id, :case_type,
+            default_case_type(@user_case.first)),{class: "form-control",id: "type",include_blank: "All"} %>
 	<div class="input-group">
-		<%= text_field_tag 'search', nil, class: "form-control", placeholder: "search cases",title: "Enter to search" %>
+		<%= text_field_tag 'search', nil, class: "form-control", placeholder: "search cases",title: "Enter to search",id: "search_word" %>
 		<div class='input-group-btn'>
 			<%= button_tag(type: 'submit', class: "btn btn-large btn-search btn-primary") do %>
  				<i class="fa fa-search"></i> 
@@ -10,3 +12,18 @@
 	</div>
 </div><br><br>
 <% end %>
+<script type="text/javascript">
+$('#search_word').keyup(function() {
+  $.ajax({ type: "GET",   
+           url: "<%= cases_path %>",
+           data: {case_type: $('#type option:selected').text(),search: $('#search_word').val()},
+  });
+});
+
+$('#type').change(function() {
+  $.ajax({ type: "GET",   
+           url: "<%= cases_path %>",
+           data: {case_type: $('#type option:selected').text(),search: $('#search_word').val()},
+  });
+});
+</script>

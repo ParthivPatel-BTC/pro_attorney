@@ -20,5 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  per_page: 5
-
+  per_page: 2
+  activerecord:
+    attributes:
+      user_profile:
+        pincode: "Zip code"
+        avatar: "Profile picture"
+        avatar_content_type: "Profile picture type"
+    errors:  
+      models:
+        user_profile:
+          attributes:
+            pincode:
+              blank: "is required"
