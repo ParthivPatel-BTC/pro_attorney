@@ -54,7 +54,8 @@
             <%= f.label :documents_atteched %> <br>   
             <% @documents.each do |document| %>
               <%= document.doc_file_name %>
-              <%= link_to "Delete", document_cases_path(document), method: :delete, data: { confirm: 'Are you sure?' }  %><br>
+              <%= link_to "",document_cases_path(document), method: :delete, data: { confirm: '          ' }, title: "Do You Want To Delete This Case ?" %>
+
             <% end %>
           </div>
 

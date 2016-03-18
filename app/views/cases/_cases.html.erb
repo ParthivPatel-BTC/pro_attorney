@@ -15,7 +15,7 @@
       <% if current_user.id == user_case.user_id %>
       <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
       <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
-      <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
+      <%= link_to "",user_case, method: :delete, data: { confirm: '          ' },class: "fa fa-fw fa-trash", title: "Do You Want To Delete This Case ?" %>
       <% end %>
       <% if current_user.is_advocate? %>
   <%=link_to "<i class='fa fa-bookmark-o' style='font-size:20px;color:'blue';></i></i>".html_safe,   favorite_cases_path(id: user_case.id, type: "favorite"), title: "Bookmark this case", method: :put,remote: true ,id: "f#{user_case.id}"%>

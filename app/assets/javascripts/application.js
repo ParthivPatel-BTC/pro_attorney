@@ -16,3 +16,5 @@
 //= require bootstrap.min
 //= require ratyrate
 //= require app.min
+//= require data-confirm-modal
+
