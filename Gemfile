@@ -7,6 +7,7 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'will_paginate-bootstrap'
 #rating to user
 gem 'ratyrate'
+gem 'groupdate'
 #paperclip for upload files
 gem "paperclip", "~> 4.2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -1,2 +1,8 @@
 <%= render 'users' %>
-<%= line_chart User.group(:created_at).count,district: 2 %>
+
+<% data= UserProfile.pluck(:first_name)%>
+
+<%data1=User.pluck(:last_sign_in_at).map{|d| d.strftime(" %S %d-%m-%Y %H")}%>
+<%dt=data.zip(data1)%>
+
+<%= column_chart dt ,discrete:true%>
