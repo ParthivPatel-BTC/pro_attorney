@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
   before_action :set_user,only: [:update_user]
   before_action :set_case,only: [:update_case]
-
+  before_action :user_payment,only:[:print_pdf]
 	def view_advocates
 		@users = User.where(role_id: Role.find_by(title: 'advocate').id).order(:email).paginate(:page => params[:page], :per_page => t("per_page"))
 	end
@@ -69,11 +69,10 @@ class AdminsController < ApplicationController
    end
 
    def print_pdf
-   
    	respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'admins_user_payment_path',
+        render pdf: 'print_pdf',
                template: admins_user_payment_path,
                dpi: '96',
                :show_as_html=> params[:debug].present?,
