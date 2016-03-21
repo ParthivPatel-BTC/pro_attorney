@@ -8,10 +8,10 @@
 				<%= link_to "All", admins_view_cases_path %>
 			</li>
 			<li class=<%= tab_class(@tab, "open") %>>
-				<%= link_to "open", admins_view_cases_path(status: "open")%>
+				<%= link_to "Open", admins_view_cases_path(status: "open")%>
 			</li>
 			<li class=<%= tab_class(@tab, "closed") %>>
-				<%= link_to "closed", admins_view_cases_path(status: "closed")%>
+				<%= link_to "Closed", admins_view_cases_path(status: "closed")%>
 			</li>
 		</ul>
 </div>
@@ -22,7 +22,7 @@
 <table class="table table-bordered table-hover dataTable">
 <thead>
 	<tr>
-		<th>No</th>
+		<th style="width: 10px">No</th>
 		<th>Title <%=get_order("case_title") %></th>
 		<th>Name<%=get_order("user_profiles.first_name")%></th>
 		<th>Type<%=get_order("case_types.case_type")%></th>
@@ -32,7 +32,7 @@
 <tbody>
 <% @user_case.each_with_index do |user_case, index|%>
 <tr>
-	<td><%= index+1 %></td>
+	<td style="white-space: nowrap"><%= index+1 %></td>
 	<td><%= link_to case_path(user_case) do%><%= user_case.case_title.capitalize %><%end%></td>
 	<td><%= user_case.user.user_profile.first_name.capitalize %> 
 	    <%= user_case.user.user_profile.last_name.capitalize %></td>

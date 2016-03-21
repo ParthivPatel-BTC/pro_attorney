@@ -23,37 +23,40 @@
           </div>
         </div>
      
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>
-        <span class="text">Attachments</span>
-        <a class="pull-right" data-toggle="collapse" data-target="#doc_body"><b>+</b></a>
-      </div>        
-      <div id="doc_body" class="panel-body collapse">
-        <% if @user_case.user_id == current_user.id %>
-          <% @user_case.documents.each do |document| %>
-            <a href="<%= "/documents/#{document.id}/#{document.doc_file_name}" %>" target='new'>  
-            <%= document.doc_file_name %>
-            </a>
-            <font color="red">
-            <%= link_to "Delete", document_cases_path(document,action1: "show"),style: "color: red", method: :delete, data: { confirm: 'Are you sure?' } %>
-            </font>
-            <br>
-          <% end %>
-        <%else%>      
-          <% @user_case.documents.each do |document| %>
-            <a href="<%= "/documents/#{document.id}/#{document.doc_file_name}" %>" target='new'>  
-            <%= document.doc_file_name %>
-            </a>
-           
-            <br>
-          <% end %>
-       
-      <%end%>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <% unless @user_case.documents.exists? %>
+              <p>No attachments</p>
+              <%else%>
+            <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-paperclip fa-lg'></i></span>
+            <span class="text">Attachments</span>
+            <a class="pull-right" data-toggle="collapse" data-target="#doc_body"><b>View</b></a>
+          </div>        
+          <div id="doc_body" class="panel-body collapse">
+
+            <% if @user_case.user_id == current_user.id %>
+              <% @user_case.documents.each do |document| %>
+                <a href="<%= "/documents/#{document.id}/#{document.doc_file_name}" %>" target='new'>  
+                <%= document.doc_file_name %>
+                </a>
+                <font color="red">
+                <%= link_to "Delete", document_cases_path(document,action1: "show"),style: "color: red", method: :delete, data: { confirm: 'Are you sure?' } %>
+                </font>
+              <br>
+              <% end %>
+            <%else%>      
+            <% @user_case.documents.each do |document| %>
+              <a href="<%= "/documents/#{document.id}/#{document.doc_file_name}" %>" target='new'>  
+              <%= document.doc_file_name %>
+              </a>
+              <br>
+            <% end %>
+            <%end%>
+        <%end%>
           </div>
 
     
-         <!-- box end -->
+         
 
 <% end %>
   
@@ -67,31 +70,30 @@
   
 
   <div class="panel panel-default">
-  <div class="panel-heading">
-    <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-info'></i></span>
-    <span class="text">Client Details</span>
+    <div class="panel-heading">
+      <span class='handle ui-sortable-handle'><i class='fa fa-fw fa-info'></i></span>
+      <span class="text">Client Details</span>
+    </div>
+    <div class="panel-body">
+      <div class="pull-right">
+        <% if @user_case.user_profile.avatar.exists? %>
+          &nbsp;&nbsp;<%= image_tag(@user_case.user_profile.avatar.url, class: "img-circle", height: "70", width: "70") %>
+        <% else %> 
+          &nbsp;&nbsp;<%= image_tag("default.jpg", class: "img-circle", height: "70", width: "70") %>
+        <% end %>
+      </div>
+      <h5>
+        <%= @user_case.user.user_profile.first_name.titleize %> <%= @user_case.user.user_profile.last_name.titleize %>
+      </h5>
+      <h5><%= @user_case.user.user_profile.gender %></h5>
+      <h5><%= @user_case.user.user_profile.mobile_no %></h5>
+      <h5>
+        <%= @user_case.user.user_profile.address.titleize %><br>
+        <%= @user_case.user.user_profile.city.titleize %> - <%= @user_case.user.user_profile.pincode %>
+      </h5>
+    </div>
   </div>
-  <div class="panel-body">
-    <div class="pull-right">
-    <% if @user_case.user_profile.avatar.exists? %>
-      &nbsp;&nbsp;<%= image_tag(@user_case.user_profile.avatar.url, class: "img-circle", height: "70", width: "70") %>
-    <% else %> 
-      &nbsp;&nbsp;<%= image_tag("default.jpg", class: "img-circle", height: "70", width: "70") %>
-    <% end %>
   </div>
-    <h5>
-      <%= @user_case.user.user_profile.first_name.titleize %> <%= @user_case.user.user_profile.last_name.titleize %>
-    </h5>
-    <h5><%= @user_case.user.user_profile.gender %></h5>
-    <h5><%= @user_case.user.user_profile.mobile_no %></h5>
-  
-    <h5>
-      <%= @user_case.user.user_profile.address.titleize %><br>
-      <%= @user_case.user.user_profile.city.titleize %> - <%= @user_case.user.user_profile.pincode %>
-    </h5>
-  </div>
-</div>
-  
   
     
 
@@ -101,6 +103,10 @@
   </div>
   </div>
 </div>
-
-</div>
+  
 <%= link_to 'Back',:back, class: "btn btn-primary" %>
+<style type="text/css">
+ a:hover {
+  cursor:pointer;
+ }
+</style>

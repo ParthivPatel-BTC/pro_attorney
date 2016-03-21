@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'home/index'
+
   post '/rate' => 'rater#create', :as => 'rate'
  
   resources :user_profiles
 
-  get 'home/index'
   #get 'cases/set'
 	resources :cases do
     collection do

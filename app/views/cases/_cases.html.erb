@@ -13,7 +13,7 @@
     </font>
     <div class="pull-right">
       <% if current_user.id == user_case.user_id %>
-      <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
+      <%= link_to "",case_path(user_case),class: "fa fa-fw fa-info", title: "view" %>
       <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
       <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
       <% end %>
@@ -26,46 +26,53 @@
    </div>
   <div class="box-body">
     <div class="row">
-      <div class="col-sm-3">
-        <i class="fa fa-fw fa-location-arrow"></i>
-        <%= user_case.location.titleize%>
+      <div class="col-md-8">
+        <p>
+        <div id="div_short<%=user_case.id%>">
+          <%= user_case.case_detail[0,80] %>
+          <a id="link_short<%=user_case.id%>">Read More </a>
+        </div>
+
+      <div id="div_open<%=user_case.id%>">
+        <%= user_case.case_detail %>
+        <a id="link_open<%=user_case.id%>"> Read less</a>
       </div>
-      <div class="col-sm-3">
-        <%= link_to "<span class='label label-primary'> #{user_case.case_type.case_type.titleize} </span>".html_safe,
-         cases_path(case_type: user_case.case_type.case_type),remote: true %>
+    </p>
+    <div id="tags">
+      <i class="fa fa-fw fa-tags"></i>
+      <b>Tags:</b>
+      <% user_case.tag_list.each do |tag| %>
+        <%= link_to "##{tag}",cases_path(tag: tag,find_by_tag: true),remote: true %>
+        <% end %>
+    </div>
       </div>
-      <div class="col-sm-3">
+
+      <div class="col-md-4">
+       <div class="pull-right">
+        <p>
+        <i class="fa fa-fw fa-map-marker"></i>
+        <%= user_case.location.titleize%>&nbsp;
         <i class="fa fa-fw fa-dollar"></i>
-        <%= user_case.case_type.amount %>$
-      </div>
-      <div class="col-sm-3">
+        <%= user_case.case_type.amount %>$&nbsp;&nbsp;
+        <%= link_to "<span class='label label-primary'> #{user_case.case_type.case_type.titleize} </span>".html_safe,
+         cases_path(case_type: user_case.case_type.case_type),remote: true %>&nbsp;&nbsp;
         <% if user_case.status.titleize == "Open"%>
           <span class="label label-success"><%= user_case.status.titleize%></span>
         <% else %>
           <span class="label label-danger"><%= user_case.status.titleize%></span>
         <% end %>
+      </p>
       </div>
     </div>
-    <br>
-    
-      <div id="div_short<%=user_case.id%>">
-        <%= user_case.case_detail[0,80] %>
-        <a id="link_short<%=user_case.id%>">Read More</a>
-      </div>
-
-      <div id="div_open<%=user_case.id%>">
-        <%= user_case.case_detail %>
-        <a id="link_open<%=user_case.id%>">Read less</a>
+      
+        
       </div>
       
-    </p>
-    <div id="tags"><b>Tags:</b>
-      <% user_case.tag_list.each do |tag| %>
-        <%= link_to "##{tag}",cases_path(tag: tag,find_by_tag: true),remote: true %>
-        <% end %>
     </div>
+    
+    
   </div>
-</div><br>
+</div>
 
 <script>
   $("#div_open<%=user_case.id%>").hide()
@@ -106,3 +113,12 @@ $("#uf<%=user_case.id%>").click(function(){
 <% end %>
 <%= paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
 </div>
+
+
+
+
+<style type="text/css">
+ a:hover {
+  cursor:pointer;
+ }
+</style>

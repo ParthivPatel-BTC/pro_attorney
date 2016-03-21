@@ -85,7 +85,11 @@ class CasesController < ApplicationController
 
   def create
     @user_case = Case.new(case_params.merge({user_id: current_user.id}))
-     @user_case.tag_list=(@user_case.tag_list[0]).split(" ")
+    # if @user_case.tag_list.blank?
+    #   flash[:danger] = "Please enter tags"
+    # else
+    #   @user_case.tag_list=(@user_case.tag_list[0]).split(" ")
+    # end
 
     if @user_case.save  
       if params[:document]
