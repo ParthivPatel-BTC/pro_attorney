@@ -1,5 +1,6 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show,:edit,:update,:destroy,:purchase,:show_purchased,:favorite]
+  before_action :check_user_profile_exist
   protect_from_forgery except: [:hook]
   before_action :hook,only: [:show_purchased]
   skip_before_filter :verify_authenticity_token, :only => [:show_purchased]
@@ -75,10 +76,6 @@ class CasesController < ApplicationController
   end
 
   def new
-    if(!current_user.user_profile.present?)
-      flash[:danger] = "Create Profile Before creating case"
-      redirect_to  new_user_profile_path 
-    end
     @user_case = Case.new(user_id: current_user.id)
     @documents = @user_case.documents
   end
@@ -153,7 +150,7 @@ class CasesController < ApplicationController
 
   def bookmark_case
     @favorite=true
-    @user_case = FavoriteCase.where(user_id: current_user.id).paginate(page: params[:page], per_page: t("per_page"))
+    @user_case = Case.joins(:favorite_cases).where("favorite_cases.user_id = #{current_user.id}").paginate(page: params[:page], per_page: t("per_page"))
     respond_to do |format|
     format.js
     format.html

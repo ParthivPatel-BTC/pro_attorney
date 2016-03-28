@@ -25,6 +25,15 @@ module CaseHelper
     end
 	end
 
+  def default_case_type_select(case_type)
+    if case_type == nil
+      return "All"
+    else
+      return  case_type
+    end
+  end
+
+
   def case_status_style(user_case)
     if user_case.status == "open"
       "green"

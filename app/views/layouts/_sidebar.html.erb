@@ -103,6 +103,14 @@
             </li>
           </ul> 
 
+          <% else %>
+            <ul class="treeview-menu">
+            <li class="treeview <%= active_class(new_user_profile_path) %>">
+              <%= link_to new_user_profile_path do %>
+               <i class="fa fa-circle-o"></i> <span>Create Profile</span> <i class="fa fa-angle"></i>
+              <% end %>
+            </li>
+           </ul>
           <% end %>
 
           </li> 

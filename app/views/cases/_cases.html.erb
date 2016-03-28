@@ -1,7 +1,6 @@
 <div id="user_case">
 <% if @user_case.any?%>  
 <% @user_case.each do |user_case| %>
-<% user_case=user_case.case if @favorite %>
 <div class = "box box-primary"><!--start box 2 -->
   <div class = "box-header with-border ">
     <h3 class = "box-title custom-header"><%= user_case.case_title.titleize %></h3>&nbsp;&nbsp;
@@ -13,21 +12,43 @@
     </font>
     <div class="pull-right">
       <% if current_user.id == user_case.user_id %>
-      <%= link_to "",case_path(user_case),class: "fa fa-fw fa-info", title: "view" %>
+      <%= link_to "",case_path(user_case),class: "fa fa-fw fa-eye", title: "view" %>
       <%= link_to "", edit_case_path(user_case) ,class: "fa fa-fw fa-pencil-square-o", title: "Edit" %>
       <%= link_to "",user_case, method: :delete, data: { confirm: 'Are you sure?' },class: "fa fa-fw fa-trash", title: "delete" %>
       <% end %>
       <% if current_user.is_advocate? %>
-  <%=link_to "<i class='fa fa-bookmark-o' style='font-size:20px;color:'blue';></i></i>".html_safe,   favorite_cases_path(id: user_case.id, type: "favorite"), title: "Bookmark this case", method: :put,remote: true ,id: "f#{user_case.id}"%>
-  <%=link_to "<i class='fa fa-bookmark' style='font-size:20px;' ></i></i>".html_safe, favorite_cases_path(id: user_case.id, type: "unfavorite"), title: "Remove bookmark", method: :put,remote: true,id: "uf#{user_case.id}" %>
+  <%=link_to "<i class='fa fa-bookmark-o' style='font-size:20px;color:'blue';></i></i>".html_safe,   favorite_cases_path(id: user_case.id, type: "favorite"), method: :put,remote: true ,id: "f#{user_case.id}",
+  title: "Bookmark"%>
+  <%=link_to "<i class='fa fa-bookmark' style='font-size:20px;' ></i></i>".html_safe, favorite_cases_path(id: user_case.id, type: "unfavorite"), method: :put,remote: true,id: "uf#{user_case.id}" ,
+  title: "Remove Bookmark" %>
 <% end %>&nbsp;&nbsp;&nbsp;&nbsp;
-      <%= link_to image_tag("paypal2.png"),case_cases_path(user_case) if current_user.is_advocate? %>
-    </div><br>
+<%= link_to image_tag("paypal2.png"),case_cases_path(user_case) if current_user.is_advocate? %>    </div><br>
    </div>
   <div class="box-body">
     <div class="row">
-      <div class="col-md-8">
-        <p>
+      <div class="col-sm-3">
+        <i class="fa fa-fw fa-location-arrow"></i>
+        <%= user_case.location.titleize%>
+      </div>
+      <div class="col-sm-3">
+        <%= link_to "<span class='label label-primary'> #{user_case.case_type.case_type.titleize} </span>".html_safe,
+         cases_path(case_type: user_case.case_type.case_type),remote: true %>
+      </div>
+      <div class="col-sm-3">
+        <i class="fa fa-fw fa-dollar"></i>
+        <%= user_case.case_type.amount %>$
+      </div>
+      <div class="col-sm-3">
+        <% if user_case.status.titleize == "Open"%>
+          <span class="label label-success"><%= user_case.status.titleize%></span>
+        <% else %>
+          <span class="label label-danger"><%= user_case.status.titleize%></span>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    
+   <p>
         <div id="div_short<%=user_case.id%>">
           <%= user_case.case_detail[0,80] %>
           <a id="link_short<%=user_case.id%>">Read More </a>
@@ -38,44 +59,16 @@
         <a id="link_open<%=user_case.id%>"> Read less</a>
       </div>
     </p>
-    <div id="tags">
-      <i class="fa fa-fw fa-tags"></i>
-      <b>Tags:</b>
+    <div id="tags"><b>Tags:</b>
       <% user_case.tag_list.each do |tag| %>
         <%= link_to "##{tag}",cases_path(tag: tag,find_by_tag: true),remote: true %>
         <% end %>
     </div>
-      </div>
-
-      <div class="col-md-4">
-       <div class="pull-right">
-        <p>
-        <i class="fa fa-fw fa-map-marker"></i>
-        <%= user_case.location.titleize%>&nbsp;
-        <i class="fa fa-fw fa-dollar"></i>
-        <%= user_case.case_type.amount %>$&nbsp;&nbsp;
-        <%= link_to "<span class='label label-primary'> #{user_case.case_type.case_type.titleize} </span>".html_safe,
-         cases_path(case_type: user_case.case_type.case_type),remote: true %>&nbsp;&nbsp;
-        <% if user_case.status.titleize == "Open"%>
-          <span class="label label-success"><%= user_case.status.titleize%></span>
-        <% else %>
-          <span class="label label-danger"><%= user_case.status.titleize%></span>
-        <% end %>
-      </p>
-      </div>
-    </div>
-      
-        
-      </div>
-      
-    </div>
-    
-    
   </div>
-</div>
+</div><br>
 
 <script>
-  $("#div_open<%=user_case.id%>").hide()
+$("#div_open<%=user_case.id%>").hide()
 
   $("#link_short<%=user_case.id%>").click(function(){
   $("#div_short<%=user_case.id%>").hide()
@@ -86,19 +79,14 @@
   $("#div_open<%=user_case.id%>").hide()
   $("#div_short<%=user_case.id%>").show()
 });
-
-
-  $("#f<%=user_case.id%>").click(function(){
+$("#f<%=user_case.id%>").click(function(){
   $("#f<%=user_case.id%>").hide()
   $("#uf<%=user_case.id%>").show()
 });
-
 $("#uf<%=user_case.id%>").click(function(){
   $("#uf<%=user_case.id%>").hide()
   $("#f<%=user_case.id%>").show()
 });
-
-
 <% if FavoriteCase.find_by(case_id: user_case.id,user_id: current_user.id).present? %>
       $("#f<%=user_case.id%>").hide()
         $("#uf<%=user_case.id%>").show()
@@ -112,11 +100,6 @@ $("#uf<%=user_case.id%>").click(function(){
 <b>No matching records found</b>
 <% end %>
 <%= paginate @user_case, renderer: BootstrapPagination::Rails, class: "pull-right" %>
-</div>
-
-
-
-
 <style type="text/css">
  a:hover {
   cursor:pointer;
