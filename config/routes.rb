@@ -34,9 +34,9 @@ Rails.application.routes.draw do
                                       passwords: "users/passwords",
                                       unlocks: "users/unlocks"}
 
-  devise_scope :user do
-  root  "users/sessions#new"
-end
+  
+  root  "home#index"
+
 
 namespace :admins do
     get 'view_advocates'

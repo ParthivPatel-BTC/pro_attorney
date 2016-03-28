@@ -1,0 +1,63 @@
+<header class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<%= image_tag('proAttorney', height: "100px", width: "100px") %>
+			<font size="8px">
+			<b style="margin-top:-30px;margin-left:5px;">Pro</b>Attorney<br></font>
+			<font color="#808080">
+				<p style="margin-top:-39px;margin-left:103px">
+					Your legal solution starts here.
+				</p>
+			</font>
+		</div>
+	</div>
+	<br>
+
+	<nav class="navbar navbar-inverse">
+  	<div class="container-fluid">
+    	<div class="navbar-header">
+      	<a class="navbar-brand" href="#">ProAttorney</a>
+    	</div>
+    	<ul class="nav navbar-nav" id="searchbyword">
+	      <li class="active"><a href="#">Home</a></li>
+	      <li class="active"><a href="#" class="searchbyword" data-target="About">About</a></li>
+	      <li class="active"><a href="#" class="searchbyword" data-target="Contact">Contact</a></li>
+	      <li class="active"><%= link_to 'Login', user_session_path %></li>
+	    </ul>
+	  </div>
+	</nav>
+	
+	<div class="box-body">
+		<%= image_tag('people', height: "400px", width: "1100px") %>
+	</div>
+	<br>
+
+	<div class="row">
+		<div class="col-md-4" id="About">
+			<h3>About Us</h3>
+			<p>We have the brains of a creative agency with the heart of a nonprofit. We refuse to accept the world as it is and have dedicated our lives to making it more as it should be.</p>
+		</div>
+
+		<div class="col-md-4">
+			<h3>Services</h3>
+			<p>Our legal experts provide you insight and guidance on thousands of legal issues. Legal insights and access to lawyers covering almost any situation. </p>
+		</div>
+
+		<div class="col-md-4" id="Contact">
+			<h3>Contact Us</h3>
+			<p>manojparmar5606@gmail.com</p>
+			<p>gauravmakwana93@gmail.com</p>
+			<p>proattoreny@gmail.com</p>
+		</div>
+	</div>
+</header>
+
+<script  type="text/javascript">
+$(document).on('click','.searchbyword', function(event) {
+    event.preventDefault();
+    var target = "#" + this.getAttribute('data-target');
+    $('html, body').animate({
+        scrollTop: $(target).offset().top
+    }, 2000);
+});
+</script>
