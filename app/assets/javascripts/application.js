@@ -11,9 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.raty
-//= require bootstrap
+//= require bootstrap.min
 //= require ratyrate
 //= require app.min
