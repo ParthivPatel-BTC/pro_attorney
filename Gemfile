@@ -16,7 +16,7 @@ gem 'pg'
 gem 'pg_search'
 # Use SCSS for stylesheets
 gem 'devise','3.4.1'
-
+gem 'jquery-ui-rails'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
