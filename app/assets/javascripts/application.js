@@ -14,6 +14,6 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.raty
-//= require custom
+//= require bootstrap
 //= require ratyrate
 //= require app.min
