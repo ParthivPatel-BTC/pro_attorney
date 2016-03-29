@@ -16,3 +16,4 @@
 //= require bootstrap.min
 //= require ratyrate
 //= require app.min
+//= require_tree .
