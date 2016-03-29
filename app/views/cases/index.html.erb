@@ -4,14 +4,12 @@
 	</div>
 	<% if @user_case.present? %>
 	<div class="col-md-9">
-	
-	
-			<%= render partial: "search_form" %>
-		</div>
-		<div class="col-md-12">
-			<%= render partial: "cases" %>
-			<% else %>
-			<p>No matching result found</p>
-			<% end %><br>
+		<%= render partial: "search_form" %>
 	</div>
 </div>
+
+		<%= render partial: "cases" %>
+		<% else %>
+			<p>No matching result found</p>
+		<% end %><br>
+	
